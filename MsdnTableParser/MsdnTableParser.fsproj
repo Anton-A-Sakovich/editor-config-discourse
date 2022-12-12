@@ -7,6 +7,7 @@
     <Compile Include="OptionMetadata.fs" />
     <Compile Include="AbortOnExceptionBuilder.fs" />
     <Compile Include="SectionParser.fs" />
+    <Compile Include="MarkdownParser.fs" />
     <Compile Include="HtmlParser.fs" />
     <Compile Include="HtmlFetcher.fs" />
     <Compile Include="Program.fs" />
