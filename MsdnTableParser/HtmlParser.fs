@@ -1,7 +1,7 @@
 namespace MsdnTableParser
 
 module HtmlParser =
-    open MsdnSectionParser
+    open SectionParser
     open HtmlAgilityPack
     
     let private abortOnException = AbortOnExceptionBuilder()

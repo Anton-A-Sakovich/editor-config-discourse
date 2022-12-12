@@ -6,7 +6,7 @@
   <ItemGroup>
     <Compile Include="OptionMetadata.fs" />
     <Compile Include="AbortOnExceptionBuilder.fs" />
-    <Compile Include="TableParser.fs" />
+    <Compile Include="SectionParser.fs" />
     <Compile Include="HtmlParser.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>

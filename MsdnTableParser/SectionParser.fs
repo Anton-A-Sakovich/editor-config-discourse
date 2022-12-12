@@ -1,6 +1,6 @@
 namespace MsdnTableParser
 
-module MsdnSectionParser =
+module SectionParser =
     type TableRow = Values of list<string>
     type Table = Rows of list<TableRow>
 
