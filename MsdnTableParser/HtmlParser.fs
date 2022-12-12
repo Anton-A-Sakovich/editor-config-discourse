@@ -11,18 +11,22 @@ module HtmlParser =
             let document = HtmlDocument()
             do! abortOnException { return document.LoadHtml(text) }
 
-            let html = document.DocumentNode
-            let body = html.Element("body")
-            let sectionHeaders = body.SelectNodes("//h3[@class='heading-anchor']")
+            let body = document.DocumentNode.Element("html").Element("body")
+            let sectionHeaders =
+                body.SelectNodes("//h3")
+                |> (function | null -> Seq.empty | nodes -> nodes)
+                |> Seq.filter (fun node ->
+                    node.InnerText |> (fun innerText ->
+                        innerText <> null && innerText.Contains("_")))
 
             let sections =
                 seq {
                     for header in sectionHeaders do
                         let hasTable =
-                            not (header.NextSibling = null)
-                            |> (&&) (header.NextSibling.Name = "div")
-                            |> (&&) (not (header.NextSibling.FirstChild = null))
-                            |> (&&) (header.NextSibling.FirstChild.Name = "table")
+                            header.NextSibling <> null
+                            && header.NextSibling.Name = "div"
+                            && header.NextSibling.FirstChild <> null
+                            && header.NextSibling.FirstChild.Name = "table"
                         
                         if hasTable then
                             let htmlRows = header.NextSibling.FirstChild.LastChild.ChildNodes
