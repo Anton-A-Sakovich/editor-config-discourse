@@ -5,7 +5,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="OptionMetadata.fs" />
+    <Compile Include="AbortOnExceptionBuilder.fs" />
     <Compile Include="TableParser.fs" />
+    <Compile Include="HtmlParser.fs" />
     <Compile Include="Program.fs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.46" />
   </ItemGroup>
 </Project>
