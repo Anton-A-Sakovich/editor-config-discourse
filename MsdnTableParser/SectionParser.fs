@@ -26,7 +26,7 @@ module SectionParser =
     let private parseRow (state:TableParsingState) (TableRow.Values row) =
         match (state, row) with
         | (WaitingOptionName, "Option name"::name::_) -> WaitingOptionValue name
-        | (WaitingOptionValue name, "Option value"::value::_) -> GatheringOptionValues (name, [value])
+        | (WaitingOptionValue name, "Option values"::value::_) -> GatheringOptionValues (name, [value])
         | (GatheringOptionValues (name, values), ""::value::_) -> GatheringOptionValues (name, value::values)
         | (GatheringOptionValues (name, values), "Default option value"::defaultValue::_) -> FoundDefaultValue (name, values, defaultValue)
         | (GatheringOptionValues (name, values), _) -> WaitingDefaultValue (name, values)
