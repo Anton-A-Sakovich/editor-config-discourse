@@ -39,6 +39,7 @@ let main args =
                 let serializer =
                     SerializerBuilder()
                      .DisableAliases()
+                     .WithQuotingNecessaryStrings()
                      .Build()
 
                 serializer.Serialize(optionsMetadata) |> printfn "%s"
