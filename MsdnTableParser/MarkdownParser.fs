@@ -3,54 +3,75 @@ namespace MsdnTableParser
 module MarkdownParser =
     open SectionParser
     open System
+    open System.Collections.Generic
     open System.Text.RegularExpressions
 
     type private ParserState =
         | Empty
-        | SectionName of sectionName:string
-        | SectionNameAndTable of sectionName:string * rows:list<list<string>>
+        | SectionName
+        | SectionTable
+    
+    type private Parser(baseUrl:string) =
+        member val private State = ParserState.Empty with get, set
+        member val private SectionName = "" with get, set
+        member val private TableRows = List<List<string>>()
+        member val private Sections = List<Section>()
 
-    let private foldLines baseUrl (acc:(ParserState * list<Section>)) (line:string) =
-        let (state, sections) = acc
+        member this.GetSections() =
+            this.Sections
 
-        match state with
-        | Empty ->
-            let state'' =
-                match Regex.Match(line, @"^###\s*(\w+_\w+)\s*") with
-                | regexMatch when regexMatch.Success -> SectionName (regexMatch.Groups[1].Value)
-                | _ -> Empty
-            (state'', sections)
-
-        | SectionName name ->
-            let state'' =
-                if line.Contains("-") then
-                    SectionNameAndTable (name, [])
+        member this.ParseLine(line:string) =
+            match this.State with
+            | Empty ->
+                let regexMatch = Regex.Match(line, @"^###\s*(\w+_\w+)\s*")
+                if regexMatch.Success then
+                    this.State <- SectionName
+                    this.SectionName <- regexMatch.Groups[1].Value
+                    this.TableRows.Clear()
                 else
-                    state
-            (state'', sections)
+                    ()
+            | SectionName ->
+                if line.Contains("-") then
+                    this.State <- SectionTable
+                    this.TableRows.Clear()
+                else
+                    ()
+            | SectionTable ->
+                if line.Contains("|") then
+                    let values =
+                        line.Split([|char "|"|], StringSplitOptions.RemoveEmptyEntries)
+                        |> Array.map (fun s -> s.Trim().Replace("*", "").Replace("`", ""))
+                    
+                    let row = List<string>()
+                    for value in values do
+                        row.Add(value)
+                    
+                    this.TableRows.Add(row)
+                else
+                    let table =
+                        this.TableRows
+                        |> Seq.map List.ofSeq
+                        |> Seq.map TableRow.Values
+                        |> List.ofSeq
+                        |> Table.Rows
+                    
+                    let section:Section =
+                        {
+                            Header =
+                                {
+                                    Title = this.SectionName;
+                                    Link = baseUrl + "#" + this.SectionName;
+                                };
+                            Table = table;
+                        }
 
-        | SectionNameAndTable (name, rows) ->
-            if line.Contains("|") then
-                let row =
-                    line.Split([|char "|"|], StringSplitOptions.RemoveEmptyEntries)
-                    |> Array.map (fun s -> s.Trim().Replace("*", "").Replace("`", ""))
-                    |> List.ofArray
-                
-                (SectionNameAndTable (name, row::rows), sections)
-            else
-                let table = rows |> List.rev |> List.map TableRow.Values |> Table.Rows
-                let section:Section =
-                    {
-                        Header =
-                            {
-                                Title = name;
-                                Link = baseUrl + "#" + name;
-                            };
-                        Table = table;
-                    }
-                (Empty, section::sections)
+                    this.Sections.Add(section)
+                    this.State <- Empty
+                    this.SectionName <- ""
+                    this.TableRows.Clear()
 
     let parseMarkdown baseUrl (text:string) =
-        text.Split("\n")
-        |> Array.fold (foldLines baseUrl) (Empty, [])
-        |> (fun (_, list) -> List.rev list)
+        let parser = Parser(baseUrl)
+        for line in text.Split("\n") do
+            parser.ParseLine(line)
+        parser.GetSections() |> List.ofSeq
