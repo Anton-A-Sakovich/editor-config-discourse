@@ -74,6 +74,7 @@ let main args =
         let serializer =
             SerializerBuilder()
              .DisableAliases()
+             .WithIndentedSequences()
              .WithQuotingNecessaryStrings()
              .Build()
 
