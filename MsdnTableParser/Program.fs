@@ -5,54 +5,47 @@ open System
 open System.Text.RegularExpressions
 open YamlDotNet.Serialization
 
-type ProgramBlock<'TValue, 'TError> =
-    | Ok of 'TValue
-    | Error of 'TError
-    | Pending
-
-let ok value = Ok value
-let error value = Error value
-
-let run (result:ProgramBlock<_,_>) =
+let run (result:Result<_, _>) =
     match result with
-    | Ok value -> value
-    | Error (message, value) ->
+    | Ok returnCode -> returnCode
+    | Error (returnCode, message) ->
         printfn "%s" message
-        value
-    | Pending -> -1
+        returnCode
 
 type ProgramBuilder() =
-    member _.Bind(result:ProgramBlock<_,_>, cont) =
+    member _.Bind(result:Result<_,_>, cont) =
         match result with
         | Ok value -> cont value
         | Error error -> Error error
-        | Pending -> Pending
 
-    member _.ReturnFrom(value) = value
-    member _.Zero() = Pending
-
-    member _.Delay(f) = f
-    member _.Run(f) = f ()
-
-    member _.Combine(result:ProgramBlock<_,_>, cont) =
-        match result with
-        | Pending -> cont ()
-        | _ -> result
+    member _.Return(value) = Ok value
+    member _.ReturnFrom(result) = result
 
 let program = ProgramBuilder()
 
+[<Literal>]
 let githubUrlPrefix = "https://raw.githubusercontent.com/dotnet/docs/main/docs/fundamentals"
+
+[<Literal>]
 let msdnUrlPrefix = "https://learn.microsoft.com/en-us/dotnet/fundamentals"
 
 [<EntryPoint>]
 let main args =
     program {
-        if args.Length = 0 then
-            return! error ("No URL provided", 1)
+        let! providedUrl =
+            program {
+                if args.Length > 0 then
+                    return args[0]
+                else
+                    return! Error (1, "No URL provided.")
+            }
 
-        let providedUrl = args[0]
-        if not (providedUrl.StartsWith(msdnUrlPrefix)) then
-            return! error ("Incorrect URL", 2)
+        do! program {
+            if providedUrl.StartsWith(msdnUrlPrefix) then
+                return ()
+            else
+                return! Error (2, "The URL provided is not a valid MSDN URL of a style rule.")
+        }
 
         let urlToFetchFrom = providedUrl.Replace(msdnUrlPrefix, githubUrlPrefix) + ".md"
         let urlToPrepend = providedUrl
@@ -65,8 +58,8 @@ let main args =
             }
             |> Async.RunSynchronously
             |> (function
-                | Some value -> ok value
-                | None -> error ("Error Error fetching the markdown from GitHub.", 3))
+                | Some value -> Ok value
+                | None -> Error (3, "Error fetching the markdown from GitHub."))
 
         let optionsMetadata =
             parseMarkdown urlToPrepend text
@@ -93,6 +86,6 @@ let main args =
 
         printfn "%s" yamlWithSpaces
 
-        return! ok 0
+        return 0
     }
     |> run
