@@ -1,6 +1,8 @@
 ﻿open MsdnTableParser.HtmlFetcher
 open MsdnTableParser.MarkdownParser
 open MsdnTableParser.SectionParser
+open System
+open System.Text.RegularExpressions
 open YamlDotNet.Serialization
 
 type ProgramBlock<'TValue, 'TError> =
@@ -78,7 +80,18 @@ let main args =
              .WithQuotingNecessaryStrings()
              .Build()
 
-        serializer.Serialize(optionsMetadata) |> printfn "%s"
+        let yaml = serializer.Serialize(optionsMetadata)
+
+        let mutable spacesToPrepend = 0
+        do (args.Length > 1 && Int32.TryParse(args[1], &spacesToPrepend)) |> ignore
+
+        let yamlWithSpaces =
+            if spacesToPrepend = 0 then
+                yaml
+            else
+                Regex.Replace(yaml, @"^", String(' ', spacesToPrepend), RegexOptions.Multiline)
+
+        printfn "%s" yamlWithSpaces
 
         return! ok 0
     }
