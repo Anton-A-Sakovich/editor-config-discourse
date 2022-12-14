@@ -48,16 +48,17 @@ let main args =
         if args.Length = 0 then
             return! error ("No URL provided", 1)
 
-        let url = args[0]
-        if not (url.StartsWith(githubUrlPrefix)) then
+        let providedUrl = args[0]
+        if not (providedUrl.StartsWith(msdnUrlPrefix)) then
             return! error ("Incorrect URL", 2)
 
-        let urlToPrepend = url.Replace(githubUrlPrefix, msdnUrlPrefix)
+        let urlToFetchFrom = providedUrl.Replace(msdnUrlPrefix, githubUrlPrefix) + ".md"
+        let urlToPrepend = providedUrl
 
         let! text =
             async {
                 use httpClient = new System.Net.Http.HttpClient()
-                let! text = fetchPageAsync httpClient "text/plain" url |> Async.AwaitTask
+                let! text = fetchPageAsync httpClient "text/plain" urlToFetchFrom |> Async.AwaitTask
                 return text
             }
             |> Async.RunSynchronously
