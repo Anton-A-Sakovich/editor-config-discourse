@@ -1,5 +1,8 @@
 ﻿namespace MarkdownUpdater
 open MarkdownGenerator
+open System.IO
+open YamlParser
+open YamlDotNet.RepresentationModel
 
 module Program =
     let rule =
@@ -24,14 +27,13 @@ module Program =
 
     [<EntryPoint>]
     let main args =
-        let document =
-            DocumentNode.Section ("Section 1", [
-                DocumentNode.Rule rule;
-                DocumentNode.Section ("Section 2", [
-                    DocumentNode.Rule rule;
-                    DocumentNode.Rule rule1])
-                ])
+        use reader = new StringReader(File.ReadAllText(@"C:\Users\Anton.Sakovich\Playground\EditorConfig\rules.yaml"))
         
-        document |> printNode id |> printfn "%s"
+        let yamlStream = YamlStream()
+        yamlStream.Load(reader)
+
+        let rootNode = yamlStream.Documents[0].RootNode
+        let documentNode = tryParseDocumentMapping rootNode
+        documentNode[0] |> nodeToMarkdown (sprintf "https://%s") |> printfn "%s"
 
         0
