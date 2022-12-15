@@ -103,3 +103,21 @@ module YamlParser =
 
             return rule
         }
+
+    let rec tryParseRootNode (node:YamlNode) =
+        switch {
+            return! require {
+                let! mappingNode = node |> tryCast<YamlMappingNode>
+                return mappingNode.Children
+                    |> Seq.map (fun pair ->
+                        let heading = (pair.Key :?> YamlScalarNode).Value
+                        DocumentNode.Section(heading, tryParseRootNode pair.Value))
+                    |> List.ofSeq
+            }
+
+            return! require {
+                let! rules = node |> tryParseSequence (tryCast<YamlMappingNode> >> (Option.bind tryParseRuleNode))
+                return rules |> List.map DocumentNode.Rule
+            }
+        }
+        |> (function | Some list -> list | None -> [])
