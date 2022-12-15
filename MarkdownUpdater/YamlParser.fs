@@ -88,14 +88,14 @@ module YamlParser =
         require {
             let! name = node |> tryGetValue "Name" |> Option.bind tryParseScalar
             let! values = node |> tryGetValue "Values" |> Option.bind (tryParseSequence tryParseScalar)
-            let! defaultValueNode = node |> tryGetValue "DefaultValue" |> Option.bind tryParseOptionalScalar
+            let! defaultValue = node |> tryGetValue "DefaultValue" |> Option.bind tryParseOptionalScalar
             let! msdnLink = node |> tryGetValue "MsdnLink" |> Option.bind tryParseScalar
 
             let rule:StyleRule =
                 {
                     Name = name;
                     Values = values;
-                    DefaultValue = defaultValueNode;
+                    DefaultValue = defaultValue;
                     MsdnLink = msdnLink;
                     SelectedValue = None;
                     IssueId = None;
