@@ -4,57 +4,55 @@ module MarkdownGenerator =
     open System
     open System.Text
 
-    let private printLink (nameMaybe:Option<_>) value =
-        match nameMaybe with
-        | Some name -> $"[{name}]({value})"
-        | None -> value
+    let private headingToMarkdown (level:int) (title:string) =
+        (String('#', level), title) ||> sprintf "%s %s"
 
-    let printRule buildIssueLink (level:int) (rule:StyleRule) =
-        let builder = StringBuilder()
+    let private linkToMarkdown (name':Option<_>) url =
+        match name' with
+        | Some name -> $"[{name}]({url})"
+        | None -> url
 
-        builder.AppendLine($"{String('#', level)} {rule.Name}") |> ignore
+    let private appendRule issueIdToLink (level:int) (rule:StyleRule) (builder:StringBuilder) =
+        let inline append (str:string) = builder.Append(str) |> ignore
+        let inline appendLine (str:string) = builder.AppendLine(str) |> ignore
 
-        builder.AppendLine() |> ignore
+        rule.Name |> headingToMarkdown level |> appendLine
+        "" |> appendLine
 
+        rule.MsdnLink |> linkToMarkdown (Some "MSDN link") |> appendLine
+        "" |> appendLine
+
+        "Selected value:" |> append
         match rule.SelectedValue with
-        | Some value -> builder.AppendLine($"Selected value: {value}") |> ignore
+        | Some value -> value |> sprintf " %s" |> append
         | None -> ()
-
-        builder.AppendLine() |> ignore
-
+        "" |> appendLine
+        
+        "Issue:" |> append
         match rule.IssueId with
-        | Some value -> builder.AppendLine($"Issue: {value |> buildIssueLink |> printLink None}") |> ignore
+        | Some issueId -> issueId |> issueIdToLink |> linkToMarkdown (Some issueId) |> append
         | None -> ()
+        "" |> appendLine
 
-        builder.AppendLine() |> ignore
-
-        builder.AppendLine("Values:") |> ignore
+        "Possible values:" |> appendLine
         for value in rule.Values do
-            builder.AppendLine($"* {value}") |> ignore
+            value |> sprintf "* %s" |> appendLine
+        "" |> appendLine
 
-        builder.AppendLine() |> ignore
-
-        builder.AppendLine(printLink (Some "MSDN Link") rule.MsdnLink) |> ignore
-
-        builder.AppendLine() |> ignore
-
+    let ruleToMarkdown issueIdToLink level rule =
+        let builder = StringBuilder()
+        appendRule issueIdToLink level rule builder
         builder.ToString()
 
-    let rec private printNode' printRule (builder:StringBuilder) (level:int) (node:DocumentNode) =
+    let rec private appendNode appendRule (level:int) (node:DocumentNode) (builder:StringBuilder) =
         match node with
-        | Rule rule ->
-            let printedRule:string = printRule level rule
-            builder.AppendLine(printedRule)
-        | Section (name, innerNodes) ->
-            builder.AppendLine($"{String('#', level)} {name}") |> ignore
+        | Rule rule -> appendRule level rule builder
+        | Section (title, childNodes) ->
+            title |> headingToMarkdown level |> builder.AppendLine |> ignore
+            for childNode in childNodes do
+                appendNode appendRule (level + 1) childNode builder
 
-            for innderNode in innerNodes do
-                printNode' printRule builder (level + 1) innderNode |> ignore
-
-            builder
-
-    let printNode buildIssueLink node =
+    let nodeToMarkdown issueIdToLink node =
         let builder = StringBuilder()
-        let printRule' = printRule buildIssueLink
-        printNode' printRule' builder 1 node |> ignore
+        appendNode (appendRule issueIdToLink) 1 node builder
         builder.ToString()
