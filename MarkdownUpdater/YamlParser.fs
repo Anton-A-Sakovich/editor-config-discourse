@@ -1,7 +1,6 @@
 namespace MarkdownUpdater
 
 module YamlParser =
-    open System.IO
     open YamlDotNet.RepresentationModel
 
     type private RequireBuilder() =
@@ -29,38 +28,32 @@ module YamlParser =
 
     let private switch = SwitchBuilder()
 
-    let inline tryCast< ^b when ^b :> YamlNode> (value:YamlNode) =
-        match value with
+    let inline private tryCast< ^b when ^b :> YamlNode> (node:YamlNode) =
+        match node with
         | :? ^b as casted -> Some casted
         | _ -> None
 
-    let inline tryGetValue (key:string) (node:YamlMappingNode) =
+    let inline private tryParseAs< ^a, ^b when ^a :> YamlNode> (parse:^a -> option< ^b>) (node:YamlNode) =
+        node |> tryCast< ^a> |> Option.bind parse
+
+    let inline private tryGetMappingValue (key:string) (node:YamlMappingNode) =
         try
             Some(node[key])
         with
             | _ -> None
 
-    let private tryParseScalar (node:YamlNode) =
-        require {
-            let! node' = node |> tryCast<YamlScalarNode>
-            return node'.Value
-        }
+    let inline private tryParseScalar (node:YamlScalarNode) = Some node.Value
 
-    let private tryParseOptionalScalar (node:YamlNode) =
+    let private tryParseAsOption (node:YamlNode) =
         switch {
-            return! require {
-                let! scalarNode = node |> tryCast<YamlScalarNode>
-                match scalarNode.Value with
-                | null | "" -> return None
-                | value -> return Some value
-            }
+            return! node
+                |> tryParseAs tryParseScalar
+                |> Option.bind ((function | null | "" -> None | value -> Some value) >> Some)
 
-            return! require {
-                let! mappingNode = node |> tryCast<YamlMappingNode>
-                let! valueNode = mappingNode |> tryGetValue "Value"
-                let! valueNode' = valueNode |> tryCast<YamlScalarNode>
-                return Some valueNode'.Value
-            }
+            return! node
+                |> tryParseAs (tryGetMappingValue "Value")
+                |> Option.bind (tryParseAs tryParseScalar)
+                |> Option.bind (Some >> Some)
         }
 
     let rec private checkChild checkedChildren childrenToCheck =
@@ -71,25 +64,25 @@ module YamlParser =
             | Some child -> checkChild (child::checkedChildren) rest
             | None -> None
 
-    let private tryParseSequence parseChild (node:YamlNode) = 
-        require {
-            let! sequenceNode = node |> tryCast<YamlSequenceNode>
-            return!
-                seq {
-                    for child in sequenceNode.Children do
-                        yield parseChild child
-                }
-                |> List.ofSeq
-                |> List.rev
-                |> checkChild []
+    let private tryParseSequence parseChild (node:YamlSequenceNode) = 
+        seq {
+            for child in node.Children do
+                yield parseChild child
         }
+        |> List.ofSeq
+        |> List.rev
+        |> checkChild []
 
-    let tryParseRuleNode (node:YamlMappingNode) =
+    let tryParseRuleMapping (node:YamlMappingNode) =
         require {
-            let! name = node |> tryGetValue "Name" |> Option.bind tryParseScalar
-            let! values = node |> tryGetValue "Values" |> Option.bind (tryParseSequence tryParseScalar)
-            let! defaultValue = node |> tryGetValue "DefaultValue" |> Option.bind tryParseOptionalScalar
-            let! msdnLink = node |> tryGetValue "MsdnLink" |> Option.bind tryParseScalar
+            let inline tryParseAsScalar node = tryParseAs tryParseScalar node
+            let inline tryParseAsSequence node =
+                tryParseAs (tryParseSequence tryParseAsScalar) node
+
+            let! name = node |> tryGetMappingValue "Name" |> Option.bind tryParseAsScalar
+            let! values = node |> tryGetMappingValue "Values" |> Option.bind tryParseAsSequence
+            let! defaultValue = node |> tryGetMappingValue "DefaultValue" |> Option.bind tryParseAsOption
+            let! msdnLink = node |> tryGetMappingValue "MsdnLink" |> Option.bind tryParseAsScalar
 
             let rule:StyleRule =
                 {
@@ -104,20 +97,20 @@ module YamlParser =
             return rule
         }
 
-    let rec tryParseRootNode (node:YamlNode) =
+    let rec tryParseDocumentMapping (node:YamlNode) =
         switch {
             return! require {
                 let! mappingNode = node |> tryCast<YamlMappingNode>
                 return mappingNode.Children
                     |> Seq.map (fun pair ->
                         let heading = (pair.Key :?> YamlScalarNode).Value
-                        DocumentNode.Section(heading, tryParseRootNode pair.Value))
+                        DocumentNode.Section(heading, tryParseDocumentMapping pair.Value))
                     |> List.ofSeq
             }
 
             return! require {
-                let! rules = node |> tryParseSequence (tryCast<YamlMappingNode> >> (Option.bind tryParseRuleNode))
+                let! rules = node |> tryParseAs (tryParseSequence (tryParseAs tryParseRuleMapping))
                 return rules |> List.map DocumentNode.Rule
             }
         }
-        |> (function | Some list -> list | None -> [])
+        |> Option.defaultValue []
