@@ -113,7 +113,7 @@ module MarkdownGenerator =
     let rec private tocEntryToMarkdown (level:int) (tocEntry:TableOfContentsEntry) (builder:StringBuilder) =
         let inline appendTitle id title resolutionStats =
             let margin = String.replicate (4 * (level - 1)) "&nbsp;"
-            sprintf "%s[%s](%s) %s\\" margin title id resolutionStats |> builder.AppendLine |> ignore
+            sprintf "%s[%s](#%s) %s\\" margin title id resolutionStats |> builder.AppendLine |> ignore
 
         match tocEntry with
         | Rule(id, title, resolved) ->
