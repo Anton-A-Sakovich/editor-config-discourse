@@ -70,6 +70,8 @@ Issue:
 Possible values:
 * true
 * false
+
+Default value: false
 ---
 
 <a name="dotnet_style_qualification_for_property"></a> `dotnet_style_qualification_for_property` [MSDN Link](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0003-ide0009#dotnet_style_qualification_for_property)
@@ -80,6 +82,8 @@ Issue:
 Possible values:
 * true
 * false
+
+Default value: false
 ---
 
 <a name="dotnet_style_qualification_for_method"></a> `dotnet_style_qualification_for_method` [MSDN Link](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0003-ide0009#dotnet_style_qualification_for_method)
@@ -90,6 +94,8 @@ Issue:
 Possible values:
 * true
 * false
+
+Default value: false
 ---
 
 <a name="dotnet_style_qualification_for_event"></a> `dotnet_style_qualification_for_event` [MSDN Link](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0003-ide0009#dotnet_style_qualification_for_event)
@@ -100,6 +106,8 @@ Issue:
 Possible values:
 * true
 * false
+
+Default value: false
 ---
 
 ### <a name="use-language-keywords-instead-of-framework-type-names-for-type-references"></a> Use language keywords instead of framework type names for type references
@@ -112,6 +120,8 @@ Issue:
 Possible values:
 * true
 * false
+
+Default value: true
 ---
 
 <a name="dotnet_style_predefined_type_for_member_access"></a> `dotnet_style_predefined_type_for_member_access` [MSDN Link](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0049#dotnet_style_predefined_type_for_member_access)
@@ -122,6 +132,8 @@ Issue:
 Possible values:
 * true
 * false
+
+Default value: true
 ---
 
 ### <a name="modifier-preferences"></a> Modifier preferences
@@ -135,6 +147,8 @@ Issue:
 
 Possible values:
 * One or more C# modifiers, such as public, private, and protected
+
+Default value: public, private, protected, internal, file, static, extern, new, virtual, abstract, sealed, override, readonly, unsafe, required, volatile, async
 ---
 
 #### <a name="add-accessibility-modifier"></a> Add accessibility modifier
@@ -149,6 +163,8 @@ Possible values:
 * for_non_interface_members
 * never
 * omit_if_default
+
+Default value: for_non_interface_members
 ---
 
 #### <a name="add-readonly-modifier"></a> Add readonly modifier
@@ -161,6 +177,8 @@ Issue:
 Possible values:
 * true
 * false
+
+Default value: true
 ---
 
 #### <a name="make-local-function-static"></a> Make local function static
@@ -173,6 +191,8 @@ Issue:
 Possible values:
 * true
 * false
+
+Default value: true:suggestion
 ---
 
 ### <a name="parentheses-preferences"></a> Parentheses preferences
@@ -185,6 +205,8 @@ Issue:
 Possible values:
 * always_for_clarity
 * never_if_unnecessary
+
+Default value: always_for_clarity
 ---
 
 <a name="dotnet_style_parentheses_in_relational_binary_operators"></a> `dotnet_style_parentheses_in_relational_binary_operators` [MSDN Link](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0047-ide0048#dotnet_style_parentheses_in_relational_binary_operators)
@@ -195,6 +217,8 @@ Issue:
 Possible values:
 * always_for_clarity
 * never_if_unnecessary
+
+Default value: always_for_clarity
 ---
 
 <a name="dotnet_style_parentheses_in_other_binary_operators"></a> `dotnet_style_parentheses_in_other_binary_operators` [MSDN Link](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0047-ide0048#dotnet_style_parentheses_in_other_binary_operators)
@@ -205,6 +229,8 @@ Issue:
 Possible values:
 * always_for_clarity
 * never_if_unnecessary
+
+Default value: always_for_clarity
 ---
 
 <a name="dotnet_style_parentheses_in_other_operators"></a> `dotnet_style_parentheses_in_other_operators` [MSDN Link](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0047-ide0048#dotnet_style_parentheses_in_other_operators)
@@ -215,6 +241,8 @@ Issue:
 Possible values:
 * always_for_clarity
 * never_if_unnecessary
+
+Default value: never_if_unnecessary
 ---
 
 ### <a name="expression-level-preferences"></a> Expression-level preferences
@@ -229,6 +257,8 @@ Issue:
 Possible values:
 * true
 * false
+
+Default value: true
 ---
 
 #### <a name="inline-variable-declaration"></a> Inline variable declaration
@@ -241,6 +271,8 @@ Issue:
 Possible values:
 * true
 * false
+
+Default value: true
 ---
 
 #### <a name="use-collection-initializers"></a> Use collection initializers
@@ -253,6 +285,8 @@ Issue:
 Possible values:
 * true
 * false
+
+Default value: true
 ---
 
 #### <a name="use-auto-implemented-property"></a> Use auto-implemented property
@@ -265,6 +299,8 @@ Issue:
 Possible values:
 * true
 * false
+
+Default value: true
 ---
 
 #### <a name="use-explicitly-provided-tuple-name"></a> Use explicitly provided tuple name
@@ -277,6 +313,8 @@ Issue:
 Possible values:
 * true
 * false
+
+Default value: true
 ---
 
 #### <a name="simplify-'default'-expression"></a> Simplify 'default' expression
@@ -289,6 +327,8 @@ Issue:
 Possible values:
 * true
 * false
+
+Default value: true
 ---
 
 #### <a name="use-inferred-member-names"></a> Use inferred member names
@@ -301,6 +341,8 @@ Issue:
 Possible values:
 * true
 * false
+
+Default value: true
 ---
 
 #### <a name="use-local-function-instead-of-lambda"></a> Use local function instead of lambda
@@ -313,6 +355,8 @@ Issue:
 Possible values:
 * true
 * false
+
+Default value: true
 ---
 
 #### <a name="deconstruct-variable-declaration"></a> Deconstruct variable declaration
@@ -325,6 +369,8 @@ Issue:
 Possible values:
 * true
 * false
+
+Default value: true
 ---
 
 #### <a name="use-conditional-expression-for-assignment"></a> Use conditional expression for assignment
@@ -337,6 +383,8 @@ Issue:
 Possible values:
 * true
 * false
+
+Default value: true
 ---
 
 #### <a name="use-conditional-expression-for-return"></a> Use conditional expression for return
@@ -349,6 +397,8 @@ Issue:
 Possible values:
 * true
 * false
+
+Default value: true
 ---
 
 #### <a name="use-compound-assignment"></a> Use compound assignment
@@ -361,6 +411,8 @@ Issue:
 Possible values:
 * true
 * false
+
+Default value: true
 ---
 
 #### <a name="simplify-conditional-expression"></a> Simplify conditional expression
@@ -373,6 +425,8 @@ Issue:
 Possible values:
 * true
 * false
+
+Default value: true
 ---
 
 #### <a name="simplify-new-expression"></a> Simplify new expression
@@ -385,6 +439,8 @@ Issue:
 Possible values:
 * true
 * false
+
+Default value: true
 ---
 
 #### <a name="use-tuple-to-swap-values"></a> Use tuple to swap values
@@ -397,5 +453,7 @@ Issue:
 Possible values:
 * true
 * false
+
+Default value: true
 ---
 

@@ -89,7 +89,10 @@ module Program =
                         return documentNodes |> List.head
                 }
 
-            let markdown = nodeToMarkdown issueIdToLink documentNode
+            let editorconfigRules = Map.empty<string, EditorconfigRule>
+            let mergedDocumentNode = Merger.mergeConfigIntoMarkdownNode editorconfigRules documentNode
+
+            let markdown = nodeToMarkdown issueIdToLink mergedDocumentNode
             File.WriteAllText(rulesMarkdownFilePath, markdown, encoding)
 
             return ()

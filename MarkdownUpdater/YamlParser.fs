@@ -84,14 +84,12 @@ module YamlParser =
             let! defaultValue = node |> tryGetMappingValue "DefaultValue" |> Option.bind tryParseAsOption
             let! msdnLink = node |> tryGetMappingValue "MsdnLink" |> Option.bind tryParseAsScalar
 
-            let rule:StyleRule =
+            let rule:StyleRuleMetadata =
                 {
                     Name = name;
                     Values = values;
                     DefaultValue = defaultValue;
                     MsdnLink = msdnLink;
-                    SelectedValue = None;
-                    IssueId = None;
                 }
 
             return rule
@@ -104,13 +102,13 @@ module YamlParser =
                 return mappingNode.Children
                     |> Seq.map (fun pair ->
                         let heading = (pair.Key :?> YamlScalarNode).Value
-                        DocumentNode.Section(heading, tryParseDocumentMapping pair.Value))
+                        MarkdownNode.Section(heading, tryParseDocumentMapping pair.Value))
                     |> List.ofSeq
             }
 
             return! require {
                 let! rules = node |> tryParseAs (tryParseSequence (tryParseAs tryParseRuleMapping))
-                return rules |> List.map DocumentNode.Rule
+                return rules |> List.map MarkdownNode.Rule
             }
         }
         |> Option.defaultValue []
