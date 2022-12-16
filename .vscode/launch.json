@@ -21,7 +21,7 @@
             "request": "launch",
             "preLaunchTask": "BuildMarkdownUpdater",
             "program": "${workspaceFolder}/MarkdownUpdater/bin/Debug/net7.0/MarkdownUpdater.dll",
-            "args": ["rules.yaml", ".editorconfig", "rules.md"],
+            "args": ["rules.yaml", ".editorconfig", "rules.md", "https://github.com/Anton-A-Sakovich/editor-config-discourse/issues/"],
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,
             "console": "internalConsole"

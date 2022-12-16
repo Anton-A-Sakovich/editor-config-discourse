@@ -65,49 +65,53 @@
 <a name="dotnet_style_qualification_for_field"></a> `dotnet_style_qualification_for_field` [MSDN Link](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0003-ide0009#dotnet_style_qualification_for_field)
 
 Selected value: `false:error`\
-Issue:
+Issue: [1](https://github.com/Anton-A-Sakovich/editor-config-discourse/issues/1)
 
 Possible values:
 * true
 * false
 
 Default value: false
+
 ---
 
 <a name="dotnet_style_qualification_for_property"></a> `dotnet_style_qualification_for_property` [MSDN Link](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0003-ide0009#dotnet_style_qualification_for_property)
 
 Selected value: `false:error`\
-Issue:[ Language keywords vs BCL types preferences]( Language keywords vs BCL types preferences)
+Issue: [1](https://github.com/Anton-A-Sakovich/editor-config-discourse/issues/1)
 
 Possible values:
 * true
 * false
 
 Default value: false
+
 ---
 
 <a name="dotnet_style_qualification_for_method"></a> `dotnet_style_qualification_for_method` [MSDN Link](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0003-ide0009#dotnet_style_qualification_for_method)
 
 Selected value: `false:silent`\
-Issue:[Sometimes, it's more readable when methods are called through this (e.g., this.GetType()).](Sometimes, it's more readable when methods are called through this (e.g., this.GetType()).)
+Issue: [1](https://github.com/Anton-A-Sakovich/editor-config-discourse/issues/1)
 
 Possible values:
 * true
 * false
 
 Default value: false
+
 ---
 
 <a name="dotnet_style_qualification_for_event"></a> `dotnet_style_qualification_for_event` [MSDN Link](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0003-ide0009#dotnet_style_qualification_for_event)
 
 Selected value: `false:error`\
-Issue:
+Issue: [1](https://github.com/Anton-A-Sakovich/editor-config-discourse/issues/1)
 
 Possible values:
 * true
 * false
 
 Default value: false
+
 ---
 
 ### <a name="use-language-keywords-instead-of-framework-type-names-for-type-references"></a> Use language keywords instead of framework type names for type references
@@ -115,25 +119,27 @@ Default value: false
 <a name="dotnet_style_predefined_type_for_locals_parameters_members"></a> `dotnet_style_predefined_type_for_locals_parameters_members` [MSDN Link](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0049#dotnet_style_predefined_type_for_locals_parameters_members)
 
 Selected value: `true:error`\
-Issue:[Prefer int local; It's more readable, though can add some inconvinience over refactoring.](Prefer int local; It's more readable, though can add some inconvinience over refactoring.)
+Issue: [1](https://github.com/Anton-A-Sakovich/editor-config-discourse/issues/1)
 
 Possible values:
 * true
 * false
 
 Default value: true
+
 ---
 
 <a name="dotnet_style_predefined_type_for_member_access"></a> `dotnet_style_predefined_type_for_member_access` [MSDN Link](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0049#dotnet_style_predefined_type_for_member_access)
 
 Selected value: `false:error`\
-Issue:[Prefer String.IsNullOrEmpty("s"); MSDN style. It displays that we work with class rather than primitive type.](Prefer String.IsNullOrEmpty("s"); MSDN style. It displays that we work with class rather than primitive type.)
+Issue: [1](https://github.com/Anton-A-Sakovich/editor-config-discourse/issues/1)
 
 Possible values:
 * true
 * false
 
 Default value: true
+
 ---
 
 ### <a name="modifier-preferences"></a> Modifier preferences
@@ -149,6 +155,7 @@ Possible values:
 * One or more C# modifiers, such as public, private, and protected
 
 Default value: public, private, protected, internal, file, static, extern, new, virtual, abstract, sealed, override, readonly, unsafe, required, volatile, async
+
 ---
 
 #### <a name="add-accessibility-modifier"></a> Add accessibility modifier
@@ -165,6 +172,7 @@ Possible values:
 * omit_if_default
 
 Default value: for_non_interface_members
+
 ---
 
 #### <a name="add-readonly-modifier"></a> Add readonly modifier
@@ -179,6 +187,7 @@ Possible values:
 * false
 
 Default value: true
+
 ---
 
 #### <a name="make-local-function-static"></a> Make local function static
@@ -193,6 +202,7 @@ Possible values:
 * false
 
 Default value: true:suggestion
+
 ---
 
 ### <a name="parentheses-preferences"></a> Parentheses preferences
@@ -207,6 +217,7 @@ Possible values:
 * never_if_unnecessary
 
 Default value: always_for_clarity
+
 ---
 
 <a name="dotnet_style_parentheses_in_relational_binary_operators"></a> `dotnet_style_parentheses_in_relational_binary_operators` [MSDN Link](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0047-ide0048#dotnet_style_parentheses_in_relational_binary_operators)
@@ -219,6 +230,7 @@ Possible values:
 * never_if_unnecessary
 
 Default value: always_for_clarity
+
 ---
 
 <a name="dotnet_style_parentheses_in_other_binary_operators"></a> `dotnet_style_parentheses_in_other_binary_operators` [MSDN Link](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0047-ide0048#dotnet_style_parentheses_in_other_binary_operators)
@@ -231,6 +243,7 @@ Possible values:
 * never_if_unnecessary
 
 Default value: always_for_clarity
+
 ---
 
 <a name="dotnet_style_parentheses_in_other_operators"></a> `dotnet_style_parentheses_in_other_operators` [MSDN Link](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0047-ide0048#dotnet_style_parentheses_in_other_operators)
@@ -243,6 +256,7 @@ Possible values:
 * never_if_unnecessary
 
 Default value: never_if_unnecessary
+
 ---
 
 ### <a name="expression-level-preferences"></a> Expression-level preferences
@@ -259,6 +273,7 @@ Possible values:
 * false
 
 Default value: true
+
 ---
 
 #### <a name="inline-variable-declaration"></a> Inline variable declaration
@@ -273,6 +288,7 @@ Possible values:
 * false
 
 Default value: true
+
 ---
 
 #### <a name="use-collection-initializers"></a> Use collection initializers
@@ -287,6 +303,7 @@ Possible values:
 * false
 
 Default value: true
+
 ---
 
 #### <a name="use-auto-implemented-property"></a> Use auto-implemented property
@@ -301,6 +318,7 @@ Possible values:
 * false
 
 Default value: true
+
 ---
 
 #### <a name="use-explicitly-provided-tuple-name"></a> Use explicitly provided tuple name
@@ -315,6 +333,7 @@ Possible values:
 * false
 
 Default value: true
+
 ---
 
 #### <a name="simplify-'default'-expression"></a> Simplify 'default' expression
@@ -329,6 +348,7 @@ Possible values:
 * false
 
 Default value: true
+
 ---
 
 #### <a name="use-inferred-member-names"></a> Use inferred member names
@@ -343,6 +363,7 @@ Possible values:
 * false
 
 Default value: true
+
 ---
 
 #### <a name="use-local-function-instead-of-lambda"></a> Use local function instead of lambda
@@ -357,6 +378,7 @@ Possible values:
 * false
 
 Default value: true
+
 ---
 
 #### <a name="deconstruct-variable-declaration"></a> Deconstruct variable declaration
@@ -371,6 +393,7 @@ Possible values:
 * false
 
 Default value: true
+
 ---
 
 #### <a name="use-conditional-expression-for-assignment"></a> Use conditional expression for assignment
@@ -385,6 +408,7 @@ Possible values:
 * false
 
 Default value: true
+
 ---
 
 #### <a name="use-conditional-expression-for-return"></a> Use conditional expression for return
@@ -399,6 +423,7 @@ Possible values:
 * false
 
 Default value: true
+
 ---
 
 #### <a name="use-compound-assignment"></a> Use compound assignment
@@ -413,6 +438,7 @@ Possible values:
 * false
 
 Default value: true
+
 ---
 
 #### <a name="simplify-conditional-expression"></a> Simplify conditional expression
@@ -427,6 +453,7 @@ Possible values:
 * false
 
 Default value: true
+
 ---
 
 #### <a name="simplify-new-expression"></a> Simplify new expression
@@ -441,6 +468,7 @@ Possible values:
 * false
 
 Default value: true
+
 ---
 
 #### <a name="use-tuple-to-swap-values"></a> Use tuple to swap values
@@ -455,5 +483,6 @@ Possible values:
 * false
 
 Default value: true
+
 ---
 
