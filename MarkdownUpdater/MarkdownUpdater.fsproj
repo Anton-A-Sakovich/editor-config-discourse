@@ -6,6 +6,7 @@
   <ItemGroup>
     <Compile Include="DocumentStructure.fs" />
     <Compile Include="MarkdownGenerator.fs" />
+    <Compile Include="EditorconfigParser.fs" />
     <Compile Include="YamlParser.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
