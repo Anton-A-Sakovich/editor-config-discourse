@@ -1,15 +1,15 @@
 #  Table of Contents
 
-[Code style rules](code-style-rules)  resolved 0 from 29\
-&nbsp;&nbsp;&nbsp;&nbsp;[Language rules](language-rules)  resolved 0 from 29\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[This and Me preferences](this-and-me-preferences)  resolved 0 from 4\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[dotnet_style_qualification_for_field](dotnet_style_qualification_for_field)  unresolved\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[dotnet_style_qualification_for_property](dotnet_style_qualification_for_property)  unresolved\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[dotnet_style_qualification_for_method](dotnet_style_qualification_for_method)  unresolved\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[dotnet_style_qualification_for_event](dotnet_style_qualification_for_event)  unresolved\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Use language keywords instead of framework type names for type references](use-language-keywords-instead-of-framework-type-names-for-type-references)  resolved 0 from 2\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[dotnet_style_predefined_type_for_locals_parameters_members](dotnet_style_predefined_type_for_locals_parameters_members)  unresolved\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[dotnet_style_predefined_type_for_member_access](dotnet_style_predefined_type_for_member_access)  unresolved\
+[Code style rules](code-style-rules)  resolved 6 from 29\
+&nbsp;&nbsp;&nbsp;&nbsp;[Language rules](language-rules)  resolved 6 from 29\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[This and Me preferences](this-and-me-preferences)  resolved 4 from 4\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[dotnet_style_qualification_for_field](dotnet_style_qualification_for_field)  resolved\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[dotnet_style_qualification_for_property](dotnet_style_qualification_for_property)  resolved\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[dotnet_style_qualification_for_method](dotnet_style_qualification_for_method)  resolved\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[dotnet_style_qualification_for_event](dotnet_style_qualification_for_event)  resolved\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Use language keywords instead of framework type names for type references](use-language-keywords-instead-of-framework-type-names-for-type-references)  resolved 2 from 2\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[dotnet_style_predefined_type_for_locals_parameters_members](dotnet_style_predefined_type_for_locals_parameters_members)  resolved\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[dotnet_style_predefined_type_for_member_access](dotnet_style_predefined_type_for_member_access)  resolved\
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Modifier preferences](modifier-preferences)  resolved 0 from 4\
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Order modifiers](order-modifiers) \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[csharp_preferred_modifier_order](csharp_preferred_modifier_order)  unresolved\
@@ -64,7 +64,7 @@
 
 <a name="dotnet_style_qualification_for_field"></a> `dotnet_style_qualification_for_field` [MSDN Link](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0003-ide0009#dotnet_style_qualification_for_field)
 
-Selected value:\
+Selected value: false:error\
 Issue:
 
 Possible values:
@@ -76,8 +76,8 @@ Default value: false
 
 <a name="dotnet_style_qualification_for_property"></a> `dotnet_style_qualification_for_property` [MSDN Link](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0003-ide0009#dotnet_style_qualification_for_property)
 
-Selected value:\
-Issue:
+Selected value: false:error\
+Issue:[ Language keywords vs BCL types preferences]( Language keywords vs BCL types preferences)
 
 Possible values:
 * true
@@ -88,8 +88,8 @@ Default value: false
 
 <a name="dotnet_style_qualification_for_method"></a> `dotnet_style_qualification_for_method` [MSDN Link](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0003-ide0009#dotnet_style_qualification_for_method)
 
-Selected value:\
-Issue:
+Selected value: false:silent\
+Issue:[Sometimes, it's more readable when methods are called through this (e.g., this.GetType()).](Sometimes, it's more readable when methods are called through this (e.g., this.GetType()).)
 
 Possible values:
 * true
@@ -100,7 +100,7 @@ Default value: false
 
 <a name="dotnet_style_qualification_for_event"></a> `dotnet_style_qualification_for_event` [MSDN Link](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0003-ide0009#dotnet_style_qualification_for_event)
 
-Selected value:\
+Selected value: false:error\
 Issue:
 
 Possible values:
@@ -114,8 +114,8 @@ Default value: false
 
 <a name="dotnet_style_predefined_type_for_locals_parameters_members"></a> `dotnet_style_predefined_type_for_locals_parameters_members` [MSDN Link](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0049#dotnet_style_predefined_type_for_locals_parameters_members)
 
-Selected value:\
-Issue:
+Selected value: true:error\
+Issue:[Prefer int local; It's more readable, though can add some inconvinience over refactoring.](Prefer int local; It's more readable, though can add some inconvinience over refactoring.)
 
 Possible values:
 * true
@@ -126,8 +126,8 @@ Default value: true
 
 <a name="dotnet_style_predefined_type_for_member_access"></a> `dotnet_style_predefined_type_for_member_access` [MSDN Link](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0049#dotnet_style_predefined_type_for_member_access)
 
-Selected value:\
-Issue:
+Selected value: false:error\
+Issue:[Prefer String.IsNullOrEmpty("s"); MSDN style. It displays that we work with class rather than primitive type.](Prefer String.IsNullOrEmpty("s"); MSDN style. It displays that we work with class rather than primitive type.)
 
 Possible values:
 * true
