@@ -56,7 +56,7 @@ module MarkdownGenerator =
         
         "Issue:" |> append
         match issueId' with
-        | Some issueId -> Link (Some issueId, issueIdToUrl issueId) |> linkToMarkdown |> append
+        | Some issueId -> Link (Some issueId, issueIdToUrl issueId) |> linkToMarkdown |> sprintf " %s" |> append
         | None -> ()
         "" |> appendLine
         "" |> appendLine
