@@ -50,7 +50,7 @@ module MarkdownGenerator =
 
         "Selected value:" |> append
         match selectedValue' with
-        | Some selectedValue -> selectedValue |> sprintf " %s" |> append
+        | Some selectedValue -> selectedValue |> sprintf " `%s`" |> append
         | None -> ()
         "\\" |> appendLine
         

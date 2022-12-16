@@ -64,7 +64,7 @@
 
 <a name="dotnet_style_qualification_for_field"></a> `dotnet_style_qualification_for_field` [MSDN Link](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0003-ide0009#dotnet_style_qualification_for_field)
 
-Selected value: false:error\
+Selected value: `false:error`\
 Issue:
 
 Possible values:
@@ -76,7 +76,7 @@ Default value: false
 
 <a name="dotnet_style_qualification_for_property"></a> `dotnet_style_qualification_for_property` [MSDN Link](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0003-ide0009#dotnet_style_qualification_for_property)
 
-Selected value: false:error\
+Selected value: `false:error`\
 Issue:[ Language keywords vs BCL types preferences]( Language keywords vs BCL types preferences)
 
 Possible values:
@@ -88,7 +88,7 @@ Default value: false
 
 <a name="dotnet_style_qualification_for_method"></a> `dotnet_style_qualification_for_method` [MSDN Link](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0003-ide0009#dotnet_style_qualification_for_method)
 
-Selected value: false:silent\
+Selected value: `false:silent`\
 Issue:[Sometimes, it's more readable when methods are called through this (e.g., this.GetType()).](Sometimes, it's more readable when methods are called through this (e.g., this.GetType()).)
 
 Possible values:
@@ -100,7 +100,7 @@ Default value: false
 
 <a name="dotnet_style_qualification_for_event"></a> `dotnet_style_qualification_for_event` [MSDN Link](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0003-ide0009#dotnet_style_qualification_for_event)
 
-Selected value: false:error\
+Selected value: `false:error`\
 Issue:
 
 Possible values:
@@ -114,7 +114,7 @@ Default value: false
 
 <a name="dotnet_style_predefined_type_for_locals_parameters_members"></a> `dotnet_style_predefined_type_for_locals_parameters_members` [MSDN Link](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0049#dotnet_style_predefined_type_for_locals_parameters_members)
 
-Selected value: true:error\
+Selected value: `true:error`\
 Issue:[Prefer int local; It's more readable, though can add some inconvinience over refactoring.](Prefer int local; It's more readable, though can add some inconvinience over refactoring.)
 
 Possible values:
@@ -126,7 +126,7 @@ Default value: true
 
 <a name="dotnet_style_predefined_type_for_member_access"></a> `dotnet_style_predefined_type_for_member_access` [MSDN Link](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0049#dotnet_style_predefined_type_for_member_access)
 
-Selected value: false:error\
+Selected value: `false:error`\
 Issue:[Prefer String.IsNullOrEmpty("s"); MSDN style. It displays that we work with class rather than primitive type.](Prefer String.IsNullOrEmpty("s"); MSDN style. It displays that we work with class rather than primitive type.)
 
 Possible values:
