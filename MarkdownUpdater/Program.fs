@@ -42,21 +42,32 @@ module Program =
 
     [<EntryPoint>]
     let main args =
+        let inline requireArg failure index =
+            program {
+                if args.Length > index then
+                    return args[index]
+                else
+                    return! failure
+            }
+
         program {
-            let! rulesFilePath =
-                program {
-                    if args.Length = 0 then
-                        return! Failed ("No file path provided.", 1)
-                    else
-                        return args[0]
-                }
+            let! rulesYamlFilePath = requireArg (Failed ("No YAML file path provided.", 1)) 0
+            let! rulesMarkdownFilePath = requireArg (Failed ("No Markdown file path provided.", 1)) 1
+
+            let issueIdToLink =
+                if args.Length > 2 then
+                    let baseIssuePath = args[2]
+                    (fun issueId -> baseIssuePath + issueId)
+                else
+                    id
 
             do! program {
-                if rulesFilePath |> File.Exists |> not then
+                if rulesYamlFilePath |> File.Exists |> not then
                     return! Failed ("The specified file does not exist.", 2)
             }
 
-            let yamlString = File.ReadAllText(rulesFilePath, Encoding.UTF8)
+            let encoding = UTF8Encoding(false)
+            let yamlString = File.ReadAllText(rulesYamlFilePath, encoding)
             use yamlReader = new StringReader(yamlString)
             let yamlStream = YamlStream()
             yamlStream.Load(yamlReader)
@@ -78,15 +89,9 @@ module Program =
                         return documentNodes |> List.head
                 }
 
-            let issueIdToLink =
-                if args.Length > 1 then
-                    let baseIssuePath = args[1]
-                    (fun issueId -> baseIssuePath + issueId)
-                else
-                    id
-
             let markdown = nodeToMarkdown issueIdToLink documentNode
-            printfn "%s" markdown
+            File.WriteAllText(rulesMarkdownFilePath, markdown, encoding)
+
             return ()
         }
         |> run
