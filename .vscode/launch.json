@@ -1,0 +1,30 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch MsdnTableParser",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "BuildMsdnTableParser",
+            "program": "${workspaceFolder}/MsdnTableParser/bin/Debug/net7.0/MsdnTableParser.dll",
+            "args": ["https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0003-ide0009"],
+            "cwd": "${workspaceFolder}",
+            "stopAtEntry": false,
+            "console": "internalConsole"
+        },
+        {
+            "name": "Launch MarkdownUpdater",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "BuildMarkdownUpdater",
+            "program": "${workspaceFolder}/MarkdownUpdater/bin/Debug/net7.0/MarkdownUpdater.dll",
+            "args": ["rules.yaml", ".editorconfig", "rules.md"],
+            "cwd": "${workspaceFolder}",
+            "stopAtEntry": false,
+            "console": "internalConsole"
+        }
+    ]
+}

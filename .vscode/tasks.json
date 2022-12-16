@@ -1,0 +1,25 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "BuildMsdnTableParser",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/MsdnTableParser/MsdnTableParser.fsproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "BuildMarkdownUpdater",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/MarkdownUpdater/MarkdownUpdater.fsproj"
+            ],
+            "problemMatcher": "$msCompile"
+        }
+    ]
+}
