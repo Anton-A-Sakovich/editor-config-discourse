@@ -1,22 +1,42 @@
 namespace MarkdownUpdater
 
 module MarkdownGenerator =
-    open System
     open System.Text
 
-    let private headingToMarkdown (level:int) (title:string) =
-        (String('#', level), title) ||> sprintf "%s %s"
+    [<Struct>]
+    type private Anchor = Anchor of name:string
+    [<Struct>]
+    type private Heading = Heading of level:int * anchor:option<Anchor> * title:string
+    [<Struct>]
+    type private Link = Link of name:option<string> * url:string
 
-    let private linkToMarkdown (name':Option<_>) url =
+    let inline private mapCoerce f x =
+        x |> Option.map f |> Option.defaultValue ""
+
+    let private anchorToMarkdown (Anchor name) =
+        sprintf "<a name=\"%s\"></a>" name
+
+    let private headingToMarkdown (Heading (level, anchor', title)) =
+        let hashes = String.replicate level "#"
+        let anchorMarkdown = anchor' |> mapCoerce anchorToMarkdown
+        sprintf "%s %s %s" hashes anchorMarkdown title
+
+    let private linkToMarkdown (Link (name', url)) =
         match name' with
         | Some name -> $"[{name}]({url})"
         | None -> url
 
-    let private appendRule issueIdToLink (level:int) (rule:StyleRule) (builder:StringBuilder) =
+    let private appendRule issueIdToUrl (rule:StyleRule) (anchor':option<Anchor>) (builder:StringBuilder) =
         let inline append (str:string) = builder.Append(str) |> ignore
         let inline appendLine (str:string) = builder.AppendLine(str) |> ignore
 
-        (rule.Name, rule.MsdnLink |> linkToMarkdown (Some "MSDN link")) ||> sprintf "`%s` %s" |> appendLine
+        let anchorMarkdown =
+            match anchor' with
+            | Some anchor -> (anchorToMarkdown anchor) + " "
+            | None -> ""
+
+        let linkMarkdown = Link (Some "MSDN Link", rule.MsdnLink) |> linkToMarkdown
+        sprintf "%s`%s` %s" anchorMarkdown rule.Name linkMarkdown |> appendLine
         "" |> appendLine
 
         "Selected value:" |> append
@@ -27,7 +47,7 @@ module MarkdownGenerator =
         
         "Issue:" |> append
         match rule.IssueId with
-        | Some issueId -> issueId |> issueIdToLink |> linkToMarkdown (Some issueId) |> append
+        | Some issueId -> Link (Some issueId, issueIdToUrl issueId) |> linkToMarkdown |> append
         | None -> ()
         "" |> appendLine
         "" |> appendLine
@@ -39,21 +59,56 @@ module MarkdownGenerator =
         "---" |> appendLine
         "" |> appendLine
 
-    let ruleToMarkdown issueIdToLink level rule =
+    let ruleToMarkdown issueIdToLink rule =
         let builder = StringBuilder()
-        appendRule issueIdToLink level rule builder
+        appendRule issueIdToLink rule None builder
         builder.ToString()
+
+    type private TableOfContentsEntry = {
+        Level: int;
+        Id: string;
+        Title: string; }
 
     let rec private appendNode appendRule (level:int) (node:DocumentNode) (builder:StringBuilder) =
         match node with
-        | Rule rule -> appendRule level rule builder
+        | Rule rule ->
+            let tocEntry = {
+                Id = rule.Name;
+                Level = level;
+                Title = rule.Name; }
+
+            appendRule rule (Some(Anchor(tocEntry.Id))) builder
+            [tocEntry]
         | Section (title, childNodes) ->
-            title |> headingToMarkdown level |> builder.AppendLine |> ignore
+            let tocEntry = {
+                Id = title.Replace(" ", "-").ToLower();
+                Level = level;
+                Title = title; }
+
+            let heading = Heading(level, Some(Anchor(tocEntry.Id)), title)
+            heading |> headingToMarkdown |> builder.AppendLine |> ignore
             builder.AppendLine() |> ignore
-            for childNode in childNodes do
-                appendNode appendRule (level + 1) childNode builder
+
+            let childTocEntries =
+                childNodes
+                |> List.collect (fun childNode -> appendNode appendRule (level + 1) childNode builder)
+            
+            tocEntry::childTocEntries
 
     let nodeToMarkdown issueIdToLink node =
         let builder = StringBuilder()
-        appendNode (appendRule issueIdToLink) 1 node builder
+        let tocEntries = appendNode (appendRule issueIdToLink) 1 node builder
+
+        let tocBuilder = StringBuilder()
+        Heading(1, None, "Table of Contents") |> headingToMarkdown |> tocBuilder.AppendLine |> ignore
+        tocBuilder.AppendLine() |> ignore
+        for tocEntry in tocEntries do
+            let margin = String.replicate (4 * (tocEntry.Level - 1)) "&nbsp;"
+            let markdown = sprintf "%s[%s](#%s)\\" margin tocEntry.Title tocEntry.Id
+            tocBuilder.AppendLine(markdown) |> ignore
+
+        tocBuilder.Remove(tocBuilder.Length - 3, 1) |> ignore
+        tocBuilder.AppendLine() |> ignore
+
+        builder.Insert(0, tocBuilder.ToString()) |> ignore
         builder.ToString()
