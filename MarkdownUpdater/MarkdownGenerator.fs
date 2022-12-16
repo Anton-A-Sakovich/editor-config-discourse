@@ -64,48 +64,68 @@ module MarkdownGenerator =
         appendRule issueIdToLink rule None builder
         builder.ToString()
 
-    type private TableOfContentsEntry = {
-        Level: int;
-        Id: string;
-        Title: string; }
+    type private TableOfContentsEntry =
+        | Rule of id:string * title:string * resolved:bool
+        | Section of id:string * title:string * children:list<TableOfContentsEntry> * resolved:int * unresolved:int
 
     let rec private appendNode appendRule (level:int) (node:DocumentNode) (builder:StringBuilder) =
         match node with
-        | Rule rule ->
-            let tocEntry = {
-                Id = rule.Name;
-                Level = level;
-                Title = rule.Name; }
+        | DocumentNode.Rule rule ->
+            let tocId = rule.Name
+            appendRule rule (Some(Anchor(tocId))) builder
 
-            appendRule rule (Some(Anchor(tocEntry.Id))) builder
-            [tocEntry]
-        | Section (title, childNodes) ->
-            let tocEntry = {
-                Id = title.Replace(" ", "-").ToLower();
-                Level = level;
-                Title = title; }
-
-            let heading = Heading(level, Some(Anchor(tocEntry.Id)), title)
+            Rule(id = tocId, title = rule.Name, resolved = (rule.SelectedValue |> Option.isSome))
+        | DocumentNode.Section (title, childNodes) ->
+            let tocId = title.Replace(" ", "-").ToLower()
+            let heading = Heading(level, Some(Anchor(tocId)), title)
             heading |> headingToMarkdown |> builder.AppendLine |> ignore
             builder.AppendLine() |> ignore
 
             let childTocEntries =
                 childNodes
-                |> List.collect (fun childNode -> appendNode appendRule (level + 1) childNode builder)
+                |> List.map (fun childNode -> appendNode appendRule (level + 1) childNode builder)
+
+            let (resolved, unresolved) =
+                childTocEntries
+                |> List.map (function
+                    | Rule (_, _, resolved) -> if resolved then (1, 0) else (0, 1)
+                    | Section (_, _, _, resolved, unresolved) -> (resolved, unresolved))
+                |> List.fold (fun (totalResolved, totalUnresolved) (resolved, unresolved) ->
+                    (totalResolved + resolved, totalUnresolved + unresolved)) (0, 0)
+
+            Section(id = tocId, title = title, children = childTocEntries, resolved = resolved, unresolved = unresolved)
+
+    let rec private tocEntryToMarkdown (level:int) (tocEntry:TableOfContentsEntry) (builder:StringBuilder) =
+        let inline appendTitle id title resolutionStats =
+            let margin = String.replicate (4 * (level - 1)) "&nbsp;"
+            sprintf "%s[%s](%s) %s\\" margin title id resolutionStats |> builder.AppendLine |> ignore
+
+        match tocEntry with
+        | Rule(id, title, resolved) ->
+            let resolvedString = if resolved then " resolved" else " unresolved"
+            appendTitle id title resolvedString
+        | Section(id, title, children, resolved, unresolved) ->
+            let resolvedString =
+                if (resolved + unresolved) = 1 then
+                    ""
+                else
+                    sprintf " resolved %i from %i" resolved (resolved + unresolved)
+
+            appendTitle id title resolvedString
             
-            tocEntry::childTocEntries
+            for child in children do
+                tocEntryToMarkdown (level + 1) child builder
 
     let nodeToMarkdown issueIdToLink node =
         let builder = StringBuilder()
-        let tocEntries = appendNode (appendRule issueIdToLink) 1 node builder
+        let rootTocEntry = appendNode (appendRule issueIdToLink) 1 node builder
 
         let tocBuilder = StringBuilder()
+
         Heading(1, None, "Table of Contents") |> headingToMarkdown |> tocBuilder.AppendLine |> ignore
         tocBuilder.AppendLine() |> ignore
-        for tocEntry in tocEntries do
-            let margin = String.replicate (4 * (tocEntry.Level - 1)) "&nbsp;"
-            let markdown = sprintf "%s[%s](#%s)\\" margin tocEntry.Title tocEntry.Id
-            tocBuilder.AppendLine(markdown) |> ignore
+
+        tocEntryToMarkdown 1 rootTocEntry tocBuilder
 
         tocBuilder.Remove(tocBuilder.Length - 3, 1) |> ignore
         tocBuilder.AppendLine() |> ignore
