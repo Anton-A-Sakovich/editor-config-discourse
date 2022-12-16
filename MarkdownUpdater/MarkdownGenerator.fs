@@ -16,27 +16,27 @@ module MarkdownGenerator =
         let inline append (str:string) = builder.Append(str) |> ignore
         let inline appendLine (str:string) = builder.AppendLine(str) |> ignore
 
-        rule.Name |> headingToMarkdown level |> appendLine
-        "" |> appendLine
-
-        rule.MsdnLink |> linkToMarkdown (Some "MSDN link") |> appendLine
+        (rule.Name, rule.MsdnLink |> linkToMarkdown (Some "MSDN link")) ||> sprintf "`%s` %s" |> appendLine
         "" |> appendLine
 
         "Selected value:" |> append
         match rule.SelectedValue with
         | Some value -> value |> sprintf " %s" |> append
         | None -> ()
-        "" |> appendLine
+        "\\" |> appendLine
         
         "Issue:" |> append
         match rule.IssueId with
         | Some issueId -> issueId |> issueIdToLink |> linkToMarkdown (Some issueId) |> append
         | None -> ()
         "" |> appendLine
+        "" |> appendLine
 
         "Possible values:" |> appendLine
         for value in rule.Values do
             value |> sprintf "* %s" |> appendLine
+
+        "---" |> appendLine
         "" |> appendLine
 
     let ruleToMarkdown issueIdToLink level rule =
@@ -49,6 +49,7 @@ module MarkdownGenerator =
         | Rule rule -> appendRule level rule builder
         | Section (title, childNodes) ->
             title |> headingToMarkdown level |> builder.AppendLine |> ignore
+            builder.AppendLine() |> ignore
             for childNode in childNodes do
                 appendNode appendRule (level + 1) childNode builder
 
