@@ -71,6 +71,7 @@ module MarkdownGenerator =
             sprintf "Default value: %s" defaultValue |> appendLine
         | None -> ()
 
+        "" |> appendLine
         "---" |> appendLine
         "" |> appendLine
 
