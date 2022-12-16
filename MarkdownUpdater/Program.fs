@@ -1,4 +1,5 @@
 ﻿namespace MarkdownUpdater
+open EditorconfigParser
 open MarkdownGenerator
 open System
 open System.IO
@@ -50,21 +51,28 @@ module Program =
                     return! failure
             }
 
+        let inline requireFile message path =
+            program {
+                if File.Exists(path) then
+                    return ()
+                else
+                    return! Failed (message, 2)
+            }
+
         program {
             let! rulesYamlFilePath = requireArg (Failed ("No YAML file path provided.", 1)) 0
-            let! rulesMarkdownFilePath = requireArg (Failed ("No Markdown file path provided.", 1)) 1
+            let! editorconfigFilePath = requireArg (Failed ("No .editorconfig file path provided", 1)) 1
+            let! rulesMarkdownFilePath = requireArg (Failed ("No Markdown file path provided.", 1)) 2
 
             let issueIdToLink =
-                if args.Length > 2 then
-                    let baseIssuePath = args[2]
+                if args.Length > 3 then
+                    let baseIssuePath = args[3]
                     (fun issueId -> baseIssuePath + issueId)
                 else
                     id
 
-            do! program {
-                if rulesYamlFilePath |> File.Exists |> not then
-                    return! Failed ("The specified file does not exist.", 2)
-            }
+            do! requireFile "The YAML file does not exist." rulesYamlFilePath
+            do! requireFile "The .editorconfig file does not exist." editorconfigFilePath
 
             let encoding = UTF8Encoding(false)
             let yamlString = File.ReadAllText(rulesYamlFilePath, encoding)
@@ -89,7 +97,8 @@ module Program =
                         return documentNodes |> List.head
                 }
 
-            let editorconfigRules = Map.empty<string, EditorconfigRule>
+            let editorconfigString = File.ReadAllText(editorconfigFilePath, encoding)
+            let editorconfigRules = parseEditorconfig editorconfigString
             let mergedDocumentNode = Merger.mergeConfigIntoMarkdownNode editorconfigRules documentNode
 
             let markdown = nodeToMarkdown issueIdToLink mergedDocumentNode
