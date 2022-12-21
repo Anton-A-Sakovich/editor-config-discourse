@@ -7,6 +7,8 @@ module Program =
         | Completed of 'T
         | Failed of string * int
 
+    val inline bind : ('T -> Program<'U>) -> Program<'T> -> Program<'U>
+
     type ProgramBuilder =
         class
             member Bind : Program<'T> * ('T -> Program<'U>) -> Program<'U>

@@ -7,11 +7,14 @@ module Program =
         | Completed of 'T
         | Failed of string * int
 
+    let inline bind cont (program:Program<_>) =
+        match program with
+        | Completed value -> cont value
+        | Failed (message, errorCode) -> Failed (message, errorCode)
+
     type ProgramBuilder() =
         member _.Bind(program:Program<_>, cont) =
-            match program with
-            | Completed value -> cont value
-            | Failed (message, errorCode) -> Failed (message, errorCode)
+            bind cont program
 
         member _.Using(resource:#IDisposable, cont) =
             try
