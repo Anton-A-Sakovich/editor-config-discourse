@@ -2,26 +2,10 @@
 open MsdnTableParser.MarkdownParser
 open MsdnTableParser.SectionParser
 open System
+open System.Net.Http
 open System.Text.RegularExpressions
+open Utilities.Program
 open YamlDotNet.Serialization
-
-let run (result:Result<_, _>) =
-    match result with
-    | Ok returnCode -> returnCode
-    | Error (returnCode, message) ->
-        printfn "%s" message
-        returnCode
-
-type ProgramBuilder() =
-    member _.Bind(result:Result<_,_>, cont) =
-        match result with
-        | Ok value -> cont value
-        | Error error -> Error error
-
-    member _.Return(value) = Ok value
-    member _.ReturnFrom(result) = result
-
-let program = ProgramBuilder()
 
 [<Literal>]
 let githubUrlPrefix = "https://raw.githubusercontent.com/dotnet/docs/main/docs/fundamentals"
@@ -37,14 +21,14 @@ let main args =
                 if args.Length > 0 then
                     return args[0]
                 else
-                    return! Error (1, "No URL provided.")
+                    return! Failed ("No URL provided.", 1)
             }
 
         do! program {
             if providedUrl.StartsWith(msdnUrlPrefix) then
                 return ()
             else
-                return! Error (2, "The URL provided is not a valid MSDN URL of a style rule.")
+                return! Failed ("The URL provided is not a valid MSDN URL of a style rule.", 2)
         }
 
         let urlToFetchFrom = providedUrl.Replace(msdnUrlPrefix, githubUrlPrefix) + ".md"
@@ -52,14 +36,14 @@ let main args =
 
         let! text =
             async {
-                use httpClient = new System.Net.Http.HttpClient()
+                use httpClient = new HttpClient()
                 let! text = fetchPageAsync httpClient "text/plain" urlToFetchFrom |> Async.AwaitTask
                 return text
             }
             |> Async.RunSynchronously
             |> (function
-                | Some value -> Ok value
-                | None -> Error (3, "Error fetching the markdown from GitHub."))
+                | Some value -> Completed value
+                | None -> Failed ("Error fetching the markdown from GitHub.", 3))
 
         let optionsMetadata =
             parseMarkdown urlToPrepend text
@@ -86,6 +70,6 @@ let main args =
 
         printfn "%s" yamlWithSpaces
 
-        return 0
+        return ()
     }
     |> run

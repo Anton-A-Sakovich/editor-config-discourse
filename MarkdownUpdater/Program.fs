@@ -1,46 +1,13 @@
 ﻿namespace MarkdownUpdater
 open EditorconfigParser
 open MarkdownGenerator
-open System
 open System.IO
 open System.Text
+open Utilities.Program
 open YamlParser
 open YamlDotNet.RepresentationModel
 
 module Program =
-    type Program<'T> =
-        | Completed of 'T
-        | Failed of string * int
-
-    type ProgramBuilder() =
-        member _.Bind(program:Program<_>, cont) =
-            match program with
-            | Completed value -> cont value
-            | Failed (message, errorCode) -> Failed (message, errorCode)
-
-        member _.Using(resource:#IDisposable, cont) =
-            try
-                cont resource
-            finally
-                resource.Dispose()
-        
-        member _.Return(result) = Completed result
-        member _.ReturnFrom(program) = program
-        member _.Zero() = Completed ()
-
-        member _.Delay(f) = f
-        member _.Run(f) = 
-            try f () with | exc -> Failed (exc.Message |> sprintf "%s", 16)
-
-    let program = ProgramBuilder()
-
-    let run (program:Program<_>) = 
-        match program with
-        | Completed () -> 0
-        | Failed (message, errorCode) ->
-            printfn "%s" message
-            errorCode
-
     [<EntryPoint>]
     let main args =
         let inline requireArg failure index =
@@ -89,7 +56,7 @@ module Program =
                 }
 
             let documentNodes = tryParseDocumentMapping rootNode
-            let! documentNode = 
+            let! documentNode =
                 program {
                     if documentNodes |> List.length |> (=) 0 then
                         return! Failed("No YAML documents found in the file.", 4)
