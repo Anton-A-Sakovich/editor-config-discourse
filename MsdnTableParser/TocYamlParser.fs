@@ -1,6 +1,6 @@
 namespace MsdnTableParser
 
-module MsdnCrawler =
+module TocYamlParser =
     open YamlDotNet.RepresentationModel
 
     type ParseResult<'T> =
@@ -19,10 +19,6 @@ module MsdnCrawler =
 
     let parse = ParseBuilder()
 
-    type TocEntry =
-        | Page of name:string * href:string
-        | Section of name:string * items:list<TocEntry>
-
     let inline tryParseAs< ^T when ^T :> YamlNode> (node:YamlNode) =
         match node with | :? ^T as casted -> Success casted | _ -> Failure
 
@@ -32,19 +28,24 @@ module MsdnCrawler =
     let inline tryGetValue (node:YamlScalarNode) =
         Success node.Value
 
-    let rec tryParseMappingNode (node:YamlMappingNode) =
+    type TocPage =
+        { Name: string;
+          Href: string; }
+
+    let rec tryParse (node:YamlNode) =
         parse {
+            let! node = node |> tryParseAs<YamlMappingNode>
             let! name = node |> tryGetItem "name" |> bind tryParseAs<YamlScalarNode> |> bind tryGetValue
             let hrefResult = node |> tryGetItem "href" |> bind tryParseAs<YamlScalarNode> |> bind tryGetValue
             let itemsResult = node |> tryGetItem "items" |> bind tryParseAs<YamlSequenceNode>
 
             match (hrefResult, itemsResult) with
             | (Success href, _) ->
-                return Page(name, href)
+                return Page({ Name = name; Href = href; })
             | (_, Success items) ->
                 let children =
                     items.Children
-                    |> Seq.map (tryParseAs<YamlMappingNode> >> (bind tryParseMappingNode))
+                    |> Seq.map (tryParseAs<YamlMappingNode> >> (bind tryParse))
                     |> Seq.choose (function | Success value -> Some value | Failure -> None)
                     |> List.ofSeq
 
@@ -52,3 +53,16 @@ module MsdnCrawler =
             | _ ->
                 return! Failure
         }
+
+    let rec tryFind (name:string) (entry:StyleTree<TocPage>) =
+        match entry with
+        | Page(tocPage) ->
+            if name = tocPage.Name then
+                Some entry
+            else
+                None
+        | Section(sectionName, children) ->
+            if name = sectionName then
+                Some entry
+            else
+                children |> Seq.map (tryFind name) |> Seq.tryPick id

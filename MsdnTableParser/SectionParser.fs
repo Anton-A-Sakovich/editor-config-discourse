@@ -51,5 +51,3 @@ module SectionParser =
                 DefaultValue = defaultValue;
                 MsdnLink = section.Header.Link;
             })
-        
-

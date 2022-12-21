@@ -1,6 +1,6 @@
 namespace MsdnTableParser
 
-module MsdnCrawler =
+module TocYamlParser =
     open YamlDotNet.RepresentationModel
 
     type ParseResult<'T> =
@@ -18,8 +18,10 @@ module MsdnCrawler =
 
     val parse : ParseBuilder
 
-    type TocEntry =
-        | Page of name:string * href:string
-        | Section of name:string * items:list<TocEntry>
+    type TocPage =
+        { Name: string;
+          Href: string; }
 
-    val tryParseMappingNode : YamlMappingNode -> ParseResult<TocEntry>
+    val tryParse : YamlNode -> ParseResult<StyleTree<TocPage>>
+
+    val tryFind : string -> StyleTree<TocPage> -> option<StyleTree<TocPage>>
