@@ -5,6 +5,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="OptionMetadata.fs" />
+    <Compile Include="MsdnCrawler.fsi" />
+    <Compile Include="MsdnCrawler.fs" />
     <Compile Include="AbortOnExceptionBuilder.fs" />
     <Compile Include="SectionParser.fs" />
     <Compile Include="MarkdownParser.fs" />
