@@ -4,6 +4,11 @@ module RulesYamlBuilder =
     open YamlDotNet.RepresentationModel
 
     let ruleToYaml (url:string) (rule:StyleRule) =
+        let url =
+            match url.LastIndexOf(".md") with
+            | index when (index > -1) -> url.Substring(0, index)
+            | _ -> url
+
         YamlMappingNode(
             YamlScalarNode("Name"),
             YamlScalarNode(rule.Name),
