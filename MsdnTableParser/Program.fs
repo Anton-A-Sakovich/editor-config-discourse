@@ -100,6 +100,9 @@ let main args =
         let yamlTree = treeToYaml treeOfStylePages
         let yamlString =
             SerializerBuilder()
+             .DisableAliases()
+             .WithIndentedSequences()
+             .WithQuotingNecessaryStrings()
              .Build()
              .Serialize(yamlTree)
 
