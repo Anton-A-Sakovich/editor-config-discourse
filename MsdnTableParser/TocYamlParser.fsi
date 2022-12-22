@@ -9,6 +9,8 @@ module TocYamlParser =
 
     val inline bind : ('T -> ParseResult<'U>) -> ParseResult<'T> -> ParseResult<'U>
 
+    val inline defaultValue : 'T -> ParseResult<'T> -> 'T
+
     type ParseBuilder =
         class
             member inline Bind : ParseResult<'T> * ('T -> ParseResult<'U>) -> ParseResult<'U>

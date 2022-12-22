@@ -12,6 +12,11 @@ module TocYamlParser =
         | Success value -> cont value
         | Failure -> Failure
 
+    let inline defaultValue defValue (result:ParseResult<_>) =
+        match result with
+        | Success value -> value
+        | Failure _ -> defValue
+
     type ParseBuilder() =
         member inline _.Bind(result, cont) = bind cont result
         member inline _.Return(value) = Success value
@@ -35,14 +40,16 @@ module TocYamlParser =
     let rec tryParse (node:YamlNode) =
         parse {
             let! node = node |> tryParseAs<YamlMappingNode>
-            let! name = node |> tryGetItem "name" |> bind tryParseAs<YamlScalarNode> |> bind tryGetValue
+            let nameResult = node |> tryGetItem "name" |> bind tryParseAs<YamlScalarNode> |> bind tryGetValue
             let hrefResult = node |> tryGetItem "href" |> bind tryParseAs<YamlScalarNode> |> bind tryGetValue
             let itemsResult = node |> tryGetItem "items" |> bind tryParseAs<YamlSequenceNode>
 
-            match (hrefResult, itemsResult) with
-            | (Success href, _) ->
+            match (nameResult, hrefResult, itemsResult) with
+            | (Success name, Success href, _) ->
                 return Page({ Name = name; Href = href; })
-            | (_, Success items) ->
+            | (_, _, Success items) ->
+                let name = nameResult |> defaultValue "root"
+
                 let children =
                     items.Children
                     |> Seq.map (tryParseAs<YamlMappingNode> >> (bind tryParse))
