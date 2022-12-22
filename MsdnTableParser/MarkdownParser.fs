@@ -65,7 +65,7 @@ module MarkdownParser =
         let mutable tableLines = List<string>()
         let mutable rules = List<StyleRule>()
 
-        let lines = markdown.Split("\r\n", StringSplitOptions.RemoveEmptyEntries)
+        let lines = markdown.Replace("\r", "").Split("\n", StringSplitOptions.RemoveEmptyEntries)
 
         for line in lines do
             if line.StartsWith("# ") then
