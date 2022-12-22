@@ -18,7 +18,7 @@ let githubUrlPrefix = "https://raw.githubusercontent.com/dotnet/docs/main/docs/f
 let msdnUrlPrefix = "https://learn.microsoft.com/en-us/dotnet/fundamentals/"
 
 [<Literal>]
-let tocYamlUrl = githubUrlPrefix + "toc.yaml"
+let tocYamlUrl = githubUrlPrefix + "toc.yml"
 
 [<EntryPoint>]
 let main args =
