@@ -6,6 +6,7 @@ open MsdnTableParser.RulesYamlBuilder
 open System
 open System.IO
 open System.Net.Http
+open System.Text
 open System.Text.RegularExpressions
 open Utilities.Program
 open YamlDotNet.Serialization
@@ -23,6 +24,14 @@ let tocYamlUrl = githubUrlPrefix + "toc.yml"
 [<EntryPoint>]
 let main args =
     program {
+        let! outputFilePath =
+            program {
+                if args.Length > 0 then
+                    return args[0]
+                else
+                    return! Failed ("No output file specified", 1)
+            }
+
         use httpClient = new HttpClient()
 
         let! tocYamlString =
@@ -103,7 +112,7 @@ let main args =
             else
                 Regex.Replace(yamlString, @"^", String(' ', spacesToPrepend), RegexOptions.Multiline)
 
-        printfn "%s" yamlWithSpaces
+        do File.WriteAllText(outputFilePath, yamlWithSpaces, UTF8Encoding(false))
 
         return ()
     }
