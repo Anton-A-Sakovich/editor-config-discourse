@@ -75,7 +75,7 @@ let main args =
 
         let rec transposeOption (collected:list<_>) (remaining:list<option<_>>) =
             match remaining with
-            | [] -> Some collected
+            | [] -> Some (List.rev collected)
             | head::tail ->
                 match head with
                 | Some value -> transposeOption (value::collected) tail
