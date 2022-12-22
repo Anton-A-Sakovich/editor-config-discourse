@@ -51,7 +51,7 @@ let main args =
 
         let! treeOfTocPages =
             treeOfTocPages
-            |> tryFind "Code style rules"
+            |> tryFind ["Root"; "Tools and diagnostics"; "Code analysis"; "Rule reference"; "Code style rules"]
             |> (function | Some value -> Completed value | None -> Failed("Failed to find code style entry", 4))
 
         let fetchAndParseMarkdown { TocPage.Href = href} =

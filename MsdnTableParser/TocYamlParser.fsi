@@ -26,4 +26,4 @@ module TocYamlParser =
 
     val tryParse : YamlNode -> ParseResult<StyleTree<TocPage>>
 
-    val tryFind : string -> StyleTree<TocPage> -> option<StyleTree<TocPage>>
+    val tryFind : list<string> -> StyleTree<TocPage> -> option<StyleTree<TocPage>>

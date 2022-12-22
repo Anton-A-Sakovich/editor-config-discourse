@@ -48,7 +48,7 @@ module TocYamlParser =
             | (Success name, Success href, _) ->
                 return Page({ Name = name; Href = href; })
             | (_, _, Success items) ->
-                let name = nameResult |> defaultValue "root"
+                let name = nameResult |> defaultValue "Root"
 
                 let children =
                     items.Children
@@ -61,15 +61,25 @@ module TocYamlParser =
                 return! Failure
         }
 
-    let rec tryFind (name:string) (entry:StyleTree<TocPage>) =
-        match entry with
-        | Page(tocPage) ->
-            if name = tocPage.Name then
-                Some entry
+    let rec tryFind (path:list<string>) (tree:StyleTree<TocPage>) =
+        match (path, tree) with
+        | ([], _) -> Some tree
+
+        | ([segment], _) ->
+            let name =
+                match tree with
+                | Page page -> page.Name
+                | Section (name, _) -> name
+
+            if segment = name then
+                Some tree
             else
                 None
-        | Section(sectionName, children) ->
-            if name = sectionName then
-                Some entry
+
+        | (segment::rest, Section(name, children)) ->
+            if segment = name then
+                Seq.tryPick (tryFind rest) children
             else
-                children |> Seq.map (tryFind name) |> Seq.tryPick id
+                None
+
+        | (_, _) -> None
