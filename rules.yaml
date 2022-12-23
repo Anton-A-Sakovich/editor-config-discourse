@@ -1,230 +1,781 @@
 Code style rules:
-  Language rules:
-    This and Me preferences:
-      - Name: dotnet_style_qualification_for_field
-        Values:
-          - "true"
-          - "false"
-        DefaultValue:
-          Value: "false"
-        MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0003-ide0009#dotnet_style_qualification_for_field
-      - Name: dotnet_style_qualification_for_property
-        Values:
-          - "true"
-          - "false"
-        DefaultValue:
-          Value: "false"
-        MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0003-ide0009#dotnet_style_qualification_for_property
-      - Name: dotnet_style_qualification_for_method
-        Values:
-          - "true"
-          - "false"
-        DefaultValue:
-          Value: "false"
-        MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0003-ide0009#dotnet_style_qualification_for_method
-      - Name: dotnet_style_qualification_for_event
-        Values:
-          - "true"
-          - "false"
-        DefaultValue:
-          Value: "false"
-        MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0003-ide0009#dotnet_style_qualification_for_event
-    Use language keywords instead of framework type names for type references:
-      - Name: dotnet_style_predefined_type_for_locals_parameters_members
-        Values:
-          - "true"
-          - "false"
-        DefaultValue:
-          Value: "true"
-        MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0049#dotnet_style_predefined_type_for_locals_parameters_members
-      - Name: dotnet_style_predefined_type_for_member_access
-        Values:
-          - "true"
-          - "false"
-        DefaultValue:
-          Value: "true"
-        MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0049#dotnet_style_predefined_type_for_member_access
-    Modifier preferences:
-      Order modifiers:
-        - Name: csharp_preferred_modifier_order
-          Values:
-            - One or more C# modifiers, such as public, private, and protected
-          DefaultValue:
-            Value: public, private, protected, internal, file, static, extern, new, virtual, abstract, sealed, override, readonly, unsafe, required, volatile, async
-          MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0036#csharp_preferred_modifier_order
-      Add accessibility modifier:
-        - Name: dotnet_style_require_accessibility_modifiers
-          Values:
-            - always
-            - for_non_interface_members
-            - never
-            - omit_if_default
-          DefaultValue:
-            Value: for_non_interface_members
-          MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0040#dotnet_style_require_accessibility_modifiers
-      Add readonly modifier:
-        - Name: dotnet_style_readonly_field
-          Values:
-            - "true"
-            - "false"
-          DefaultValue:
-            Value: "true"
-          MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0044#dotnet_style_readonly_field
-      Make local function static:
-        - Name: csharp_prefer_static_local_function
-          Values:
-            - "true"
-            - "false"
-          DefaultValue:
-            Value: true:suggestion
-          MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0062#csharp_prefer_static_local_function
-    Parentheses preferences:
-      - Name: dotnet_style_parentheses_in_arithmetic_binary_operators
-        Values:
-          - always_for_clarity
-          - never_if_unnecessary
-        DefaultValue:
-          Value: always_for_clarity
-        MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0047-ide0048#dotnet_style_parentheses_in_arithmetic_binary_operators
-      - Name: dotnet_style_parentheses_in_relational_binary_operators
-        Values:
-          - always_for_clarity
-          - never_if_unnecessary
-        DefaultValue:
-          Value: always_for_clarity
-        MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0047-ide0048#dotnet_style_parentheses_in_relational_binary_operators
-      - Name: dotnet_style_parentheses_in_other_binary_operators
-        Values:
-          - always_for_clarity
-          - never_if_unnecessary
-        DefaultValue:
-          Value: always_for_clarity
-        MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0047-ide0048#dotnet_style_parentheses_in_other_binary_operators
-      - Name: dotnet_style_parentheses_in_other_operators
-        Values:
-          - always_for_clarity
-          - never_if_unnecessary
-        DefaultValue:
-          Value: never_if_unnecessary
-        MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0047-ide0048#dotnet_style_parentheses_in_other_operators
-    Expression-level preferences:  
-      Use object initializers:
-        - Name: dotnet_style_object_initializer
-          Values:
-            - "true"
-            - "false"
-          DefaultValue:
-            Value: "true"
-          MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0017#dotnet_style_object_initializer
-      Inline variable declaration:
-        - Name: csharp_style_inlined_variable_declaration
-          Values:
-            - "true"
-            - "false"
-          DefaultValue:
-            Value: "true"
-          MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0018#csharp_style_inlined_variable_declaration
-      Use collection initializers:
-        - Name: dotnet_style_collection_initializer
-          Values:
-            - "true"
-            - "false"
-          DefaultValue:
-            Value: "true"
-          MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0028#dotnet_style_collection_initializer
-      Use auto-implemented property:
-        - Name: dotnet_style_prefer_auto_properties
-          Values:
-            - "true"
-            - "false"
-          DefaultValue:
-            Value: "true"
-          MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0032#dotnet_style_prefer_auto_properties
-      Use explicitly provided tuple name:
-        - Name: dotnet_style_explicit_tuple_names
-          Values:
-            - "true"
-            - "false"
-          DefaultValue:
-            Value: "true"
-          MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0033#dotnet_style_explicit_tuple_names
-      Simplify 'default' expression:
-        - Name: csharp_prefer_simple_default_expression
-          Values:
-            - "true"
-            - "false"
-          DefaultValue:
-            Value: "true"
-          MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0034#csharp_prefer_simple_default_expression
-      Use inferred member names:
-        - Name: dotnet_style_prefer_inferred_anonymous_type_member_names
-          Values:
-            - "true"
-            - "false"
-          DefaultValue:
-            Value: "true"
-          MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0037#dotnet_style_prefer_inferred_anonymous_type_member_names
-      Use local function instead of lambda:
-        - Name: csharp_style_prefer_local_over_anonymous_function
-          Values:
-            - "true"
-            - "false"
-          DefaultValue:
-            Value: "true"
-          MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0039#csharp_style_prefer_local_over_anonymous_function
-      Deconstruct variable declaration:
-        - Name: csharp_style_deconstructed_variable_declaration
-          Values:
-            - "true"
-            - "false"
-          DefaultValue:
-            Value: "true"
-          MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0042#csharp_style_deconstructed_variable_declaration
-      Use conditional expression for assignment:
-        - Name: dotnet_style_prefer_conditional_expression_over_assignment
-          Values:
-            - "true"
-            - "false"
-          DefaultValue:
-            Value: "true"
-          MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0045#dotnet_style_prefer_conditional_expression_over_assignment
-      Use conditional expression for return:
-        - Name: dotnet_style_prefer_conditional_expression_over_return
-          Values:
-            - "true"
-            - "false"
-          DefaultValue:
-            Value: "true"
-          MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0046#dotnet_style_prefer_conditional_expression_over_return
-      Use compound assignment:
-        - Name: dotnet_style_prefer_compound_assignment
-          Values:
-            - "true"
-            - "false"
-          DefaultValue:
-            Value: "true"
-          MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0054-ide0074#dotnet_style_prefer_compound_assignment
-      Simplify conditional expression:
-        - Name: dotnet_style_prefer_simplified_boolean_expressions
-          Values:
-            - "true"
-            - "false"
-          DefaultValue:
-            Value: "true"
-          MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0075#dotnet_style_prefer_simplified_boolean_expressions
-      Simplify new expression:
-        - Name: csharp_style_implicit_object_creation_when_type_is_apparent
-          Values:
-            - "true"
-            - "false"
-          DefaultValue:
-            Value: "true"
-          MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0090#csharp_style_implicit_object_creation_when_type_is_apparent
-      Use tuple to swap values:
-        - Name: csharp_style_prefer_tuple_swap
-          Values:
-            - "true"
-            - "false"
-          DefaultValue:
-            Value: "true"
-          MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0180#csharp_style_prefer_tuple_swap
+  - Code-style rules: []
+  - Language rules:
+      - Language rules: []
+      - this and Me preferences:
+          - this and Me preferences (IDE0003 and IDE0009):
+              - Name: dotnet_style_qualification_for_field
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: '`false`'
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0003-ide0009#dotnet_style_qualification_for_field
+              - Name: dotnet_style_qualification_for_property
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: '`false`'
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0003-ide0009#dotnet_style_qualification_for_property
+              - Name: dotnet_style_qualification_for_method
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: '`false`'
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0003-ide0009#dotnet_style_qualification_for_method
+              - Name: dotnet_style_qualification_for_event
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: '`false`'
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0003-ide0009#dotnet_style_qualification_for_event
+      - Use language keywords for types:
+          - Use language keywords instead of framework type names for type references (IDE0049):
+              - Name: dotnet_style_predefined_type_for_locals_parameters_members
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: '`true`'
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0049#dotnet_style_predefined_type_for_locals_parameters_members
+              - Name: dotnet_style_predefined_type_for_member_access
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: '`true`'
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0049#dotnet_style_predefined_type_for_member_access
+      - Modifier preferences:
+          - Modifier preferences: []
+          - Order modifiers (IDE0036):
+              - Name: csharp_preferred_modifier_order
+                Values:
+                  - One or more C# modifiers, such as `public`, `private`, and `protected`
+                DefaultValue: '`public, private, protected, internal, file, static, extern, new, virtual, abstract, sealed, override, readonly, unsafe, required, volatile, async`'
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0036#csharp_preferred_modifier_order
+              - Name: visual_basic_preferred_modifier_order
+                Values:
+                  - One or more Visual Basic modifiers, such as `Partial`, `Private`, and `Public`
+                DefaultValue: '`Partial, Default, Private, Protected, Public, Friend, NotOverridable, Overridable, MustOverride, Overloads, Overrides, MustInherit, NotInheritable, Static, Shared, Shadows, ReadOnly, WriteOnly, Dim, Const, WithEvents, Widening, Narrowing, Custom, Async`'
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0036#visual_basic_preferred_modifier_order
+          - Add accessibility modifiers (IDE0040):
+              - Name: dotnet_style_require_accessibility_modifiers
+                Values:
+                  - '`always`'
+                  - '`for_non_interface_members`'
+                  - '`never`'
+                  - '`omit_if_default`'
+                DefaultValue: '`for_non_interface_members`'
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0040#dotnet_style_require_accessibility_modifiers
+          - Add readonly modifier (IDE0044):
+              - Name: dotnet_style_readonly_field
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: '`true`'
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0044#dotnet_style_readonly_field
+          - Make local function static (IDE0062):
+              - Name: csharp_prefer_static_local_function
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: '`true:suggestion`'
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0062#csharp_prefer_static_local_function
+          - Make struct fields writable (IDE0064): []
+      - Parentheses preferences:
+          - Parentheses preferences (IDE0047 and IDE0048):
+              - Name: dotnet_style_parentheses_in_arithmetic_binary_operators
+                Values:
+                  - '`always_for_clarity`'
+                  - '`never_if_unnecessary`'
+                DefaultValue: '`always_for_clarity`'
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0047-ide0048#dotnet_style_parentheses_in_arithmetic_binary_operators
+              - Name: dotnet_style_parentheses_in_relational_binary_operators
+                Values:
+                  - '`always_for_clarity`'
+                  - '`never_if_unnecessary`'
+                DefaultValue: '`always_for_clarity`'
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0047-ide0048#dotnet_style_parentheses_in_relational_binary_operators
+              - Name: dotnet_style_parentheses_in_other_binary_operators
+                Values:
+                  - '`always_for_clarity`'
+                  - '`never_if_unnecessary`'
+                DefaultValue: '`always_for_clarity`'
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0047-ide0048#dotnet_style_parentheses_in_other_binary_operators
+              - Name: dotnet_style_parentheses_in_other_operators
+                Values:
+                  - '`always_for_clarity`'
+                  - '`never_if_unnecessary`'
+                DefaultValue: '`never_if_unnecessary`'
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0047-ide0048#dotnet_style_parentheses_in_other_operators
+      - Expression-level preferences:
+          - Expression-level preferences: []
+          - Add missing cases to switch statement (IDE0010): []
+          - Use object initializers (IDE0017):
+              - Name: dotnet_style_object_initializer
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: '`true`'
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0017#dotnet_style_object_initializer
+          - Inline variable declaration (IDE0018):
+              - Name: csharp_style_inlined_variable_declaration
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: '`true`'
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0018#csharp_style_inlined_variable_declaration
+          - Use collection initializers (IDE0028):
+              - Name: dotnet_style_collection_initializer
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: '`true`'
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0028#dotnet_style_collection_initializer
+          - Use auto-implemented property (IDE0032):
+              - Name: dotnet_style_prefer_auto_properties
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: '`true`'
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0032#dotnet_style_prefer_auto_properties
+          - Use explicitly provided tuple name (IDE0033):
+              - Name: dotnet_style_explicit_tuple_names
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: '`true`'
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0033#dotnet_style_explicit_tuple_names
+          - Simplify 'default' expression (IDE0034):
+              - Name: csharp_prefer_simple_default_expression
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: '`true`'
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0034#csharp_prefer_simple_default_expression
+          - Use inferred member names (IDE0037):
+              - Name: dotnet_style_prefer_inferred_tuple_names
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: '`true`'
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0037#dotnet_style_prefer_inferred_tuple_names
+              - Name: dotnet_style_prefer_inferred_anonymous_type_member_names
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: '`true`'
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0037#dotnet_style_prefer_inferred_anonymous_type_member_names
+          - Use local function instead of lambda (IDE0039):
+              - Name: csharp_style_prefer_local_over_anonymous_function
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: '`true`'
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0039#csharp_style_prefer_local_over_anonymous_function
+          - Deconstruct variable declaration (IDE0042):
+              - Name: csharp_style_deconstructed_variable_declaration
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: '`true`'
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0042#csharp_style_deconstructed_variable_declaration
+          - Use conditional expression for assignment (IDE0045):
+              - Name: dotnet_style_prefer_conditional_expression_over_assignment
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: '`true`'
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0045#dotnet_style_prefer_conditional_expression_over_assignment
+          - Use conditional expression for return (IDE0046):
+              - Name: dotnet_style_prefer_conditional_expression_over_return
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: '`true`'
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0046#dotnet_style_prefer_conditional_expression_over_return
+          - Convert anonymous type to tuple (IDE0050): []
+          - Use compound assignment (IDE0054 and IDE0074):
+              - Name: dotnet_style_prefer_compound_assignment
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: '`true`'
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0054-ide0074#dotnet_style_prefer_compound_assignment
+          - Use index operator (IDE0056):
+              - Name: csharp_style_prefer_index_operator
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: '`true`'
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0056#csharp_style_prefer_index_operator
+          - Use range operator (IDE0057):
+              - Name: csharp_style_prefer_range_operator
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: '`true`'
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0057#csharp_style_prefer_range_operator
+          - Use 'System.HashCode.Combine' (IDE0070): []
+          - Simplify interpolation (IDE0071):
+              - Name: dotnet_style_prefer_simplified_interpolation
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: '`true`'
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0071#dotnet_style_prefer_simplified_interpolation
+          - Add missing cases to switch expression (IDE0072): []
+          - Use compound assignment (IDE0054 and IDE0074):
+              - Name: dotnet_style_prefer_compound_assignment
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: '`true`'
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0054-ide0074#dotnet_style_prefer_compound_assignment
+          - Simplify conditional expression (IDE0075):
+              - Name: dotnet_style_prefer_simplified_boolean_expressions
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: '`true`'
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0075#dotnet_style_prefer_simplified_boolean_expressions
+          - Convert `typeof` to `nameof` (IDE0082): []
+          - Simplify `new` expression (IDE0090):
+              - Name: csharp_style_implicit_object_creation_when_type_is_apparent
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: '`true`'
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0090#csharp_style_implicit_object_creation_when_type_is_apparent
+          - Use tuple to swap values (IDE0180):
+              - Name: csharp_style_prefer_tuple_swap
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: '`true`'
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0180#csharp_style_prefer_tuple_swap
+      - Namespace declaration preferences:
+          - Namespace declaration preferences (IDE0160 and IDE0161):
+              - Name: csharp_style_namespace_declarations
+                Values:
+                  - '`block_scoped`'
+                  - '`file_scoped`'
+                DefaultValue: '`block_scoped`'
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0160-ide0161#csharp_style_namespace_declarations
+      - Null-checking preferences:
+          - Null-checking preferences: []
+          - Use throw expression (IDE0016):
+              - Name: csharp_style_throw_expression
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: '`true`'
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0016#csharp_style_throw_expression
+          - Use coalesce expression (IDE0029 and IDE0030):
+              - Name: dotnet_style_coalesce_expression
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: '`true`'
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0029-ide0030#dotnet_style_coalesce_expression
+          - Use null propagation (IDE0031):
+              - Name: dotnet_style_null_propagation
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: '`true`'
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0031#dotnet_style_null_propagation
+          - Use 'is null' check (IDE0041):
+              - Name: dotnet_style_prefer_is_null_check_over_reference_equality_method
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: '`true`'
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0041#dotnet_style_prefer_is_null_check_over_reference_equality_method
+          - Prefer 'null' check over type check (IDE0150):
+              - Name: csharp_style_prefer_null_check_over_type_check
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: '`true`'
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0150#csharp_style_prefer_null_check_over_type_check
+          - Use conditional delegate call (IDE1005):
+              - Name: csharp_style_conditional_delegate_call
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: '`true`'
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide1005#csharp_style_conditional_delegate_call
+      - var preferences:
+          - "'var' preferences (IDE0007 and IDE0008)":
+              - Name: csharp_style_var_for_built_in_types
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: '`false`'
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0007-ide0008#csharp_style_var_for_built_in_types
+              - Name: csharp_style_var_when_type_is_apparent
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: '`false`'
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0007-ide0008#csharp_style_var_when_type_is_apparent
+              - Name: csharp_style_var_elsewhere
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: '`false`'
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0007-ide0008#csharp_style_var_elsewhere
+      - Expression-bodied members:
+          - Expression-bodied-members: []
+          - Use expression body for constructors (IDE0021):
+              - Name: csharp_style_expression_bodied_constructors
+                Values:
+                  - '`true`'
+                  - '`when_on_single_line`'
+                  - '`false`'
+                DefaultValue: '`false`'
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0021#csharp_style_expression_bodied_constructors
+          - Use expression body for methods (IDE0022):
+              - Name: csharp_style_expression_bodied_methods
+                Values:
+                  - '`true`'
+                  - '`when_on_single_line`'
+                  - '`false`'
+                DefaultValue: '`false`'
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0022#csharp_style_expression_bodied_methods
+          - Use expression body for operators (IDE0023 and IDE0024):
+              - Name: csharp_style_expression_bodied_operators
+                Values:
+                  - '`true`'
+                  - '`when_on_single_line`'
+                  - '`false`'
+                DefaultValue: '`false`'
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0023-ide0024#csharp_style_expression_bodied_operators
+          - Use expression body for properties (IDE0025):
+              - Name: csharp_style_expression_bodied_properties
+                Values:
+                  - '`true`'
+                  - '`when_on_single_line`'
+                  - '`false`'
+                DefaultValue: '`true`'
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0025#csharp_style_expression_bodied_properties
+          - Use expression body for indexers (IDE0026):
+              - Name: csharp_style_expression_bodied_indexers
+                Values:
+                  - '`true`'
+                  - '`when_on_single_line`'
+                  - '`false`'
+                DefaultValue: '`true`'
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0026#csharp_style_expression_bodied_indexers
+          - Use expression body for accessors (IDE0027):
+              - Name: csharp_style_expression_bodied_accessors
+                Values:
+                  - '`true`'
+                  - '`when_on_single_line`'
+                  - '`false`'
+                DefaultValue: '`true`'
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0027#csharp_style_expression_bodied_accessors
+          - Use expression body for lambdas (IDE0053):
+              - Name: csharp_style_expression_bodied_lambdas
+                Values:
+                  - '`true`'
+                  - '`when_on_single_line`'
+                  - '`false`'
+                DefaultValue: '`true`'
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0053#csharp_style_expression_bodied_lambdas
+          - Use expression body for local functions (IDE0061):
+              - Name: csharp_style_expression_bodied_local_functions
+                Values:
+                  - '`true`'
+                  - '`when_on_single_line`'
+                  - '`false`'
+                DefaultValue: '`false`'
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0061#csharp_style_expression_bodied_local_functions
+      - Pattern matching preferences:
+          - Pattern matching preferences: []
+          - Use pattern matching to avoid 'as' followed by a 'null' check (IDE0019):
+              - Name: csharp_style_pattern_matching_over_as_with_null_check
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: '`true`'
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0019#csharp_style_pattern_matching_over_as_with_null_check
+          - Use pattern matching to avoid 'is' check followed by a cast (IDE0020 and IDE0038):
+              - Name: csharp_style_pattern_matching_over_is_with_cast_check
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: '`true`'
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0020-ide0038#csharp_style_pattern_matching_over_is_with_cast_check
+          - Use switch expression (IDE0066):
+              - Name: csharp_style_prefer_switch_expression
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: '`true`'
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0066#csharp_style_prefer_switch_expression
+          - Use pattern matching (IDE0078):
+              - Name: csharp_style_prefer_pattern_matching
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: '`true`'
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0078#csharp_style_prefer_pattern_matching
+          - Use pattern matching (`not` operator) (IDE0083):
+              - Name: csharp_style_prefer_not_pattern
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: '`true`'
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0083#csharp_style_prefer_not_pattern
+          - Use pattern matching (`IsNot` operator) (IDE0084):
+              - Name: visual_basic_style_prefer_isnot_expression
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: '`true`'
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0084#visual_basic_style_prefer_isnot_expression
+          - Simplify property pattern (IDE0170):
+              - Name: csharp_style_prefer_extended_property_pattern
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: '`true`'
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0170#csharp_style_prefer_extended_property_pattern
+      - Code block preferences:
+          - Code block preferences: []
+          - Add braces (IDE0011):
+              - Name: csharp_prefer_braces
+                Values:
+                  - '`true`'
+                  - '`false`'
+                  - '`when_multiline`'
+                DefaultValue: '`true`'
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0011#csharp_prefer_braces
+          - Use simple 'using' statement (IDE0063):
+              - Name: csharp_prefer_simple_using_statement
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: '`true`'
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0063#csharp_prefer_simple_using_statement
+      - using directive preferences:
+          - "'using' directive placement (IDE0065)":
+              - Name: csharp_using_directive_placement
+                Values:
+                  - '`outside_namespace`'
+                  - '`inside_namespace`'
+                DefaultValue: '`outside_namespace`'
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0065#csharp_using_directive_placement
+      - File header preferences:
+          - Require file header (IDE0073):
+              - Name: file_header_template
+                Values:
+                  - non-empty string, optionally containing a `{fileName}` placeholder
+                  - '`unset` or empty string'
+                DefaultValue: '`unset`'
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0073#file_header_template
+  - Unnecessary code rules:
+      - Unnecessary code rules: []
+      - Simplify name (IDE0001): []
+      - Simplify member access (IDE0002): []
+      - Remove unnecessary cast (IDE0004): []
+      - Remove unnecessary using directives (IDE0005): []
+      - Remove unreachable code (IDE0035): []
+      - Remove unused private member (IDE0051): []
+      - Remove unread private member (IDE0052): []
+      - Remove unnecessary expression value (IDE0058):
+          - Name: csharp_style_unused_value_expression_statement_preference
+            Values:
+              - '`discard_variable`'
+              - '`unused_local_variable`'
+            DefaultValue: '`discard_variable`'
+            MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0058#csharp_style_unused_value_expression_statement_preference
+          - Name: visual_basic_style_unused_value_expression_statement_preference
+            Values:
+              - '`unused_local_variable`'
+            DefaultValue: '`unused_local_variable`'
+            MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0058#visual_basic_style_unused_value_expression_statement_preference
+      - Remove unnecessary value assignment (IDE0059):
+          - Name: csharp_style_unused_value_assignment_preference
+            Values:
+              - '`discard_variable`'
+              - '`unused_local_variable`'
+            DefaultValue: '`discard_variable`'
+            MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0059#csharp_style_unused_value_assignment_preference
+          - Name: visual_basic_style_unused_value_assignment_preference
+            Values:
+              - '`unused_local_variable`'
+            DefaultValue: '`unused_local_variable`'
+            MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0059#visual_basic_style_unused_value_assignment_preference
+      - Remove unused parameter (IDE0060):
+          - Name: dotnet_code_quality_unused_parameters
+            Values:
+              - '`all`'
+              - '`non_public`'
+            DefaultValue: '`all`'
+            MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0060#dotnet_code_quality_unused_parameters
+      - Remove unnecessary suppression (IDE0079):
+          - Name: dotnet_remove_unnecessary_suppression_exclusions
+            Values:
+              - '`,` separated list of rule IDs or categories (prefixed with `category:`)'
+              - '`all`'
+              - '`none`'
+            DefaultValue: '`none`'
+            MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0079#dotnet_remove_unnecessary_suppression_exclusions
+      - Remove unnecessary suppression operator (IDE0080): []
+      - Remove `ByVal` (IDE0081): []
+      - Remove unnecessary equality operator (IDE0100): []
+      - Remove unnecessary discard (IDE0110): []
+      - Simplify object creation (IDE0140):
+          - Name: visual_basic_style_prefer_simplified_object_creation
+            Values:
+              - '`true`'
+              - '`false`'
+            DefaultValue: '`true`'
+            MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0140#visual_basic_style_prefer_simplified_object_creation
+  - Miscellaneous rules:
+      - Miscellaneous rules: []
+      - Remove invalid global 'SuppressMessageAttribute' (IDE0076): []
+      - Avoid legacy format target in global 'SuppressMessageAttribute' (IDE0077): []
+  - Formatting rules:
+      - IDE0055:
+          - Formatting rule (IDE0055): []
+          - .NET namespace rules:
+              - Name: dotnet_sort_system_directives_first
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: ''
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/dotnet-formatting-options#dotnet_sort_system_directives_first
+              - Name: dotnet_separate_import_directive_groups
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: ''
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/dotnet-formatting-options#dotnet_separate_import_directive_groups
+              - Name: dotnet_style_namespace_match_folder
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: ''
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/dotnet-formatting-options#dotnet_style_namespace_match_folder
+          - ' CSharp formatting rules:':
+              - Name: csharp_new_line_before_else
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: ''
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/csharp-formatting-options#csharp_new_line_before_else
+              - Name: csharp_new_line_before_catch
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: ''
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/csharp-formatting-options#csharp_new_line_before_catch
+              - Name: csharp_new_line_before_finally
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: ''
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/csharp-formatting-options#csharp_new_line_before_finally
+              - Name: csharp_new_line_before_members_in_object_initializers
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: ''
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/csharp-formatting-options#csharp_new_line_before_members_in_object_initializers
+              - Name: csharp_new_line_before_members_in_anonymous_types
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: ''
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/csharp-formatting-options#csharp_new_line_before_members_in_anonymous_types
+              - Name: csharp_new_line_between_query_expression_clauses
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: ''
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/csharp-formatting-options#csharp_new_line_between_query_expression_clauses
+              - Name: csharp_indent_case_contents
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: ''
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/csharp-formatting-options#csharp_indent_case_contents
+              - Name: csharp_indent_switch_labels
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: ''
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/csharp-formatting-options#csharp_indent_switch_labels
+              - Name: csharp_indent_labels
+                Values:
+                  - '`flush_left`'
+                  - '`one_less_than_current`'
+                  - '`no_change`'
+                DefaultValue: ''
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/csharp-formatting-options#csharp_indent_labels
+              - Name: csharp_indent_block_contents
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: ''
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/csharp-formatting-options#csharp_indent_block_contents
+              - Name: csharp_indent_braces
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: ''
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/csharp-formatting-options#csharp_indent_braces
+              - Name: csharp_indent_case_contents_when_block
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: ''
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/csharp-formatting-options#csharp_indent_case_contents_when_block
+              - Name: csharp_space_after_cast
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: ''
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/csharp-formatting-options#csharp_space_after_cast
+              - Name: csharp_space_after_keywords_in_control_flow_statements
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: ''
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/csharp-formatting-options#csharp_space_after_keywords_in_control_flow_statements
+              - Name: csharp_space_between_parentheses
+                Values:
+                  - '`control_flow_statements`'
+                  - '`expressions`'
+                  - '`type_casts`'
+                DefaultValue: ''
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/csharp-formatting-options#csharp_space_between_parentheses
+              - Name: csharp_space_before_colon_in_inheritance_clause
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: ''
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/csharp-formatting-options#csharp_space_before_colon_in_inheritance_clause
+              - Name: csharp_space_after_colon_in_inheritance_clause
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: ''
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/csharp-formatting-options#csharp_space_after_colon_in_inheritance_clause
+              - Name: csharp_space_around_binary_operators
+                Values:
+                  - '`before_and_after`'
+                  - '`none`'
+                  - '`ignore`'
+                DefaultValue: ''
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/csharp-formatting-options#csharp_space_around_binary_operators
+              - Name: csharp_space_between_method_declaration_parameter_list_parentheses
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: ''
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/csharp-formatting-options#csharp_space_between_method_declaration_parameter_list_parentheses
+              - Name: csharp_space_between_method_declaration_empty_parameter_list_parentheses
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: ''
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/csharp-formatting-options#csharp_space_between_method_declaration_empty_parameter_list_parentheses
+              - Name: csharp_space_between_method_declaration_name_and_open_parenthesis
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: ''
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/csharp-formatting-options#csharp_space_between_method_declaration_name_and_open_parenthesis
+              - Name: csharp_space_between_method_call_parameter_list_parentheses
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: ''
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/csharp-formatting-options#csharp_space_between_method_call_parameter_list_parentheses
+              - Name: csharp_space_between_method_call_empty_parameter_list_parentheses
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: ''
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/csharp-formatting-options#csharp_space_between_method_call_empty_parameter_list_parentheses
+              - Name: csharp_space_between_method_call_name_and_opening_parenthesis
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: ''
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/csharp-formatting-options#csharp_space_between_method_call_name_and_opening_parenthesis
+              - Name: csharp_space_after_comma
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: ''
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/csharp-formatting-options#csharp_space_after_comma
+              - Name: csharp_space_before_comma
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: ''
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/csharp-formatting-options#csharp_space_before_comma
+              - Name: csharp_space_after_dot
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: ''
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/csharp-formatting-options#csharp_space_after_dot
+              - Name: csharp_space_before_dot
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: ''
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/csharp-formatting-options#csharp_space_before_dot
+              - Name: csharp_space_after_semicolon_in_for_statement
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: ''
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/csharp-formatting-options#csharp_space_after_semicolon_in_for_statement
+              - Name: csharp_space_before_semicolon_in_for_statement
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: ''
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/csharp-formatting-options#csharp_space_before_semicolon_in_for_statement
+              - Name: csharp_space_around_declaration_statements
+                Values:
+                  - '`ignore`'
+                  - '`false`'
+                DefaultValue: ''
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/csharp-formatting-options#csharp_space_around_declaration_statements
+              - Name: csharp_space_before_open_square_brackets
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: ''
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/csharp-formatting-options#csharp_space_before_open_square_brackets
+              - Name: csharp_space_between_empty_square_brackets
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: ''
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/csharp-formatting-options#csharp_space_between_empty_square_brackets
+              - Name: csharp_space_between_square_brackets
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: ''
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/csharp-formatting-options#csharp_space_between_square_brackets
+              - Name: csharp_preserve_single_line_statements
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: ''
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/csharp-formatting-options#csharp_preserve_single_line_statements
+              - Name: csharp_preserve_single_line_blocks
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: ''
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/csharp-formatting-options#csharp_preserve_single_line_blocks
+  - Define the 'private_static_fields_none' naming rule: []

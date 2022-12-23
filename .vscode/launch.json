@@ -10,7 +10,7 @@
             "request": "launch",
             "preLaunchTask": "BuildMsdnTableParser",
             "program": "${workspaceFolder}/MsdnTableParser/bin/Debug/net7.0/MsdnTableParser.dll",
-            "args": ["https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0003-ide0009"],
+            "args": ["${workspaceFolder}/rules.yaml"],
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,
             "console": "internalConsole"

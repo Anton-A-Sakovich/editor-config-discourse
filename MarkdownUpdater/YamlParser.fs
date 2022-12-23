@@ -64,7 +64,7 @@ module YamlParser =
             | Some child -> checkChild (child::checkedChildren) rest
             | None -> None
 
-    let private tryParseSequence parseChild (node:YamlSequenceNode) = 
+    let private tryParseSequence parseChild (node:YamlSequenceNode) =
         seq {
             for child in node.Children do
                 yield parseChild child
@@ -96,19 +96,19 @@ module YamlParser =
         }
 
     let rec tryParseDocumentMapping (node:YamlNode) =
-        switch {
-            return! require {
-                let! mappingNode = node |> tryCast<YamlMappingNode>
-                return mappingNode.Children
-                    |> Seq.map (fun pair ->
-                        let heading = (pair.Key :?> YamlScalarNode).Value
-                        MarkdownNode.Section(heading, tryParseDocumentMapping pair.Value))
-                    |> List.ofSeq
-            }
+        require {
+            let! mappingNode = node |> tryCast<YamlMappingNode>
 
-            return! require {
-                let! rules = node |> tryParseAs (tryParseSequence (tryParseAs tryParseRuleMapping))
-                return rules |> List.map MarkdownNode.Rule
-            }
+            let hasName =
+                mappingNode.Children
+                |> Seq.exists (fun pair -> pair.Key |> (tryParseAs tryParseScalar) |> Option.map (fun name -> name = "Name") |> Option.defaultValue false)
+
+            if hasName then
+                let! rule = mappingNode |> tryParseRuleMapping
+                return MarkdownNode.Rule(rule)
+            else
+                let! firstPair = mappingNode.Children |> Seq.tryHead
+                let! name = firstPair.Key |> tryParseAs tryParseScalar
+                let! children = firstPair.Value |> tryParseAs (tryParseSequence tryParseDocumentMapping)
+                return MarkdownNode.Section(name, children)
         }
-        |> Option.defaultValue []

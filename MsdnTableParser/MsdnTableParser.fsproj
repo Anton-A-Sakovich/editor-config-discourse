@@ -4,14 +4,20 @@
     <TargetFramework>net7.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="OptionMetadata.fs" />
-    <Compile Include="AbortOnExceptionBuilder.fs" />
-    <Compile Include="SectionParser.fs" />
+    <Compile Include="StyleTree.fs" />
+    <Compile Include="MarkdownParser.fsi" />
     <Compile Include="MarkdownParser.fs" />
+    <Compile Include="TocYamlParser.fsi" />
+    <Compile Include="TocYamlParser.fs" />
+    <Compile Include="RulesYamlBuilder.fsi" />
+    <Compile Include="RulesYamlBuilder.fs" />
     <Compile Include="HtmlFetcher.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="YamlDotNet" Version="12.2.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Utilities\Utilities.fsproj" />
   </ItemGroup>
 </Project>

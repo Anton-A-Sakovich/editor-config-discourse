@@ -1,77 +1,102 @@
 namespace MsdnTableParser
 
 module MarkdownParser =
-    open SectionParser
     open System
     open System.Collections.Generic
-    open System.Text.RegularExpressions
 
-    type private ParserState =
-        | Empty
-        | SectionName
-        | SectionTable
-    
-    type private Parser(baseUrl:string) =
-        member val private State = ParserState.Empty with get, set
-        member val private SectionName = "" with get, set
-        member val private TableRows = List<List<string>>()
-        member val private Sections = List<Section>()
+    type TableRow =
+        { Property: string;
+          Value: string;
+          Description: string; }
 
-        member this.GetSections() =
-            this.Sections
+    type PropertyType =
+        | OptionName
+        | OptionValue
+        | DefaultOptionValue
+        | Other
 
-        member this.ParseLine(line:string) =
-            match this.State with
-            | Empty ->
-                let regexMatch = Regex.Match(line, @"^###\s*(\w+_\w+)\s*")
-                if regexMatch.Success then
-                    this.State <- SectionName
-                    this.SectionName <- regexMatch.Groups[1].Value
-                    this.TableRows.Clear()
-                else
-                    ()
-            | SectionName ->
-                if line.Contains("-") then
-                    this.State <- SectionTable
-                    this.TableRows.Clear()
-                else
-                    ()
-            | SectionTable ->
-                if line.Contains("|") then
-                    let values =
-                        line.Split([|char "|"|], StringSplitOptions.RemoveEmptyEntries)
-                        |> Array.map (fun s -> s.Trim().Replace("*", "").Replace("`", ""))
-                    
-                    let row = List<string>()
-                    for value in values do
-                        row.Add(value)
-                    
-                    this.TableRows.Add(row)
-                else
-                    let table =
-                        this.TableRows
-                        |> Seq.map List.ofSeq
-                        |> Seq.map TableRow.Values
-                        |> List.ofSeq
-                        |> Table.Rows
-                    
-                    let section:Section =
-                        {
-                            Header =
-                                {
-                                    Title = this.SectionName;
-                                    Link = baseUrl + "#" + this.SectionName;
-                                };
-                            Table = table;
-                        }
+    let parseLine (line:string) =
+        line.Split('|', StringSplitOptions.RemoveEmptyEntries)
+        |> (function
+            | [|property; value; description|] ->
+                { Property = property.Trim().Replace("*", "");
+                  Value = value.Trim();
+                  Description = description.Trim(); }
+                |> Some
+            | _ -> None)
 
-                    this.Sections.Add(section)
-                    this.State <- Empty
-                    this.SectionName <- ""
-                    this.TableRows.Clear()
+    let collectRows (rows:seq<TableRow>) : option<StyleRule> =
+        let mutable propertyType = Other
+        let mutable name = ""
+        let mutable values = List<string>()
+        let mutable defaultValue = option<string>.None
 
-    let parseMarkdown baseUrl (text:string) =
-        let parser = Parser(baseUrl)
-        for line in text.Split("\n") do
-            parser.ParseLine(line)
-        parser.GetSections() |> List.ofSeq
+        for { Property = property; Value = value } in rows do
+            if property = "Option name" then
+                propertyType <- OptionName
+                name <- value
+            elif property = "Option values" then
+                propertyType <- OptionValue
+                values.Add(value)
+            elif property = "" && propertyType = OptionValue then
+                values.Add(value)
+            elif property = "Default option value" then
+                propertyType <- DefaultOptionValue
+                defaultValue <- Some(value)
+            else
+                propertyType <- Other
+
+        if name.Length > 0 && values.Count > 0 then
+            { Name = name;
+              Values = values |> List.ofSeq;
+              DefaultValue = defaultValue; }
+            |> Some
+        else
+            None
+
+    type LineType =
+        | Subsubsection
+        | Table
+        | Other
+
+    let parseMarkdown (url:string) (markdown:string) : option<StylePage> =
+        let mutable title = ""
+        let mutable lineType = Other
+        let mutable tableLines = List<string>()
+        let mutable rules = List<StyleRule>()
+
+        let lines = markdown.Replace("\r", "").Split("\n", StringSplitOptions.RemoveEmptyEntries)
+
+        for line in lines do
+            if line.StartsWith("# ") then
+                title <- line.Substring(2)
+            elif line.StartsWith("### ") then
+                lineType <- Subsubsection
+            elif line.StartsWith("|") && lineType = Subsubsection then
+                lineType <- Table
+                tableLines.Clear()
+                tableLines.Add(line)
+            elif line.StartsWith("|") && lineType = Table then
+                tableLines.Add(line)
+            elif lineType = Table then
+                let rule' =
+                    tableLines
+                    |> Seq.map parseLine
+                    |> Seq.choose id
+                    |> collectRows
+
+                if rule' |> Option.isSome then
+                    rules.Add(rule'.Value)
+
+                tableLines.Clear()
+                lineType <- Other
+            else
+                lineType <- Other
+
+        if title = "" then
+            None
+        else
+            Some({
+                Title = title;
+                Url = url;
+                Rules = rules |> List.ofSeq;})
