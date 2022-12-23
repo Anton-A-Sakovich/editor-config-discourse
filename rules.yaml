@@ -473,6 +473,14 @@ Code style rules:
                   - '`unset` or empty string'
                 DefaultValue: '`unset`'
                 MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0073#file_header_template
+      - Namespace naming preferences:
+          - Namespace does not match folder structure (IDE0130):
+              - Name: dotnet_style_namespace_match_folder
+                Values:
+                  - '`true`'
+                  - '`false`'
+                DefaultValue: '`true`'
+                MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0130#dotnet_style_namespace_match_folder
   - Unnecessary code rules:
       - Unnecessary code rules: []
       - Simplify name (IDE0001): []

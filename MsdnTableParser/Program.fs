@@ -1,5 +1,6 @@
 ﻿open MsdnTableParser
 open MsdnTableParser.HtmlFetcher
+open MsdnTableParser.LocalFileFetcher
 open MsdnTableParser.MarkdownParser
 open MsdnTableParser.TocYamlParser
 open MsdnTableParser.RulesYamlBuilder
@@ -19,7 +20,7 @@ let githubUrlPrefix = "https://raw.githubusercontent.com/dotnet/docs/main/docs/f
 let msdnUrlPrefix = "https://learn.microsoft.com/en-us/dotnet/fundamentals/"
 
 [<Literal>]
-let tocYamlUrl = githubUrlPrefix + "toc.yml"
+let tocYamlPath = "toc.yml"
 
 [<EntryPoint>]
 let main args =
@@ -32,10 +33,19 @@ let main args =
                     return! Failed ("No output file specified", 1)
             }
 
+        let sourceRootPath =
+            if args.Length > 1 then args[1] else githubUrlPrefix
+
         use httpClient = new HttpClient()
+        let fetchFileAsync =
+            if sourceRootPath.StartsWith("http") then
+                fun path -> fetchPageAsync httpClient "text/plain" (Uri(sourceRootPath + path).ToString())
+            else
+                let encoding = UTF8Encoding(false)
+                fun path -> fetchFileAsync encoding (Path.Combine(sourceRootPath, path))
 
         let! tocYamlString =
-            fetchPageAsync httpClient "text/plain" tocYamlUrl
+            fetchFileAsync tocYamlPath
             |> Async.AwaitTask
             |> Async.RunSynchronously
             |> (function
@@ -64,9 +74,8 @@ let main args =
             |> (function | Some value -> Completed value | None -> Failed("Failed to find code style entry", 4))
 
         let fetchAndParseMarkdown { TocPage.Href = href} =
-            let urlToFetchFrom = Uri(githubUrlPrefix + href).ToString()
             let urlToLinkTo = Uri(msdnUrlPrefix + href).ToString()
-            fetchPageAsync httpClient "text/plain" urlToFetchFrom
+            fetchFileAsync href
             |> Async.AwaitTask
             |> Async.RunSynchronously
             |> Option.bind (parseMarkdown urlToLinkTo)

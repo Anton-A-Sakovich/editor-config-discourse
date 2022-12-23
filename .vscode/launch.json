@@ -10,7 +10,7 @@
             "request": "launch",
             "preLaunchTask": "BuildMsdnTableParser",
             "program": "${workspaceFolder}/MsdnTableParser/bin/Debug/net7.0/MsdnTableParser.dll",
-            "args": ["${workspaceFolder}/rules.yaml"],
+            "args": ["${workspaceFolder}/rules.yaml", "${workspaceFolder}/docs/fundamentals/"],
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,
             "console": "internalConsole"
