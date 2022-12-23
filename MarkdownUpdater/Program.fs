@@ -55,14 +55,9 @@ module Program =
                         return yamlStream.Documents[0].RootNode
                 }
 
-            let documentNodes = tryParseDocumentMapping rootNode
             let! documentNode =
-                program {
-                    if documentNodes |> List.length |> (=) 0 then
-                        return! Failed("No YAML documents found in the file.", 4)
-                    else
-                        return documentNodes |> List.head
-                }
+                tryParseDocumentMapping rootNode
+                |> (function | Some value -> Completed value | None -> Failed ("Failed to build sections tree from the YAML", 4))
 
             let editorconfigString = File.ReadAllText(editorconfigFilePath, encoding)
             let editorconfigRules = parseEditorconfig editorconfigString
