@@ -11,6 +11,7 @@
     <Compile Include="TocYamlParser.fs" />
     <Compile Include="RulesYamlBuilder.fsi" />
     <Compile Include="RulesYamlBuilder.fs" />
+    <Compile Include="HtmlFetcher.fsi" />
     <Compile Include="HtmlFetcher.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
