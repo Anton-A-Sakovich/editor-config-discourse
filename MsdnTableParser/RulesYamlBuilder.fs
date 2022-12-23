@@ -22,15 +22,28 @@ module RulesYamlBuilder =
             YamlScalarNode("MsdnLink"),
             YamlScalarNode(url + "#" + rule.Name))
 
-    let pageToYaml (page:StylePage) =
-        YamlMappingNode(
-            YamlScalarNode(page.Title),
-            YamlSequenceNode(page.Rules |> Seq.map (ruleToYaml page.Url) |> Seq.cast<YamlNode>))
-
-    let rec treeToYaml (tree:StyleTree<StylePage>) =
+    let rec addTree (tree:StyleTree<StylePage>) (parent:YamlMappingNode) =
         match tree with
-        | Page page -> pageToYaml page
+        | Page (name, page) ->
+            let pageMapping = YamlMappingNode()
+
+            let rulesMappings =
+                page.Rules
+                |> Seq.map (ruleToYaml page.Url)
+                |> Seq.cast<YamlNode>
+
+            pageMapping.Add(page.Title, YamlSequenceNode(rulesMappings))
+            parent.Add(name, pageMapping)
+
         | Section (name, children) ->
-            YamlMappingNode(
-                YamlScalarNode(name),
-                YamlSequenceNode(children |> Seq.map treeToYaml |> Seq.cast<YamlNode>))
+            let childrenMapping = YamlMappingNode()
+
+            for child in children do
+                addTree child childrenMapping
+
+            parent.Add(name, childrenMapping)
+
+    let treeToYaml (tree:StyleTree<StylePage>) =
+        let root = YamlMappingNode()
+        addTree tree root
+        root
