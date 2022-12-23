@@ -27,11 +27,17 @@ module TocYamlParser =
     let inline tryParseAs< ^T when ^T :> YamlNode> (node:YamlNode) =
         match node with | :? ^T as casted -> Success casted | _ -> Failure
 
-    let inline tryGetItem (key:string) (node:YamlMappingNode) =
-        try Success node[key] with | _ -> Failure
-
     let inline tryGetValue (node:YamlScalarNode) =
         Success node.Value
+
+    let tryGetItem (key:string) (node:YamlMappingNode) =
+        node.Children
+        |> Seq.tryPick (fun pair ->
+            let pairKeyResult = pair.Key |> tryParseAs<YamlScalarNode> |> bind tryGetValue
+            match pairKeyResult with
+            | Success pairKey when (pairKey = key) -> Some pair.Value
+            | _ -> None)
+        |> (function | Some node -> Success node | None -> Failure)
 
     type TocPage =
         { Name: string;
