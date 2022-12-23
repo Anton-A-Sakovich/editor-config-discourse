@@ -72,7 +72,7 @@ module StyleTree =
                         mappingNode.Children
                         |> Seq.map (fun pair ->
                             let name = (pair.Key :?> YamlScalarNode).Value
-                            name |> fromYaml converter node)
+                            name |> fromYaml converter pair.Value)
                         |> List.ofSeq
 
                     Section(name, chidren)
