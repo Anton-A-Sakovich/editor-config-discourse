@@ -1,3 +1,6 @@
 .vscode/**
 !.vscode/launch.json
 !.vscode/tasks.json
+
+# A local copy of relevant MSDN docs
+/docs
