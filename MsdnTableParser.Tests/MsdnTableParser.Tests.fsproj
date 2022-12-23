@@ -5,7 +5,7 @@
     <GenerateProgramFile>false</GenerateProgramFile>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="MsdnCrawlerTests.fs" />
+    <Compile Include="TocYamlParserTests.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
   <ItemGroup>
