@@ -4,6 +4,7 @@ open MsdnTableParser.LocalFileFetcher
 open MsdnTableParser.MarkdownParser
 open MsdnTableParser.TocYamlParser
 open MsdnTableParser.RulesYamlBuilder
+open StyleTree
 open System
 open System.IO
 open System.Net.Http

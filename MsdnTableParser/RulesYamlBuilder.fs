@@ -1,6 +1,7 @@
 namespace MsdnTableParser
 
 module RulesYamlBuilder =
+    open StyleTree
     open YamlDotNet.RepresentationModel
 
     let ruleToYaml (url:string) (rule:StyleRule) =
