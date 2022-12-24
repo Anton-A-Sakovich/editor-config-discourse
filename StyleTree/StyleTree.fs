@@ -60,20 +60,46 @@ module StyleTree =
         addToYaml converter tree rootNode
         rootNode
 
-    let rec fromYaml converter (node:YamlNode) =
+    let transposeListOption (list:list<option<_>>) =
+        let rec loop remaining collected =
+            match remaining with
+            | [] -> Some (List.rev collected)
+            | head::tail ->
+                match head with
+                | Some value -> loop tail (value::collected)
+                | None -> None
+
+        loop list []
+
+    let inline tryScalarValue (node:YamlNode) =
+        match node with
+        | :? YamlScalarNode as scalarNode -> Some scalarNode.Value
+        | _ -> None
+
+    let rec fromYamlLoop converter (node:YamlNode) =
         match converter node with
-        | Some leaf ->
-            fun name -> Page(name, leaf)
+        | Some leaf -> fun name -> Some(Page(name, leaf))
         | None ->
             match node with
             | :? YamlMappingNode as mappingNode ->
                 fun name ->
-                    let chidren =
-                        mappingNode.Children
-                        |> Seq.map (fun pair ->
-                            let name = (pair.Key :?> YamlScalarNode).Value
-                            name |> fromYaml converter pair.Value)
-                        |> List.ofSeq
+                    mappingNode.Children
+                    |> Seq.map (fun pair ->
+                        pair.Key
+                        |> tryScalarValue
+                        |> Option.bind (fromYamlLoop converter pair.Value))
+                    |> List.ofSeq
+                    |> transposeListOption
+                    |> (function
+                        | Some values -> Some(Section(name, values))
+                        | None -> None)
+            | _ -> fun _ -> None
 
-                    Section(name, chidren)
-            | _ -> failwith "Error"
+    let fromYaml converter (root:YamlMappingNode) =
+        let singleChild = Seq.tryExactlyOne root.Children
+        match singleChild with
+        | Some pair ->
+            pair.Key
+            |> tryScalarValue
+            |> Option.bind (fromYamlLoop converter pair.Value)
+        | None -> fromYamlLoop converter root "Root"
