@@ -45,7 +45,7 @@ module StyleTree =
     let rec addToYaml converter (tree:StyleTree<_>) (parent:YamlMappingNode) =
         match tree with
         | Page (name, leaf) ->
-            let leafNode:YamlNode = converter leaf
+            let leafNode:#YamlNode = converter leaf
             parent.Add(name, leafNode)
         | Section (name, children) ->
             let childrenNode = YamlMappingNode()
