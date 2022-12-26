@@ -16,5 +16,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Utilities\Utilities.fsproj" />
+    <ProjectReference Include="..\StyleTree\StyleTree.fsproj" />
   </ItemGroup>
 </Project>

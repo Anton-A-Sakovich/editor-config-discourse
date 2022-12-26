@@ -1,42 +1,38 @@
 namespace MarkdownUpdater
 
-type StyleRuleMetadata = {
-    Name: string;
-    Values: string list;
-    DefaultValue: string option;
-    MsdnLink: string; }
+type StyleRule =
+    { Name: string;
+      Values: list<string>;
+      DefaultValue: option<string>;
+      MsdnLink: string; }
 
-type StyleRule = {
-    Metadata: StyleRuleMetadata;
-    SelectedValue: string option;
-    IssueId: string option; }
+type StyleRuleResolution =
+    { Rule: StyleRule;
+      SelectedValue: option<string>;
+      IssueId: option<string>; }
 
-type MarkdownNode<'T> =
-    | Rule of 'T
-    | Section of title:string * children:list<MarkdownNode<'T>>
-
-type EditorconfigRule = {
-    Name: string;
-    Value: string;
-    IssueId: string option }
+type EditorconfigRule =
+    { Name: string;
+      Value: string;
+      IssueId: option<string>; }
 
 module Merger =
-    let inline private mergeConfigsIntoMetadata (editorconfigRules:Map<string, EditorconfigRule>) (metadata:StyleRuleMetadata) =
-        match editorconfigRules |> Map.tryFind metadata.Name with
+    let inline private mergeConfigsIntoMetadata (editorconfigRules:Map<string, EditorconfigRule>) (rule:StyleRule) =
+        match editorconfigRules |> Map.tryFind rule.Name with
         | Some config ->
             {
-                Metadata = metadata;
+                Rule = rule;
                 SelectedValue = Some config.Value;
                 IssueId = config.IssueId;
             }
         | None ->
             {
-                Metadata = metadata;
+                Rule = rule;
                 SelectedValue = None;
                 IssueId = None;
             }
 
-    let rec mergeConfigIntoMarkdownNode (editorconfigRules:Map<string, EditorconfigRule>) (node:MarkdownNode<StyleRuleMetadata>) =
+    let rec mergeConfigIntoMarkdownNode (editorconfigRules:Map<string, EditorconfigRule>) (node:MarkdownNode<StyleRule>) =
         match node with
         | Rule metadata -> Rule (metadata |> mergeConfigsIntoMetadata editorconfigRules)
         | Section (title, children) -> Section (title, children |> List.map (mergeConfigIntoMarkdownNode editorconfigRules))

@@ -26,12 +26,12 @@ module MarkdownGenerator =
         | Some name -> $"[{name}]({url})"
         | None -> url
 
-    let private appendRule issueIdToUrl (rule:StyleRule) (anchor':option<Anchor>) (builder:StringBuilder) =
+    let private appendRule issueIdToUrl (rule:StyleRuleResolution) (anchor':option<Anchor>) (builder:StringBuilder) =
         let inline append (str:string) = builder.Append(str) |> ignore
         let inline appendLine (str:string) = builder.AppendLine(str) |> ignore
 
         let {
-            Metadata = {
+            Rule = {
                 Name = name;
                 Values = values;
                 DefaultValue = defaultValue';
@@ -53,7 +53,7 @@ module MarkdownGenerator =
         | Some selectedValue -> selectedValue |> sprintf " `%s`" |> append
         | None -> ()
         "\\" |> appendLine
-        
+
         "Issue:" |> append
         match issueId' with
         | Some issueId -> Link (Some issueId, issueIdToUrl issueId) |> linkToMarkdown |> sprintf " %s" |> append
@@ -64,7 +64,7 @@ module MarkdownGenerator =
         "Possible values:" |> appendLine
         for value in values do
             value |> sprintf "* %s" |> appendLine
-        
+
         match defaultValue' with
         | Some defaultValue ->
             "" |> appendLine
@@ -84,13 +84,13 @@ module MarkdownGenerator =
         | Rule of id:string * title:string * resolved:bool
         | Section of id:string * title:string * children:list<TableOfContentsEntry> * resolved:int * unresolved:int
 
-    let rec private appendNode appendRule (level:int) (node:MarkdownNode<StyleRule>) (builder:StringBuilder) =
+    let rec private appendNode appendRule (level:int) (node:MarkdownNode<StyleRuleResolution>) (builder:StringBuilder) =
         match node with
         | MarkdownNode.Rule rule ->
-            let tocId = rule.Metadata.Name
+            let tocId = rule.Rule.Name
             appendRule rule (Some(Anchor(tocId))) builder
 
-            Rule(id = tocId, title = rule.Metadata.Name, resolved = (rule.SelectedValue |> Option.isSome))
+            Rule(id = tocId, title = rule.Rule.Name, resolved = (rule.SelectedValue |> Option.isSome))
         | MarkdownNode.Section (title, childNodes) ->
             let tocId = title.Replace(" ", "-").ToLower()
             let heading = Heading(level, Some(Anchor(tocId)), title)
@@ -128,7 +128,7 @@ module MarkdownGenerator =
                     sprintf " resolved %i from %i" resolved (resolved + unresolved)
 
             appendTitle id title resolvedString
-            
+
             for child in children do
                 tocEntryToMarkdown (level + 1) child builder
 

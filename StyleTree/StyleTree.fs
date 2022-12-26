@@ -1,5 +1,11 @@
 namespace StyleTree
 
+type StyleRule =
+    { Name: string;
+      Values: list<string>;
+      DefaultValue: option<string>;
+      MsdnLink: string; }
+
 type StyleTree<'T> =
     | Page of string * 'T
     | Section of string * list<StyleTree<'T>>
