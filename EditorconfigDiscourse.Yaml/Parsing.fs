@@ -44,16 +44,15 @@ module Parsing =
     let inline getValue (scalar:YamlScalarNode) =
         scalar.Value
 
-    let rec parseSequenceLoop parser (parsed:List<_>) (enumerator:IEnumerator<YamlNode>) =
-        if enumerator.MoveNext() then
-            let parseResult:ParseResult<_> = parser enumerator.Current
-            match parseResult with
-            | Parsed value ->
-                parsed.Add(value)
-                parseSequenceLoop parser parsed enumerator
-            | Failed -> Failed
-        else
-            Parsed (parsed |> List.ofSeq)
-
     let tryParseSequence parser (sequence:seq<YamlNode>) =
-        parseSequenceLoop parser (List<_>()) (sequence.GetEnumerator())
+        let rec loop (parsedValues:List<_>) (enumerator:IEnumerator<YamlNode>) =
+            if enumerator.MoveNext() then
+                let parseResult:ParseResult<_> = parser enumerator.Current
+                match parseResult with
+                | Parsed value ->
+                    parsedValues.Add(value)
+                    loop parsedValues enumerator
+                | Failed -> Failed
+            else
+                Parsed (parsedValues |> List.ofSeq)
+        loop (List<_>()) (sequence.GetEnumerator())
