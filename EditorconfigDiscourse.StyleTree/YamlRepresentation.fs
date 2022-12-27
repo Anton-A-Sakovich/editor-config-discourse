@@ -48,3 +48,62 @@ module YamlRepresentation =
 
             return styleRule
         }
+
+    let rec addToYaml converter (tree:StyleTree<_>) (parent:YamlMappingNode) =
+        match tree with
+        | Page (name, leaf) ->
+            let leafNode:#YamlNode = converter leaf
+            parent.Add(name, leafNode)
+        | Section (name, children) ->
+            let childrenNode = YamlMappingNode()
+
+            for child in children do
+                addToYaml converter child childrenNode
+
+            parent.Add(name, childrenNode)
+
+    let toYaml converter tree =
+        let rootNode = YamlMappingNode()
+        addToYaml converter tree rootNode
+        rootNode
+
+    let transposeParseResults (list:list<ParseResult<_>>) =
+        let rec loop remaining collected =
+            match remaining with
+            | [] -> Parsed (List.rev collected)
+            | head::tail ->
+                match head with
+                | Parsed value -> loop tail (value::collected)
+                | Failed -> Failed
+
+        loop list []
+
+    let rec fromYamlLoop leafParser (node:YamlNode) =
+        match leafParser node with
+        | Parsed leaf -> fun name -> Parsed(Page(name, leaf))
+        | Failed ->
+            match node with
+            | :? YamlMappingNode as mappingNode ->
+                fun name ->
+                    mappingNode.Children
+                    |> Seq.map (fun pair ->
+                        pair.Key
+                        |> tryParseAs<YamlScalarNode>
+                        |> ParseResult.map getValue
+                        |> ParseResult.bind (fromYamlLoop leafParser pair.Value))
+                    |> List.ofSeq
+                    |> transposeParseResults
+                    |> (function
+                        | Parsed trees -> Parsed(Section(name, trees))
+                        | Failed -> Failed)
+            | _ -> fun _ -> Failed
+
+    let fromYaml converter (root:YamlMappingNode) =
+        let singleChild = Seq.tryExactlyOne root.Children
+        match singleChild with
+        | Some pair ->
+            pair.Key
+            |> tryParseAs<YamlScalarNode>
+            |> ParseResult.map getValue
+            |> ParseResult.bind (fromYamlLoop converter pair.Value)
+        | None -> fromYamlLoop converter root "Root"
