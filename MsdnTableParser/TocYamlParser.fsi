@@ -1,7 +1,7 @@
 namespace MsdnTableParser
 
 module TocYamlParser =
-    open StyleTree
+    open EditorconfigDiscourse.StyleTree
     open YamlDotNet.RepresentationModel
 
     type ParseResult<'T> =

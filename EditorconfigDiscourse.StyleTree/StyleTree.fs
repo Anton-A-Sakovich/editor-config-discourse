@@ -1,4 +1,4 @@
-namespace StyleTree
+namespace EditorconfigDiscourse.StyleTree
 
 type StyleRule =
     { Name: string;

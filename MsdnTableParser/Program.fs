@@ -4,7 +4,7 @@ open MsdnTableParser.LocalFileFetcher
 open MsdnTableParser.MarkdownParser
 open MsdnTableParser.TocYamlParser
 open MsdnTableParser.RulesYamlBuilder
-open StyleTree
+open EditorconfigDiscourse.StyleTree
 open System
 open System.IO
 open System.Net.Http
@@ -75,11 +75,14 @@ let main args =
             |> (function | Some value -> Completed value | None -> Failed("Failed to find code style entry", 4))
 
         let fetchAndParseMarkdown href =
-            let urlToLinkTo = Uri(msdnUrlPrefix + href).ToString()
-            fetchFileAsync href
-            |> Async.AwaitTask
-            |> Async.RunSynchronously
-            |> Option.bind (parseMarkdown urlToLinkTo)
+            (href:string).LastIndexOf(".md") |> (function | -1 -> None | x -> Some x)
+            |> Option.map (fun index -> href.Substring(0, index))
+            |> Option.map (fun hrefWithoutExtension -> Uri(msdnUrlPrefix + hrefWithoutExtension).ToString())
+            |> Option.bind (fun urlToLinkTo ->
+                fetchFileAsync href
+                |> Async.AwaitTask
+                |> Async.RunSynchronously
+                |> Option.bind (parseMarkdown urlToLinkTo))
 
         let treeOfMaybeStylePages = treeOfTocPages |> StyleTree.map fetchAndParseMarkdown
 

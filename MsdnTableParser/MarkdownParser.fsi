@@ -1,4 +1,4 @@
 namespace MsdnTableParser
 
 module MarkdownParser =
-    val parseMarkdown : string -> string -> option<StylePage>
+    val parseMarkdown : string -> string -> option<MsdnPage>

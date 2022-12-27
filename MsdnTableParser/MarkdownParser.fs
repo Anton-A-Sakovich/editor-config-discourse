@@ -25,7 +25,7 @@ module MarkdownParser =
                 |> Some
             | _ -> None)
 
-    let collectRows (rows:seq<TableRow>) : option<StyleRule> =
+    let collectRows (rows:seq<TableRow>) : option<MsdnRule> =
         let mutable propertyType = Other
         let mutable name = ""
         let mutable values = List<string>()
@@ -59,11 +59,11 @@ module MarkdownParser =
         | Table
         | Other
 
-    let parseMarkdown (url:string) (markdown:string) : option<StylePage> =
+    let parseMarkdown (url:string) (markdown:string) : option<MsdnPage> =
         let mutable title = ""
         let mutable lineType = Other
         let mutable tableLines = List<string>()
-        let mutable rules = List<StyleRule>()
+        let mutable rules = List<MsdnRule>()
 
         let lines = markdown.Replace("\r", "").Split("\n", StringSplitOptions.RemoveEmptyEntries)
 

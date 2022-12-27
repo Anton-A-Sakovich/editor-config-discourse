@@ -1,11 +1,11 @@
 namespace MsdnTableParser
 
-type StyleRule =
+type MsdnRule =
     { Name: string;
       Values: list<string>;
       DefaultValue: option<string>; }
 
-type StylePage =
+type MsdnPage =
     { Title: string;
       Url: string;
-      Rules: list<StyleRule>; }
+      Rules: list<MsdnRule>; }

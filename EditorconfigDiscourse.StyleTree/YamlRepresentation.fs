@@ -1,4 +1,4 @@
-namespace StyleTree
+namespace EditorconfigDiscourse.StyleTree
 
 module YamlRepresentation =
     open EditorconfigDiscourse.Yaml.Parsing
