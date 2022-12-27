@@ -1,10 +1,5 @@
 namespace MarkdownUpdater
-
-type StyleRule =
-    { Name: string;
-      Values: list<string>;
-      DefaultValue: option<string>;
-      MsdnLink: string; }
+open EditorconfigDiscourse.StyleTree
 
 type StyleRuleResolution =
     { Rule: StyleRule;
@@ -17,7 +12,7 @@ type EditorconfigRule =
       IssueId: option<string>; }
 
 module Merger =
-    let inline private mergeConfigsIntoMetadata (editorconfigRules:Map<string, EditorconfigRule>) (rule:StyleRule) =
+    let inline private createResolution (editorconfigRules:Map<string, EditorconfigRule>) (rule:StyleRule) =
         match editorconfigRules |> Map.tryFind rule.Name with
         | Some config ->
             {
@@ -32,7 +27,7 @@ module Merger =
                 IssueId = None;
             }
 
-    let rec mergeConfigIntoMarkdownNode (editorconfigRules:Map<string, EditorconfigRule>) (node:MarkdownNode<StyleRule>) =
-        match node with
-        | Rule metadata -> Rule (metadata |> mergeConfigsIntoMetadata editorconfigRules)
-        | Section (title, children) -> Section (title, children |> List.map (mergeConfigIntoMarkdownNode editorconfigRules))
+    let rec createResolutions (editorconfigRules:Map<string, EditorconfigRule>) (tree:StyleTree<list<StyleRule>>) =
+        match tree with
+        | Page (name, rules) -> Page (name, rules |> List.map (createResolution editorconfigRules))
+        | Section (name, children) -> Section (name, children |> List.map (createResolutions editorconfigRules))

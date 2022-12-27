@@ -1,6 +1,7 @@
 namespace MarkdownUpdater
 
 module MarkdownGenerator =
+    open EditorconfigDiscourse.StyleTree
     open System.Text
 
     [<Struct>]
@@ -26,7 +27,7 @@ module MarkdownGenerator =
         | Some name -> $"[{name}]({url})"
         | None -> url
 
-    let private appendRule issueIdToUrl (rule:StyleRuleResolution) (anchor':option<Anchor>) (builder:StringBuilder) =
+    let private appendResolution issueIdToUrl (resolution:StyleRuleResolution) (anchor':option<Anchor>) (builder:StringBuilder) =
         let inline append (str:string) = builder.Append(str) |> ignore
         let inline appendLine (str:string) = builder.AppendLine(str) |> ignore
 
@@ -37,7 +38,7 @@ module MarkdownGenerator =
                 DefaultValue = defaultValue';
                 MsdnLink = msdnLink };
             SelectedValue = selectedValue';
-            IssueId = issueId'; } = rule
+            IssueId = issueId'; } = resolution
 
         let anchorMarkdown =
             match anchor' with
@@ -77,71 +78,105 @@ module MarkdownGenerator =
 
     let ruleToMarkdown issueIdToLink rule =
         let builder = StringBuilder()
-        appendRule issueIdToLink rule None builder
+        appendResolution issueIdToLink rule None builder
         builder.ToString()
 
-    type private TableOfContentsEntry =
-        | Rule of id:string * title:string * resolved:bool
-        | Section of id:string * title:string * children:list<TableOfContentsEntry> * resolved:int * unresolved:int
+    type TableOfContentsReference = { Id: string; Title: string; }
 
-    let rec private appendNode appendRule (level:int) (node:MarkdownNode<StyleRuleResolution>) (builder:StringBuilder) =
-        match node with
-        | MarkdownNode.Rule rule ->
-            let tocId = rule.Rule.Name
-            appendRule rule (Some(Anchor(tocId))) builder
+    type TableOfContentsTree =
+        | Resolution of reference:TableOfContentsReference * resolved:bool
+        | Section of reference:TableOfContentsReference * resolved:int * total:int * children:list<TableOfContentsTree>
 
-            Rule(id = tocId, title = rule.Rule.Name, resolved = (rule.SelectedValue |> Option.isSome))
-        | MarkdownNode.Section (title, childNodes) ->
-            let tocId = title.Replace(" ", "-").ToLower()
-            let heading = Heading(level, Some(Anchor(tocId)), title)
-            heading |> headingToMarkdown |> builder.AppendLine |> ignore
-            builder.AppendLine() |> ignore
+    let sumTree (tree:TableOfContentsTree) =
+        match tree with
+        | Resolution (_, resolved) -> if resolved then (1, 1) else (0, 1)
+        | Section(_, resolved, total, _) -> (resolved, total)
 
-            let childTocEntries =
-                childNodes
-                |> List.map (fun childNode -> appendNode appendRule (level + 1) childNode builder)
+    let rec appendTree issueIdToUrl (level:int) (builder:StringBuilder) (tree:StyleTree<list<StyleRuleResolution>>) =
+        match tree with
+        | Page (name, resolutions) ->
+            let childReferences =
+                resolutions
+                |> List.map (fun resolution ->
+                    let reference:TableOfContentsReference =
+                        { Id = resolution.Rule.Name; Title = resolution.Rule.Name; }
+                    let resolved =
+                        resolution.SelectedValue |> Option.isSome
+                    reference , resolved)
 
-            let (resolved, unresolved) =
-                childTocEntries
-                |> List.map (function
-                    | Rule (_, _, resolved) -> if resolved then (1, 0) else (0, 1)
-                    | Section (_, _, _, resolved, unresolved) -> (resolved, unresolved))
-                |> List.fold (fun (totalResolved, totalUnresolved) (resolved, unresolved) ->
-                    (totalResolved + resolved, totalUnresolved + unresolved)) (0, 0)
+            let childTrees:list<TableOfContentsTree> =
+                childReferences
+                |> List.map Resolution
 
-            Section(id = tocId, title = title, children = childTocEntries, resolved = resolved, unresolved = unresolved)
+            let resolved =
+                resolutions
+                |> List.map (fun resolution -> resolution.SelectedValue)
+                |> List.map (function | Some _ -> 1 | None -> 0)
+                |> List.sum
 
-    let rec private tocEntryToMarkdown (level:int) (tocEntry:TableOfContentsEntry) (builder:StringBuilder) =
-        let inline appendTitle id title resolutionStats =
+            let total = resolutions |> List.length
+
+            let thisReference:TableOfContentsReference =
+                { Id = name.Replace(" ", "-").ToLower(); Title = name; }
+
+            Heading(level, Some(Anchor(thisReference.Id)), thisReference.Title)
+            |> headingToMarkdown
+            |> builder.AppendLine
+            |> ignore
+
+            for (resolution, (reference, _)) in Seq.zip resolutions childReferences do
+                appendResolution issueIdToUrl resolution (Some(Anchor(reference.Id))) builder
+
+            Section(thisReference, resolved, total, childTrees)
+
+        | StyleTree.Section (name, children) ->
+            let childTrees = children |> List.map (appendTree issueIdToUrl (level + 1) builder)
+
+            let (resolved, total) =
+                childTrees
+                |> List.map sumTree
+                |> List.fold (fun (r, t) (r', t') -> (r + r', t + t')) (0, 0)
+
+            let thisReference:TableOfContentsReference =
+                { Id = name.Replace(" ", "-").ToLower(); Title = name; }
+
+            Heading(level, Some(Anchor(thisReference.Id)), thisReference.Title)
+            |> headingToMarkdown
+            |> builder.AppendLine
+            |> ignore
+
+            Section(thisReference, resolved, total, childTrees)
+
+    let rec private tocTreeToMarkdown (level:int) (builder:StringBuilder) (tree:TableOfContentsTree) =
+        let inline appendTitle (reference:TableOfContentsReference) resolutionStats =
             let margin = String.replicate (4 * (level - 1)) "&nbsp;"
-            sprintf "%s[%s](#%s) %s\\" margin title id resolutionStats |> builder.AppendLine |> ignore
+            sprintf "%s[%s](#%s) %s\\" margin reference.Title reference.Id resolutionStats |> builder.AppendLine |> ignore
 
-        match tocEntry with
-        | Rule(id, title, resolved) ->
+        match tree with
+        | Resolution (reference, resolved) ->
             let resolvedString = if resolved then " resolved" else " unresolved"
-            appendTitle id title resolvedString
-        | Section(id, title, children, resolved, unresolved) ->
+            appendTitle reference resolvedString
+        | Section (reference, resolved, total, children) ->
             let resolvedString =
-                if (resolved + unresolved) = 1 then
+                if total = 1 then
                     ""
                 else
-                    sprintf " resolved %i from %i" resolved (resolved + unresolved)
+                    sprintf " resolved %i from %i" resolved total
 
-            appendTitle id title resolvedString
+            appendTitle reference resolvedString
 
             for child in children do
-                tocEntryToMarkdown (level + 1) child builder
+                tocTreeToMarkdown (level + 1) builder child
 
     let nodeToMarkdown issueIdToLink node =
         let builder = StringBuilder()
-        let rootTocEntry = appendNode (appendRule issueIdToLink) 1 node builder
+        let tocRoot = appendTree issueIdToLink 1 builder node
 
         let tocBuilder = StringBuilder()
-
         Heading(1, None, "Table of Contents") |> headingToMarkdown |> tocBuilder.AppendLine |> ignore
         tocBuilder.AppendLine() |> ignore
 
-        tocEntryToMarkdown 1 rootTocEntry tocBuilder
+        tocTreeToMarkdown 1 tocBuilder tocRoot
 
         tocBuilder.Remove(tocBuilder.Length - 3, 1) |> ignore
         tocBuilder.AppendLine() |> ignore

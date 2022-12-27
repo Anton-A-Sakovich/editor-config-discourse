@@ -1,6 +1,8 @@
 ﻿namespace MarkdownUpdater
 open EditorconfigParser
 open MarkdownGenerator
+open EditorconfigDiscourse.StyleTree
+open EditorconfigDiscourse.Yaml
 open System.IO
 open System.Text
 open Utilities.Program
@@ -56,12 +58,14 @@ module Program =
                 }
 
             let! documentNode =
-                tryParseDocumentMapping rootNode
-                |> (function | Some value -> Completed value | None -> Failed ("Failed to build sections tree from the YAML", 4))
+                rootNode
+                |> Parsing.tryParseAs<YamlMappingNode>
+                |> Parsing.ParseResult.bind (YamlRepresentation.fromYaml tryParseRules)
+                |> (function | Parsing.Parsed value -> Completed value | Parsing.Failed -> Failed ("Failed to build sections tree from the YAML", 4))
 
             let editorconfigString = File.ReadAllText(editorconfigFilePath, encoding)
             let editorconfigRules = parseEditorconfig editorconfigString
-            let mergedDocumentNode = Merger.mergeConfigIntoMarkdownNode editorconfigRules documentNode
+            let mergedDocumentNode = Merger.createResolutions editorconfigRules documentNode
 
             let markdown = nodeToMarkdown issueIdToLink mergedDocumentNode
             File.WriteAllText(rulesMarkdownFilePath, markdown, encoding)
