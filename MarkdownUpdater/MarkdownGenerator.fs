@@ -95,27 +95,6 @@ module MarkdownGenerator =
     let rec appendTree issueIdToUrl (level:int) (builder:StringBuilder) (tree:StyleTree<list<StyleRuleResolution>>) =
         match tree with
         | Page (name, resolutions) ->
-            let childReferences =
-                resolutions
-                |> List.map (fun resolution ->
-                    let reference:TableOfContentsReference =
-                        { Id = resolution.Rule.Name; Title = resolution.Rule.Name; }
-                    let resolved =
-                        resolution.SelectedValue |> Option.isSome
-                    reference , resolved)
-
-            let childTrees:list<TableOfContentsTree> =
-                childReferences
-                |> List.map Resolution
-
-            let resolved =
-                resolutions
-                |> List.map (fun resolution -> resolution.SelectedValue)
-                |> List.map (function | Some _ -> 1 | None -> 0)
-                |> List.sum
-
-            let total = resolutions |> List.length
-
             let thisReference:TableOfContentsReference =
                 { Id = name.Replace(" ", "-").ToLower(); Title = name; }
 
@@ -124,26 +103,51 @@ module MarkdownGenerator =
             |> builder.AppendLine
             |> ignore
 
-            for (resolution, (reference, _)) in Seq.zip resolutions childReferences do
+            let childReferences =
+                resolutions
+                |> List.map (fun resolution ->
+                    let { Rule = { Name = name }} = resolution
+                    let reference:TableOfContentsReference =
+                        { Id = name; Title = name; }
+                    reference)
+
+            for (resolution, reference) in Seq.zip resolutions childReferences do
                 appendResolution issueIdToUrl resolution (Some(Anchor(reference.Id))) builder
+
+            let childResolved =
+                resolutions
+                |> List.map (fun resolution ->
+                    resolution.SelectedValue |> Option.isSome)
+
+            let childTrees:list<TableOfContentsTree> =
+                (childReferences, childResolved) ||> List.zip
+                |> List.map Resolution
+
+            let resolved =
+                childResolved
+                |> List.map (fun resolved ->
+                    if resolved then 1 else 0)
+                |> List.sum
+
+            let total = childResolved |> List.length
 
             Section(thisReference, resolved, total, childTrees)
 
         | StyleTree.Section (name, children) ->
+            let thisReference:TableOfContentsReference =
+                { Id = name.Replace(" ", "-").ToLower(); Title = name; }
+
+            Heading(level, Some(Anchor(thisReference.Id)), thisReference.Title)
+            |> headingToMarkdown
+            |> builder.AppendLine
+            |> ignore
+
             let childTrees = children |> List.map (appendTree issueIdToUrl (level + 1) builder)
 
             let (resolved, total) =
                 childTrees
                 |> List.map sumTree
                 |> List.fold (fun (r, t) (r', t') -> (r + r', t + t')) (0, 0)
-
-            let thisReference:TableOfContentsReference =
-                { Id = name.Replace(" ", "-").ToLower(); Title = name; }
-
-            Heading(level, Some(Anchor(thisReference.Id)), thisReference.Title)
-            |> headingToMarkdown
-            |> builder.AppendLine
-            |> ignore
 
             Section(thisReference, resolved, total, childTrees)
 
