@@ -5,7 +5,6 @@
   <ItemGroup>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.fsi" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 </Project>
