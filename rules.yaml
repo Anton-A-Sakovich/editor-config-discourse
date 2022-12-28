@@ -50,11 +50,6 @@ Code style rules:
               - One or more C# modifiers, such as `public`, `private`, and `protected`
             DefaultValue: '`public, private, protected, internal, file, static, extern, new, virtual, abstract, sealed, override, readonly, unsafe, required, volatile, async`'
             MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0036#csharp_preferred_modifier_order
-          - Name: visual_basic_preferred_modifier_order
-            Values:
-              - One or more Visual Basic modifiers, such as `Partial`, `Private`, and `Public`
-            DefaultValue: '`Partial, Default, Private, Protected, Public, Friend, NotOverridable, Overridable, MustOverride, Overloads, Overrides, MustInherit, NotInheritable, Static, Shared, Shadows, ReadOnly, WriteOnly, Dim, Const, WithEvents, Widening, Narrowing, Custom, Async`'
-            MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0036#visual_basic_preferred_modifier_order
       IDE0040:
         Add accessibility modifiers (IDE0040):
           - Name: dotnet_style_require_accessibility_modifiers
@@ -452,14 +447,6 @@ Code style rules:
               - '`false`'
             DefaultValue: '`true`'
             MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0083#csharp_style_prefer_not_pattern
-      IDE0084:
-        Use pattern matching (`IsNot` operator) (IDE0084):
-          - Name: visual_basic_style_prefer_isnot_expression
-            Values:
-              - '`true`'
-              - '`false`'
-            DefaultValue: '`true`'
-            MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0084#visual_basic_style_prefer_isnot_expression
       IDE0170:
         Simplify property pattern (IDE0170):
           - Name: csharp_style_prefer_extended_property_pattern
@@ -522,11 +509,6 @@ Code style rules:
             - '`unused_local_variable`'
           DefaultValue: '`discard_variable`'
           MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0058#csharp_style_unused_value_expression_statement_preference
-        - Name: visual_basic_style_unused_value_expression_statement_preference
-          Values:
-            - '`unused_local_variable`'
-          DefaultValue: '`unused_local_variable`'
-          MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0058#visual_basic_style_unused_value_expression_statement_preference
     IDE0059:
       Remove unnecessary value assignment (IDE0059):
         - Name: csharp_style_unused_value_assignment_preference
@@ -535,11 +517,6 @@ Code style rules:
             - '`unused_local_variable`'
           DefaultValue: '`discard_variable`'
           MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0059#csharp_style_unused_value_assignment_preference
-        - Name: visual_basic_style_unused_value_assignment_preference
-          Values:
-            - '`unused_local_variable`'
-          DefaultValue: '`unused_local_variable`'
-          MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0059#visual_basic_style_unused_value_assignment_preference
     IDE0060:
       Remove unused parameter (IDE0060):
         - Name: dotnet_code_quality_unused_parameters
@@ -557,14 +534,6 @@ Code style rules:
             - '`none`'
           DefaultValue: '`none`'
           MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0079#dotnet_remove_unnecessary_suppression_exclusions
-    IDE0140:
-      Simplify object creation (IDE0140):
-        - Name: visual_basic_style_prefer_simplified_object_creation
-          Values:
-            - '`true`'
-            - '`false`'
-          DefaultValue: '`true`'
-          MsdnLink: https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0140#visual_basic_style_prefer_simplified_object_creation
   Formatting rules:
     IDE0055:
       .NET formatting options:

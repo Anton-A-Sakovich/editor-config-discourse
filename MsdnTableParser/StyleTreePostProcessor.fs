@@ -1,6 +1,7 @@
 namespace MsdnTableParser
 
 module StyleTreePostProcessor =
+    open System
     open EditorconfigDiscourse.StyleTree
 
     type MsdnPageResult =
@@ -8,17 +9,17 @@ module StyleTreePostProcessor =
         | NoRules
         | Ok of StyleTree<MsdnPage>
 
-    let rec removeDuplicateRulesLoop (set:Set<string>) (collected:list<MsdnRule>) (remaining:list<MsdnRule>) =
+    let rec removeDuplicateAndVBRulesLoop (set:Set<string>) (collected:list<MsdnRule>) (remaining:list<MsdnRule>) =
         match remaining with
         | [] -> (collected |> List.rev, set)
         | head::tail ->
-            if set |> Set.contains head.Name then
-                removeDuplicateRulesLoop set collected tail
+            if (set |> Set.contains head.Name) || (head.Name.StartsWith("visual_basic", StringComparison.InvariantCultureIgnoreCase)) then
+                removeDuplicateAndVBRulesLoop set collected tail
             else
-                removeDuplicateRulesLoop (set |> Set.add head.Name) (head::collected) tail
+                removeDuplicateAndVBRulesLoop (set |> Set.add head.Name) (head::collected) tail
 
-    let removeDuplicateRules (rules, set) =
-       removeDuplicateRulesLoop set [] rules
+    let removeDuplicateAndVBRules (rules, set) =
+       removeDuplicateAndVBRulesLoop set [] rules
 
     let rec refineListLoop name (collected:list<StyleTree<MsdnPage>>) (remaining:list<MsdnPageResult>) =
         match remaining with
@@ -41,7 +42,7 @@ module StyleTreePostProcessor =
             match maybePage with
             | None -> (FailedToParse, set)
             | Some page ->
-                let (newRules, newSet) = removeDuplicateRules (page.Rules, set)
+                let (newRules, newSet) = removeDuplicateAndVBRules (page.Rules, set)
                 match newRules with
                 | [] -> (NoRules, newSet)
                 | _ -> (Ok (Page (name, { page with Rules = newRules; })), newSet)
