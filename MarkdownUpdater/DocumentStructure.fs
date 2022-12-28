@@ -1,42 +1,33 @@
 namespace MarkdownUpdater
+open EditorconfigDiscourse.StyleTree
 
-type StyleRuleMetadata = {
-    Name: string;
-    Values: string list;
-    DefaultValue: string option;
-    MsdnLink: string; }
+type StyleRuleResolution =
+    { Rule: StyleRule;
+      SelectedValue: option<string>;
+      IssueId: option<string>; }
 
-type StyleRule = {
-    Metadata: StyleRuleMetadata;
-    SelectedValue: string option;
-    IssueId: string option; }
-
-type MarkdownNode<'T> =
-    | Rule of 'T
-    | Section of title:string * children:list<MarkdownNode<'T>>
-
-type EditorconfigRule = {
-    Name: string;
-    Value: string;
-    IssueId: string option }
+type EditorconfigRule =
+    { Name: string;
+      Value: string;
+      IssueId: option<string>; }
 
 module Merger =
-    let inline private mergeConfigsIntoMetadata (editorconfigRules:Map<string, EditorconfigRule>) (metadata:StyleRuleMetadata) =
-        match editorconfigRules |> Map.tryFind metadata.Name with
+    let inline private createResolution (editorconfigRules:Map<string, EditorconfigRule>) (rule:StyleRule) =
+        match editorconfigRules |> Map.tryFind rule.Name with
         | Some config ->
             {
-                Metadata = metadata;
+                Rule = rule;
                 SelectedValue = Some config.Value;
                 IssueId = config.IssueId;
             }
         | None ->
             {
-                Metadata = metadata;
+                Rule = rule;
                 SelectedValue = None;
                 IssueId = None;
             }
 
-    let rec mergeConfigIntoMarkdownNode (editorconfigRules:Map<string, EditorconfigRule>) (node:MarkdownNode<StyleRuleMetadata>) =
-        match node with
-        | Rule metadata -> Rule (metadata |> mergeConfigsIntoMetadata editorconfigRules)
-        | Section (title, children) -> Section (title, children |> List.map (mergeConfigIntoMarkdownNode editorconfigRules))
+    let rec createResolutions (editorconfigRules:Map<string, EditorconfigRule>) (tree:StyleTree<list<StyleRule>>) =
+        match tree with
+        | Page (name, rules) -> Page (name, rules |> List.map (createResolution editorconfigRules))
+        | Section (name, children) -> Section (name, children |> List.map (createResolutions editorconfigRules))

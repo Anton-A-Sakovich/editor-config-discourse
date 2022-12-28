@@ -3,4 +3,4 @@ namespace MsdnTableParser
 module RulesYamlBuilder =
     open YamlDotNet.RepresentationModel
 
-    val treeToYaml : StyleTree<StylePage> -> YamlMappingNode
+    val pageToYaml : page:MsdnPage -> YamlMappingNode

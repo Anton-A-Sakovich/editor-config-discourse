@@ -4,6 +4,7 @@ open MsdnTableParser.LocalFileFetcher
 open MsdnTableParser.MarkdownParser
 open MsdnTableParser.TocYamlParser
 open MsdnTableParser.RulesYamlBuilder
+open EditorconfigDiscourse.StyleTree
 open System
 open System.IO
 open System.Net.Http
@@ -70,43 +71,27 @@ let main args =
 
         let! treeOfTocPages =
             treeOfTocPages
-            |> tryFind ["Root"; "Tools and diagnostics"; "Code analysis"; "Rule reference"; "Code style rules"]
+            |> StyleTree.tryFind ["Root"; "Tools and diagnostics"; "Code analysis"; "Rule reference"; "Code style rules"]
             |> (function | Some value -> Completed value | None -> Failed("Failed to find code style entry", 4))
 
-        let fetchAndParseMarkdown { TocPage.Href = href} =
-            let urlToLinkTo = Uri(msdnUrlPrefix + href).ToString()
-            fetchFileAsync href
-            |> Async.AwaitTask
-            |> Async.RunSynchronously
-            |> Option.bind (parseMarkdown urlToLinkTo)
+        let fetchAndParseMarkdown href =
+            (href:string).LastIndexOf(".md") |> (function | -1 -> None | x -> Some x)
+            |> Option.map (fun index -> href.Substring(0, index))
+            |> Option.map (fun hrefWithoutExtension -> Uri(msdnUrlPrefix + hrefWithoutExtension).ToString())
+            |> Option.bind (fun urlToLinkTo ->
+                fetchFileAsync href
+                |> Async.AwaitTask
+                |> Async.RunSynchronously
+                |> Option.bind (parseMarkdown urlToLinkTo))
 
         let treeOfMaybeStylePages = treeOfTocPages |> StyleTree.map fetchAndParseMarkdown
 
-        let rec transposeOption (collected:list<_>) (remaining:list<option<_>>) =
-            match remaining with
-            | [] -> Some (List.rev collected)
-            | head::tail ->
-                match head with
-                | Some value -> transposeOption (value::collected) tail
-                | None -> None
-
-        let onPage (page':option<_>) =
-            match page' with
-            | Some page -> Some(Page page)
-            | None -> None
-
-        let onSection (name, children:list<option<_>>) =
-            let transposedChildren = transposeOption [] children
-            match transposedChildren with
-            | Some list -> Some (Section(name, list))
-            | None -> None
-
         let! treeOfStylePages =
             treeOfMaybeStylePages
-            |> StyleTree.cat onPage onSection
+            |> StyleTreePostProcessor.refine
             |> (function | Some tree -> Completed tree | None -> Failed ("Failed to build some Style Pages", 5))
 
-        let yamlTree = treeToYaml treeOfStylePages
+        let yamlTree = YamlRepresentation.toYaml pageToYaml treeOfStylePages
         let yamlString =
             SerializerBuilder()
              .DisableAliases()

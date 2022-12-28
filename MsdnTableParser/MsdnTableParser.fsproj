@@ -4,11 +4,13 @@
     <TargetFramework>net7.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="StyleTree.fs" />
-    <Compile Include="MarkdownParser.fsi" />
-    <Compile Include="MarkdownParser.fs" />
     <Compile Include="TocYamlParser.fsi" />
     <Compile Include="TocYamlParser.fs" />
+    <Compile Include="MsdnPage.fs" />
+    <Compile Include="MarkdownParser.fsi" />
+    <Compile Include="MarkdownParser.fs" />
+    <Compile Include="StyleTreePostProcessor.fsi" />
+    <Compile Include="StyleTreePostProcessor.fs" />
     <Compile Include="RulesYamlBuilder.fsi" />
     <Compile Include="RulesYamlBuilder.fs" />
     <Compile Include="HtmlFetcher.fsi" />
@@ -22,5 +24,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Utilities\Utilities.fsproj" />
+    <ProjectReference Include="..\EditorconfigDiscourse.StyleTree\EditorconfigDiscourse.StyleTree.fsproj" />
   </ItemGroup>
 </Project>

@@ -1,6 +1,7 @@
 namespace MsdnTableParser
 
 module TocYamlParser =
+    open EditorconfigDiscourse.StyleTree
     open YamlDotNet.RepresentationModel
 
     type ParseResult<'T> =
@@ -20,10 +21,4 @@ module TocYamlParser =
 
     val parse : ParseBuilder
 
-    type TocPage =
-        { Name: string;
-          Href: string; }
-
-    val tryParse : YamlNode -> ParseResult<StyleTree<TocPage>>
-
-    val tryFind : list<string> -> StyleTree<TocPage> -> option<StyleTree<TocPage>>
+    val tryParse : YamlNode -> ParseResult<StyleTree<string>>
