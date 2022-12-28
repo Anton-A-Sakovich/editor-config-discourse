@@ -1,4 +1,4 @@
-namespace MsdnTableParser
+namespace EditorconfigDiscourse.MsdnTableParser
 
 type MsdnRule =
     { Name: string;

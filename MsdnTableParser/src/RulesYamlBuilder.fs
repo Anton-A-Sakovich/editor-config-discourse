@@ -1,4 +1,4 @@
-namespace MsdnTableParser
+namespace EditorconfigDiscourse.MsdnTableParser
 
 module RulesYamlBuilder =
     open EditorconfigDiscourse.StyleTree

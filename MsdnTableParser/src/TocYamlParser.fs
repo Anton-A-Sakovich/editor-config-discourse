@@ -1,4 +1,4 @@
-namespace MsdnTableParser
+namespace EditorconfigDiscourse.MsdnTableParser
 
 module TocYamlParser =
     open EditorconfigDiscourse.StyleTree

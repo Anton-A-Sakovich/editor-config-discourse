@@ -1,9 +1,5 @@
-﻿open MsdnTableParser
-open MsdnTableParser.HtmlFetcher
-open MsdnTableParser.LocalFileFetcher
-open MsdnTableParser.MarkdownParser
-open MsdnTableParser.TocYamlParser
-open MsdnTableParser.RulesYamlBuilder
+﻿open EditorconfigDiscourse.MsdnTableParser
+open EditorconfigDiscourse.Utilities.Program
 open EditorconfigDiscourse.Yaml
 open EditorconfigDiscourse.StyleTree
 open System
@@ -11,7 +7,6 @@ open System.IO
 open System.Net.Http
 open System.Text
 open System.Text.RegularExpressions
-open Utilities.Program
 open YamlDotNet.Serialization
 open YamlDotNet.RepresentationModel
 
@@ -32,7 +27,7 @@ let main args =
                 if args.Length > 0 then
                     return args[0]
                 else
-                    return! Failed ("No output file specified", 1)
+                    return! Program.Failed ("No output file specified", 1)
             }
 
         let sourceRootPath =
@@ -41,18 +36,18 @@ let main args =
         use httpClient = new HttpClient()
         let fetchFileAsync =
             if sourceRootPath.StartsWith("http") then
-                fun path -> fetchPageAsync httpClient "text/plain" (Uri(sourceRootPath + path).ToString())
+                fun path -> HtmlFetcher.fetchPageAsync httpClient "text/plain" (Uri(sourceRootPath + path).ToString())
             else
                 let encoding = UTF8Encoding(false)
-                fun path -> fetchFileAsync encoding (Path.Combine(sourceRootPath, path))
+                fun path -> LocalFileFetcher.fetchFileAsync encoding (Path.Combine(sourceRootPath, path))
 
         let! tocYamlString =
             fetchFileAsync tocYamlPath
             |> Async.AwaitTask
             |> Async.RunSynchronously
             |> (function
-                | Some value -> Completed value
-                | None -> Failed ("Error fetching table of contents YAML", 1))
+                | Some value -> Program.Completed value
+                | None -> Program.Failed ("Error fetching table of contents YAML", 1))
 
         let tocYamlStream = YamlStream()
         use tocYamlReader = new StringReader(tocYamlString)
@@ -61,19 +56,19 @@ let main args =
             tocYamlStream.Documents
             |> (fun list ->
                 if list.Count > 0 then
-                    Completed(list[0].RootNode)
+                    Program.Completed(list[0].RootNode)
                 else
-                    Failed("Failed to parse TOC YAML", 2))
+                    Program.Failed("Failed to parse TOC YAML", 2))
 
         let! treeOfTocPages =
             tocRoot
-            |> tryParse
-            |> (function | Parsed value -> Completed value | ParseResult.Failed -> Failed("Failed to build TOC from YAML", 3))
+            |> TocYamlParser.tryParse
+            |> (function | ParseResult.Parsed value -> Program.Completed value | ParseResult.Failed -> Program.Failed("Failed to build TOC from YAML", 3))
 
         let! treeOfTocPages =
             treeOfTocPages
             |> StyleTree.tryFind ["Root"; "Tools and diagnostics"; "Code analysis"; "Rule reference"; "Code style rules"]
-            |> (function | Some value -> Completed value | None -> Failed("Failed to find code style entry", 4))
+            |> (function | Some value -> Program.Completed value | None -> Program.Failed("Failed to find code style entry", 4))
 
         let fetchAndParseMarkdown href =
             (href:string).LastIndexOf(".md") |> (function | -1 -> None | x -> Some x)
@@ -83,16 +78,16 @@ let main args =
                 fetchFileAsync href
                 |> Async.AwaitTask
                 |> Async.RunSynchronously
-                |> Option.bind (parseMarkdown urlToLinkTo))
+                |> Option.bind (MarkdownParser.parseMarkdown urlToLinkTo))
 
         let treeOfMaybeStylePages = treeOfTocPages |> StyleTree.map fetchAndParseMarkdown
 
         let! treeOfStylePages =
             treeOfMaybeStylePages
             |> StyleTreePostProcessor.refine
-            |> (function | Some tree -> Completed tree | None -> Failed ("Failed to build some Style Pages", 5))
+            |> (function | Some tree -> Program.Completed tree | None -> Program.Failed ("Failed to build some Style Pages", 5))
 
-        let yamlTree = YamlRepresentation.toYaml pageToYaml treeOfStylePages
+        let yamlTree = YamlRepresentation.toYaml RulesYamlBuilder.pageToYaml treeOfStylePages
         let yamlString =
             SerializerBuilder()
              .DisableAliases()
