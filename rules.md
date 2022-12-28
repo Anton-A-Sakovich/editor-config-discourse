@@ -1,11 +1,7 @@
 #  Table of Contents
 
-[Code style rules](#code-style-rules)  resolved 11 from 111\
-&nbsp;&nbsp;&nbsp;&nbsp;[Overview](#overview)  resolved 0 from 0\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Code-style rules](#code-style-rules)  resolved 0 from 0\
-&nbsp;&nbsp;&nbsp;&nbsp;[Language rules](#language-rules)  resolved 8 from 65\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Overview](#overview)  resolved 0 from 0\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Language rules](#language-rules)  resolved 0 from 0\
+[Code style rules](#code-style-rules)  resolved 10 from 104\
+&nbsp;&nbsp;&nbsp;&nbsp;[Language rules](#language-rules)  resolved 8 from 62\
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[this and Me preferences](#this-and-me-preferences)  resolved 4 from 4\
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[IDE0003 and IDE0009](#ide0003-and-ide0009)  resolved 4 from 4\
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[this and Me preferences (IDE0003 and IDE0009)](#this-and-me-preferences-(ide0003-and-ide0009))  resolved 4 from 4\
@@ -18,13 +14,10 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Use language keywords instead of framework type names for type references (IDE0049)](#use-language-keywords-instead-of-framework-type-names-for-type-references-(ide0049))  resolved 2 from 2\
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[dotnet_style_predefined_type_for_locals_parameters_members](#dotnet_style_predefined_type_for_locals_parameters_members)  resolved\
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[dotnet_style_predefined_type_for_member_access](#dotnet_style_predefined_type_for_member_access)  resolved\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Modifier preferences](#modifier-preferences)  resolved 0 from 5\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Overview](#overview)  resolved 0 from 0\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Modifier preferences](#modifier-preferences)  resolved 0 from 0\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[IDE0036](#ide0036)  resolved 0 from 2\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Order modifiers (IDE0036)](#order-modifiers-(ide0036))  resolved 0 from 2\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Modifier preferences](#modifier-preferences)  resolved 0 from 4\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[IDE0036](#ide0036) \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Order modifiers (IDE0036)](#order-modifiers-(ide0036)) \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[csharp_preferred_modifier_order](#csharp_preferred_modifier_order)  unresolved\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[visual_basic_preferred_modifier_order](#visual_basic_preferred_modifier_order)  unresolved\
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[IDE0040](#ide0040) \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Add accessibility modifiers (IDE0040)](#add-accessibility-modifiers-(ide0040)) \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[dotnet_style_require_accessibility_modifiers](#dotnet_style_require_accessibility_modifiers)  unresolved\
@@ -34,8 +27,6 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[IDE0062](#ide0062) \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Make local function static (IDE0062)](#make-local-function-static-(ide0062)) \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[csharp_prefer_static_local_function](#csharp_prefer_static_local_function)  unresolved\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[IDE0064](#ide0064)  resolved 0 from 0\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Make struct fields writable (IDE0064)](#make-struct-fields-writable-(ide0064))  resolved 0 from 0\
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Parentheses preferences](#parentheses-preferences)  resolved 0 from 4\
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[IDE0047 and IDE0048](#ide0047-and-ide0048)  resolved 0 from 4\
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Parentheses preferences (IDE0047 and IDE0048)](#parentheses-preferences-(ide0047-and-ide0048))  resolved 0 from 4\
@@ -43,11 +34,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[dotnet_style_parentheses_in_relational_binary_operators](#dotnet_style_parentheses_in_relational_binary_operators)  unresolved\
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[dotnet_style_parentheses_in_other_binary_operators](#dotnet_style_parentheses_in_other_binary_operators)  unresolved\
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[dotnet_style_parentheses_in_other_operators](#dotnet_style_parentheses_in_other_operators)  unresolved\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Expression-level preferences](#expression-level-preferences)  resolved 0 from 20\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Overview](#overview)  resolved 0 from 0\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Expression-level preferences](#expression-level-preferences)  resolved 0 from 0\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[IDE0010](#ide0010)  resolved 0 from 0\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Add missing cases to switch statement (IDE0010)](#add-missing-cases-to-switch-statement-(ide0010))  resolved 0 from 0\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Expression-level preferences](#expression-level-preferences)  resolved 0 from 19\
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[IDE0017](#ide0017) \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Use object initializers (IDE0017)](#use-object-initializers-(ide0017)) \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[dotnet_style_object_initializer](#dotnet_style_object_initializer)  unresolved\
@@ -82,8 +69,6 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[IDE0046](#ide0046) \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Use conditional expression for return (IDE0046)](#use-conditional-expression-for-return-(ide0046)) \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[dotnet_style_prefer_conditional_expression_over_return](#dotnet_style_prefer_conditional_expression_over_return)  unresolved\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[IDE0050](#ide0050)  resolved 0 from 0\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Convert anonymous type to tuple (IDE0050)](#convert-anonymous-type-to-tuple-(ide0050))  resolved 0 from 0\
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[IDE0054](#ide0054) \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Use compound assignment (IDE0054 and IDE0074)](#use-compound-assignment-(ide0054-and-ide0074)) \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[dotnet_style_prefer_compound_assignment](#dotnet_style_prefer_compound_assignment)  unresolved\
@@ -93,21 +78,12 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[IDE0057](#ide0057) \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Use range operator (IDE0057)](#use-range-operator-(ide0057)) \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[csharp_style_prefer_range_operator](#csharp_style_prefer_range_operator)  unresolved\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[IDE0070](#ide0070)  resolved 0 from 0\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Use 'System.HashCode.Combine' (IDE0070)](#use-'system.hashcode.combine'-(ide0070))  resolved 0 from 0\
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[IDE0071](#ide0071) \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Simplify interpolation (IDE0071)](#simplify-interpolation-(ide0071)) \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[dotnet_style_prefer_simplified_interpolation](#dotnet_style_prefer_simplified_interpolation)  unresolved\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[IDE0072](#ide0072)  resolved 0 from 0\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Add missing cases to switch expression (IDE0072)](#add-missing-cases-to-switch-expression-(ide0072))  resolved 0 from 0\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[IDE0074](#ide0074) \
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Use compound assignment (IDE0054 and IDE0074)](#use-compound-assignment-(ide0054-and-ide0074)) \
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[dotnet_style_prefer_compound_assignment](#dotnet_style_prefer_compound_assignment)  unresolved\
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[IDE0075](#ide0075) \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Simplify conditional expression (IDE0075)](#simplify-conditional-expression-(ide0075)) \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[dotnet_style_prefer_simplified_boolean_expressions](#dotnet_style_prefer_simplified_boolean_expressions)  unresolved\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[IDE0082](#ide0082)  resolved 0 from 0\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Convert `typeof` to `nameof` (IDE0082)](#convert-`typeof`-to-`nameof`-(ide0082))  resolved 0 from 0\
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[IDE0090](#ide0090) \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Simplify `new` expression (IDE0090)](#simplify-`new`-expression-(ide0090)) \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[csharp_style_implicit_object_creation_when_type_is_apparent](#csharp_style_implicit_object_creation_when_type_is_apparent)  unresolved\
@@ -119,8 +95,6 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Namespace declaration preferences (IDE0160 and IDE0161)](#namespace-declaration-preferences-(ide0160-and-ide0161)) \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[csharp_style_namespace_declarations](#csharp_style_namespace_declarations)  unresolved\
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Null-checking preferences](#null-checking-preferences)  resolved 0 from 6\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Overview](#overview)  resolved 0 from 0\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Null-checking preferences](#null-checking-preferences)  resolved 0 from 0\
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[IDE0016](#ide0016) \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Use throw expression (IDE0016)](#use-throw-expression-(ide0016)) \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[csharp_style_throw_expression](#csharp_style_throw_expression)  unresolved\
@@ -146,8 +120,6 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[csharp_style_var_when_type_is_apparent](#csharp_style_var_when_type_is_apparent)  unresolved\
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[csharp_style_var_elsewhere](#csharp_style_var_elsewhere)  unresolved\
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Expression-bodied members](#expression-bodied-members)  resolved 0 from 8\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Overview](#overview)  resolved 0 from 0\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Expression-bodied-members](#expression-bodied-members)  resolved 0 from 0\
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[IDE0021](#ide0021) \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Use expression body for constructors (IDE0021)](#use-expression-body-for-constructors-(ide0021)) \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[csharp_style_expression_bodied_constructors](#csharp_style_expression_bodied_constructors)  unresolved\
@@ -172,9 +144,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[IDE0061](#ide0061) \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Use expression body for local functions (IDE0061)](#use-expression-body-for-local-functions-(ide0061)) \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[csharp_style_expression_bodied_local_functions](#csharp_style_expression_bodied_local_functions)  unresolved\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Pattern matching preferences](#pattern-matching-preferences)  resolved 0 from 7\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Overview](#overview)  resolved 0 from 0\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Pattern matching preferences](#pattern-matching-preferences)  resolved 0 from 0\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Pattern matching preferences](#pattern-matching-preferences)  resolved 0 from 6\
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[IDE0019](#ide0019) \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Use pattern matching to avoid 'as' followed by a 'null' check (IDE0019)](#use-pattern-matching-to-avoid-'as'-followed-by-a-'null'-check-(ide0019)) \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[csharp_style_pattern_matching_over_as_with_null_check](#csharp_style_pattern_matching_over_as_with_null_check)  unresolved\
@@ -190,15 +160,10 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[IDE0083](#ide0083) \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Use pattern matching (`not` operator) (IDE0083)](#use-pattern-matching-(`not`-operator)-(ide0083)) \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[csharp_style_prefer_not_pattern](#csharp_style_prefer_not_pattern)  unresolved\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[IDE0084](#ide0084) \
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Use pattern matching (`IsNot` operator) (IDE0084)](#use-pattern-matching-(`isnot`-operator)-(ide0084)) \
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[visual_basic_style_prefer_isnot_expression](#visual_basic_style_prefer_isnot_expression)  unresolved\
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[IDE0170](#ide0170) \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Simplify property pattern (IDE0170)](#simplify-property-pattern-(ide0170)) \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[csharp_style_prefer_extended_property_pattern](#csharp_style_prefer_extended_property_pattern)  unresolved\
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Code block preferences](#code-block-preferences)  resolved 0 from 2\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Overview](#overview)  resolved 0 from 0\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Code block preferences](#code-block-preferences)  resolved 0 from 0\
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[IDE0011](#ide0011) \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Add braces (IDE0011)](#add-braces-(ide0011)) \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[csharp_prefer_braces](#csharp_prefer_braces)  unresolved\
@@ -217,64 +182,25 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[IDE0130](#ide0130) \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Namespace does not match folder structure (IDE0130)](#namespace-does-not-match-folder-structure-(ide0130)) \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[dotnet_style_namespace_match_folder](#dotnet_style_namespace_match_folder)  resolved\
-&nbsp;&nbsp;&nbsp;&nbsp;[Unnecessary code rules](#unnecessary-code-rules)  resolved 0 from 7\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Overview](#overview)  resolved 0 from 0\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Unnecessary code rules](#unnecessary-code-rules)  resolved 0 from 0\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[IDE0001](#ide0001)  resolved 0 from 0\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Simplify name (IDE0001)](#simplify-name-(ide0001))  resolved 0 from 0\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[IDE0002](#ide0002)  resolved 0 from 0\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Simplify member access (IDE0002)](#simplify-member-access-(ide0002))  resolved 0 from 0\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[IDE0004](#ide0004)  resolved 0 from 0\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Remove unnecessary cast (IDE0004)](#remove-unnecessary-cast-(ide0004))  resolved 0 from 0\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[IDE0005](#ide0005)  resolved 0 from 0\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Remove unnecessary using directives (IDE0005)](#remove-unnecessary-using-directives-(ide0005))  resolved 0 from 0\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[IDE0035](#ide0035)  resolved 0 from 0\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Remove unreachable code (IDE0035)](#remove-unreachable-code-(ide0035))  resolved 0 from 0\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[IDE0051](#ide0051)  resolved 0 from 0\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Remove unused private member (IDE0051)](#remove-unused-private-member-(ide0051))  resolved 0 from 0\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[IDE0052](#ide0052)  resolved 0 from 0\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Remove unread private member (IDE0052)](#remove-unread-private-member-(ide0052))  resolved 0 from 0\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[IDE0058](#ide0058)  resolved 0 from 2\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Remove unnecessary expression value (IDE0058)](#remove-unnecessary-expression-value-(ide0058))  resolved 0 from 2\
+&nbsp;&nbsp;&nbsp;&nbsp;[Unnecessary code rules](#unnecessary-code-rules)  resolved 0 from 4\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[IDE0058](#ide0058) \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Remove unnecessary expression value (IDE0058)](#remove-unnecessary-expression-value-(ide0058)) \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[csharp_style_unused_value_expression_statement_preference](#csharp_style_unused_value_expression_statement_preference)  unresolved\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[visual_basic_style_unused_value_expression_statement_preference](#visual_basic_style_unused_value_expression_statement_preference)  unresolved\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[IDE0059](#ide0059)  resolved 0 from 2\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Remove unnecessary value assignment (IDE0059)](#remove-unnecessary-value-assignment-(ide0059))  resolved 0 from 2\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[IDE0059](#ide0059) \
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Remove unnecessary value assignment (IDE0059)](#remove-unnecessary-value-assignment-(ide0059)) \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[csharp_style_unused_value_assignment_preference](#csharp_style_unused_value_assignment_preference)  unresolved\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[visual_basic_style_unused_value_assignment_preference](#visual_basic_style_unused_value_assignment_preference)  unresolved\
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[IDE0060](#ide0060) \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Remove unused parameter (IDE0060)](#remove-unused-parameter-(ide0060)) \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[dotnet_code_quality_unused_parameters](#dotnet_code_quality_unused_parameters)  unresolved\
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[IDE0079](#ide0079) \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Remove unnecessary suppression (IDE0079)](#remove-unnecessary-suppression-(ide0079)) \
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[dotnet_remove_unnecessary_suppression_exclusions](#dotnet_remove_unnecessary_suppression_exclusions)  unresolved\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[IDE0080](#ide0080)  resolved 0 from 0\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Remove unnecessary suppression operator (IDE0080)](#remove-unnecessary-suppression-operator-(ide0080))  resolved 0 from 0\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[IDE0081](#ide0081)  resolved 0 from 0\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Remove `ByVal` (IDE0081)](#remove-`byval`-(ide0081))  resolved 0 from 0\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[IDE0100](#ide0100)  resolved 0 from 0\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Remove unnecessary equality operator (IDE0100)](#remove-unnecessary-equality-operator-(ide0100))  resolved 0 from 0\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[IDE0110](#ide0110)  resolved 0 from 0\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Remove unnecessary discard (IDE0110)](#remove-unnecessary-discard-(ide0110))  resolved 0 from 0\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[IDE0140](#ide0140) \
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Simplify object creation (IDE0140)](#simplify-object-creation-(ide0140)) \
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[visual_basic_style_prefer_simplified_object_creation](#visual_basic_style_prefer_simplified_object_creation)  unresolved\
-&nbsp;&nbsp;&nbsp;&nbsp;[Miscellaneous rules](#miscellaneous-rules)  resolved 0 from 0\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Overview](#overview)  resolved 0 from 0\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Miscellaneous rules](#miscellaneous-rules)  resolved 0 from 0\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[IDE0076](#ide0076)  resolved 0 from 0\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Remove invalid global 'SuppressMessageAttribute' (IDE0076)](#remove-invalid-global-'suppressmessageattribute'-(ide0076))  resolved 0 from 0\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[IDE0077](#ide0077)  resolved 0 from 0\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Avoid legacy format target in global 'SuppressMessageAttribute' (IDE0077)](#avoid-legacy-format-target-in-global-'suppressmessageattribute'-(ide0077))  resolved 0 from 0\
-&nbsp;&nbsp;&nbsp;&nbsp;[Formatting rules](#formatting-rules)  resolved 3 from 39\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[IDE0055](#ide0055)  resolved 3 from 39\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Overview](#overview)  resolved 0 from 0\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Formatting rule (IDE0055)](#formatting-rule-(ide0055))  resolved 0 from 0\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[.NET formatting options](#.net-formatting-options)  resolved 3 from 3\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[.NET namespace rules](#.net-namespace-rules)  resolved 3 from 3\
+&nbsp;&nbsp;&nbsp;&nbsp;[Formatting rules](#formatting-rules)  resolved 2 from 38\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[IDE0055](#ide0055)  resolved 2 from 38\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[.NET formatting options](#.net-formatting-options)  resolved 2 from 2\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[.NET namespace rules](#.net-namespace-rules)  resolved 2 from 2\
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[dotnet_sort_system_directives_first](#dotnet_sort_system_directives_first)  resolved\
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[dotnet_separate_import_directive_groups](#dotnet_separate_import_directive_groups)  resolved\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[dotnet_style_namespace_match_folder](#dotnet_style_namespace_match_folder)  resolved\
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[C# formatting options](#c#-formatting-options)  resolved 0 from 36\
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ CSharp formatting rules:](#-csharp-formatting-rules:)  resolved 0 from 36\
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[csharp_new_line_before_else](#csharp_new_line_before_else)  unresolved\
@@ -312,16 +238,10 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[csharp_space_between_empty_square_brackets](#csharp_space_between_empty_square_brackets)  unresolved\
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[csharp_space_between_square_brackets](#csharp_space_between_square_brackets)  unresolved\
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[csharp_preserve_single_line_statements](#csharp_preserve_single_line_statements)  unresolved\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[csharp_preserve_single_line_blocks](#csharp_preserve_single_line_blocks)  unresolved\
-&nbsp;&nbsp;&nbsp;&nbsp;[Naming rules](#naming-rules)  resolved 0 from 0\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Define the 'private_static_fields_none' naming rule](#define-the-'private_static_fields_none'-naming-rule)  resolved 0 from 0
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[csharp_preserve_single_line_blocks](#csharp_preserve_single_line_blocks)  unresolved
 
 # <a name="code-style-rules"></a> Code style rules
-## <a name="overview"></a> Overview
-### <a name="code-style-rules"></a> Code-style rules
 ## <a name="language-rules"></a> Language rules
-### <a name="overview"></a> Overview
-#### <a name="language-rules"></a> Language rules
 ### <a name="this-and-me-preferences"></a> this and Me preferences
 #### <a name="ide0003-and-ide0009"></a> IDE0003 and IDE0009
 ##### <a name="this-and-me-preferences-(ide0003-and-ide0009)"></a> this and Me preferences (IDE0003 and IDE0009)
@@ -407,8 +327,6 @@ Default value: `true`
 ---
 
 ### <a name="modifier-preferences"></a> Modifier preferences
-#### <a name="overview"></a> Overview
-##### <a name="modifier-preferences"></a> Modifier preferences
 #### <a name="ide0036"></a> IDE0036
 ##### <a name="order-modifiers-(ide0036)"></a> Order modifiers (IDE0036)
 <a name="csharp_preferred_modifier_order"></a> `csharp_preferred_modifier_order` [MSDN Link](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0036#csharp_preferred_modifier_order)
@@ -420,18 +338,6 @@ Possible values:
 * One or more C# modifiers, such as `public`, `private`, and `protected`
 
 Default value: `public, private, protected, internal, file, static, extern, new, virtual, abstract, sealed, override, readonly, unsafe, required, volatile, async`
-
----
-
-<a name="visual_basic_preferred_modifier_order"></a> `visual_basic_preferred_modifier_order` [MSDN Link](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0036#visual_basic_preferred_modifier_order)
-
-Selected value:\
-Issue:
-
-Possible values:
-* One or more Visual Basic modifiers, such as `Partial`, `Private`, and `Public`
-
-Default value: `Partial, Default, Private, Protected, Public, Friend, NotOverridable, Overridable, MustOverride, Overloads, Overrides, MustInherit, NotInheritable, Static, Shared, Shadows, ReadOnly, WriteOnly, Dim, Const, WithEvents, Widening, Narrowing, Custom, Async`
 
 ---
 
@@ -482,8 +388,6 @@ Default value: `true:suggestion`
 
 ---
 
-#### <a name="ide0064"></a> IDE0064
-##### <a name="make-struct-fields-writable-(ide0064)"></a> Make struct fields writable (IDE0064)
 ### <a name="parentheses-preferences"></a> Parentheses preferences
 #### <a name="ide0047-and-ide0048"></a> IDE0047 and IDE0048
 ##### <a name="parentheses-preferences-(ide0047-and-ide0048)"></a> Parentheses preferences (IDE0047 and IDE0048)
@@ -540,10 +444,6 @@ Default value: `never_if_unnecessary`
 ---
 
 ### <a name="expression-level-preferences"></a> Expression-level preferences
-#### <a name="overview"></a> Overview
-##### <a name="expression-level-preferences"></a> Expression-level preferences
-#### <a name="ide0010"></a> IDE0010
-##### <a name="add-missing-cases-to-switch-statement-(ide0010)"></a> Add missing cases to switch statement (IDE0010)
 #### <a name="ide0017"></a> IDE0017
 ##### <a name="use-object-initializers-(ide0017)"></a> Use object initializers (IDE0017)
 <a name="dotnet_style_object_initializer"></a> `dotnet_style_object_initializer` [MSDN Link](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0017#dotnet_style_object_initializer)
@@ -722,8 +622,6 @@ Default value: `true`
 
 ---
 
-#### <a name="ide0050"></a> IDE0050
-##### <a name="convert-anonymous-type-to-tuple-(ide0050)"></a> Convert anonymous type to tuple (IDE0050)
 #### <a name="ide0054"></a> IDE0054
 ##### <a name="use-compound-assignment-(ide0054-and-ide0074)"></a> Use compound assignment (IDE0054 and IDE0074)
 <a name="dotnet_style_prefer_compound_assignment"></a> `dotnet_style_prefer_compound_assignment` [MSDN Link](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0054-ide0074#dotnet_style_prefer_compound_assignment)
@@ -769,28 +667,9 @@ Default value: `true`
 
 ---
 
-#### <a name="ide0070"></a> IDE0070
-##### <a name="use-'system.hashcode.combine'-(ide0070)"></a> Use 'System.HashCode.Combine' (IDE0070)
 #### <a name="ide0071"></a> IDE0071
 ##### <a name="simplify-interpolation-(ide0071)"></a> Simplify interpolation (IDE0071)
 <a name="dotnet_style_prefer_simplified_interpolation"></a> `dotnet_style_prefer_simplified_interpolation` [MSDN Link](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0071#dotnet_style_prefer_simplified_interpolation)
-
-Selected value:\
-Issue:
-
-Possible values:
-* `true`
-* `false`
-
-Default value: `true`
-
----
-
-#### <a name="ide0072"></a> IDE0072
-##### <a name="add-missing-cases-to-switch-expression-(ide0072)"></a> Add missing cases to switch expression (IDE0072)
-#### <a name="ide0074"></a> IDE0074
-##### <a name="use-compound-assignment-(ide0054-and-ide0074)"></a> Use compound assignment (IDE0054 and IDE0074)
-<a name="dotnet_style_prefer_compound_assignment"></a> `dotnet_style_prefer_compound_assignment` [MSDN Link](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0054-ide0074#dotnet_style_prefer_compound_assignment)
 
 Selected value:\
 Issue:
@@ -818,8 +697,6 @@ Default value: `true`
 
 ---
 
-#### <a name="ide0082"></a> IDE0082
-##### <a name="convert-`typeof`-to-`nameof`-(ide0082)"></a> Convert `typeof` to `nameof` (IDE0082)
 #### <a name="ide0090"></a> IDE0090
 ##### <a name="simplify-`new`-expression-(ide0090)"></a> Simplify `new` expression (IDE0090)
 <a name="csharp_style_implicit_object_creation_when_type_is_apparent"></a> `csharp_style_implicit_object_creation_when_type_is_apparent` [MSDN Link](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0090#csharp_style_implicit_object_creation_when_type_is_apparent)
@@ -867,8 +744,6 @@ Default value: `block_scoped`
 ---
 
 ### <a name="null-checking-preferences"></a> Null-checking preferences
-#### <a name="overview"></a> Overview
-##### <a name="null-checking-preferences"></a> Null-checking preferences
 #### <a name="ide0016"></a> IDE0016
 ##### <a name="use-throw-expression-(ide0016)"></a> Use throw expression (IDE0016)
 <a name="csharp_style_throw_expression"></a> `csharp_style_throw_expression` [MSDN Link](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0016#csharp_style_throw_expression)
@@ -1002,8 +877,6 @@ Default value: `false`
 ---
 
 ### <a name="expression-bodied-members"></a> Expression-bodied members
-#### <a name="overview"></a> Overview
-##### <a name="expression-bodied-members"></a> Expression-bodied-members
 #### <a name="ide0021"></a> IDE0021
 ##### <a name="use-expression-body-for-constructors-(ide0021)"></a> Use expression body for constructors (IDE0021)
 <a name="csharp_style_expression_bodied_constructors"></a> `csharp_style_expression_bodied_constructors` [MSDN Link](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0021#csharp_style_expression_bodied_constructors)
@@ -1133,8 +1006,6 @@ Default value: `false`
 ---
 
 ### <a name="pattern-matching-preferences"></a> Pattern matching preferences
-#### <a name="overview"></a> Overview
-##### <a name="pattern-matching-preferences"></a> Pattern matching preferences
 #### <a name="ide0019"></a> IDE0019
 ##### <a name="use-pattern-matching-to-avoid-'as'-followed-by-a-'null'-check-(ide0019)"></a> Use pattern matching to avoid 'as' followed by a 'null' check (IDE0019)
 <a name="csharp_style_pattern_matching_over_as_with_null_check"></a> `csharp_style_pattern_matching_over_as_with_null_check` [MSDN Link](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0019#csharp_style_pattern_matching_over_as_with_null_check)
@@ -1210,21 +1081,6 @@ Default value: `true`
 
 ---
 
-#### <a name="ide0084"></a> IDE0084
-##### <a name="use-pattern-matching-(`isnot`-operator)-(ide0084)"></a> Use pattern matching (`IsNot` operator) (IDE0084)
-<a name="visual_basic_style_prefer_isnot_expression"></a> `visual_basic_style_prefer_isnot_expression` [MSDN Link](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0084#visual_basic_style_prefer_isnot_expression)
-
-Selected value:\
-Issue:
-
-Possible values:
-* `true`
-* `false`
-
-Default value: `true`
-
----
-
 #### <a name="ide0170"></a> IDE0170
 ##### <a name="simplify-property-pattern-(ide0170)"></a> Simplify property pattern (IDE0170)
 <a name="csharp_style_prefer_extended_property_pattern"></a> `csharp_style_prefer_extended_property_pattern` [MSDN Link](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0170#csharp_style_prefer_extended_property_pattern)
@@ -1241,8 +1097,6 @@ Default value: `true`
 ---
 
 ### <a name="code-block-preferences"></a> Code block preferences
-#### <a name="overview"></a> Overview
-##### <a name="code-block-preferences"></a> Code block preferences
 #### <a name="ide0011"></a> IDE0011
 ##### <a name="add-braces-(ide0011)"></a> Add braces (IDE0011)
 <a name="csharp_prefer_braces"></a> `csharp_prefer_braces` [MSDN Link](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0011#csharp_prefer_braces)
@@ -1323,22 +1177,6 @@ Default value: `true`
 ---
 
 ## <a name="unnecessary-code-rules"></a> Unnecessary code rules
-### <a name="overview"></a> Overview
-#### <a name="unnecessary-code-rules"></a> Unnecessary code rules
-### <a name="ide0001"></a> IDE0001
-#### <a name="simplify-name-(ide0001)"></a> Simplify name (IDE0001)
-### <a name="ide0002"></a> IDE0002
-#### <a name="simplify-member-access-(ide0002)"></a> Simplify member access (IDE0002)
-### <a name="ide0004"></a> IDE0004
-#### <a name="remove-unnecessary-cast-(ide0004)"></a> Remove unnecessary cast (IDE0004)
-### <a name="ide0005"></a> IDE0005
-#### <a name="remove-unnecessary-using-directives-(ide0005)"></a> Remove unnecessary using directives (IDE0005)
-### <a name="ide0035"></a> IDE0035
-#### <a name="remove-unreachable-code-(ide0035)"></a> Remove unreachable code (IDE0035)
-### <a name="ide0051"></a> IDE0051
-#### <a name="remove-unused-private-member-(ide0051)"></a> Remove unused private member (IDE0051)
-### <a name="ide0052"></a> IDE0052
-#### <a name="remove-unread-private-member-(ide0052)"></a> Remove unread private member (IDE0052)
 ### <a name="ide0058"></a> IDE0058
 #### <a name="remove-unnecessary-expression-value-(ide0058)"></a> Remove unnecessary expression value (IDE0058)
 <a name="csharp_style_unused_value_expression_statement_preference"></a> `csharp_style_unused_value_expression_statement_preference` [MSDN Link](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0058#csharp_style_unused_value_expression_statement_preference)
@@ -1354,18 +1192,6 @@ Default value: `discard_variable`
 
 ---
 
-<a name="visual_basic_style_unused_value_expression_statement_preference"></a> `visual_basic_style_unused_value_expression_statement_preference` [MSDN Link](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0058#visual_basic_style_unused_value_expression_statement_preference)
-
-Selected value:\
-Issue:
-
-Possible values:
-* `unused_local_variable`
-
-Default value: `unused_local_variable`
-
----
-
 ### <a name="ide0059"></a> IDE0059
 #### <a name="remove-unnecessary-value-assignment-(ide0059)"></a> Remove unnecessary value assignment (IDE0059)
 <a name="csharp_style_unused_value_assignment_preference"></a> `csharp_style_unused_value_assignment_preference` [MSDN Link](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0059#csharp_style_unused_value_assignment_preference)
@@ -1378,18 +1204,6 @@ Possible values:
 * `unused_local_variable`
 
 Default value: `discard_variable`
-
----
-
-<a name="visual_basic_style_unused_value_assignment_preference"></a> `visual_basic_style_unused_value_assignment_preference` [MSDN Link](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0059#visual_basic_style_unused_value_assignment_preference)
-
-Selected value:\
-Issue:
-
-Possible values:
-* `unused_local_variable`
-
-Default value: `unused_local_variable`
 
 ---
 
@@ -1424,40 +1238,8 @@ Default value: `none`
 
 ---
 
-### <a name="ide0080"></a> IDE0080
-#### <a name="remove-unnecessary-suppression-operator-(ide0080)"></a> Remove unnecessary suppression operator (IDE0080)
-### <a name="ide0081"></a> IDE0081
-#### <a name="remove-`byval`-(ide0081)"></a> Remove `ByVal` (IDE0081)
-### <a name="ide0100"></a> IDE0100
-#### <a name="remove-unnecessary-equality-operator-(ide0100)"></a> Remove unnecessary equality operator (IDE0100)
-### <a name="ide0110"></a> IDE0110
-#### <a name="remove-unnecessary-discard-(ide0110)"></a> Remove unnecessary discard (IDE0110)
-### <a name="ide0140"></a> IDE0140
-#### <a name="simplify-object-creation-(ide0140)"></a> Simplify object creation (IDE0140)
-<a name="visual_basic_style_prefer_simplified_object_creation"></a> `visual_basic_style_prefer_simplified_object_creation` [MSDN Link](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0140#visual_basic_style_prefer_simplified_object_creation)
-
-Selected value:\
-Issue:
-
-Possible values:
-* `true`
-* `false`
-
-Default value: `true`
-
----
-
-## <a name="miscellaneous-rules"></a> Miscellaneous rules
-### <a name="overview"></a> Overview
-#### <a name="miscellaneous-rules"></a> Miscellaneous rules
-### <a name="ide0076"></a> IDE0076
-#### <a name="remove-invalid-global-'suppressmessageattribute'-(ide0076)"></a> Remove invalid global 'SuppressMessageAttribute' (IDE0076)
-### <a name="ide0077"></a> IDE0077
-#### <a name="avoid-legacy-format-target-in-global-'suppressmessageattribute'-(ide0077)"></a> Avoid legacy format target in global 'SuppressMessageAttribute' (IDE0077)
 ## <a name="formatting-rules"></a> Formatting rules
 ### <a name="ide0055"></a> IDE0055
-#### <a name="overview"></a> Overview
-##### <a name="formatting-rule-(ide0055)"></a> Formatting rule (IDE0055)
 #### <a name=".net-formatting-options"></a> .NET formatting options
 ##### <a name=".net-namespace-rules"></a> .NET namespace rules
 <a name="dotnet_sort_system_directives_first"></a> `dotnet_sort_system_directives_first` [MSDN Link](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/dotnet-formatting-options#dotnet_sort_system_directives_first)
@@ -1474,17 +1256,6 @@ Possible values:
 <a name="dotnet_separate_import_directive_groups"></a> `dotnet_separate_import_directive_groups` [MSDN Link](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/dotnet-formatting-options#dotnet_separate_import_directive_groups)
 
 Selected value: `false`\
-Issue: [1](https://github.com/Anton-A-Sakovich/editor-config-discourse/issues/1)
-
-Possible values:
-* `true`
-* `false`
-
----
-
-<a name="dotnet_style_namespace_match_folder"></a> `dotnet_style_namespace_match_folder` [MSDN Link](https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/dotnet-formatting-options#dotnet_style_namespace_match_folder)
-
-Selected value: `true:error`\
 Issue: [1](https://github.com/Anton-A-Sakovich/editor-config-discourse/issues/1)
 
 Possible values:
@@ -1894,5 +1665,3 @@ Possible values:
 
 ---
 
-## <a name="naming-rules"></a> Naming rules
-### <a name="define-the-'private_static_fields_none'-naming-rule"></a> Define the 'private_static_fields_none' naming rule
