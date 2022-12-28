@@ -110,7 +110,7 @@ let main args =
             |> StyleTree.cat onPage onSection
             |> (function | Some tree -> Completed tree | None -> Failed ("Failed to build some Style Pages", 5))
 
-        let yamlTree = StyleTree.toYaml pageToYaml treeOfStylePages
+        let yamlTree = YamlRepresentation.toYaml pageToYaml treeOfStylePages
         let yamlString =
             SerializerBuilder()
              .DisableAliases()
