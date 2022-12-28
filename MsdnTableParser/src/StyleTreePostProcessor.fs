@@ -4,12 +4,12 @@ module StyleTreePostProcessor =
     open System
     open EditorconfigDiscourse.StyleTree
 
-    type MsdnPageResult =
+    type private MsdnPageResult =
         | FailedToParse
         | NoRules
         | Ok of StyleTree<MsdnPage>
 
-    let rec removeDuplicateAndVBRulesLoop (set:Set<string>) (collected:list<MsdnRule>) (remaining:list<MsdnRule>) =
+    let rec private removeDuplicateAndVBRulesLoop (set:Set<string>) (collected:list<MsdnRule>) (remaining:list<MsdnRule>) =
         match remaining with
         | [] -> (collected |> List.rev, set)
         | head::tail ->
@@ -18,10 +18,10 @@ module StyleTreePostProcessor =
             else
                 removeDuplicateAndVBRulesLoop (set |> Set.add head.Name) (head::collected) tail
 
-    let removeDuplicateAndVBRules (rules, set) =
+    let private removeDuplicateAndVBRules (rules, set) =
        removeDuplicateAndVBRulesLoop set [] rules
 
-    let rec refineListLoop name (collected:list<StyleTree<MsdnPage>>) (remaining:list<MsdnPageResult>) =
+    let rec private refineListLoop name (collected:list<StyleTree<MsdnPage>>) (remaining:list<MsdnPageResult>) =
         match remaining with
         | [] ->
             match collected with
@@ -33,10 +33,10 @@ module StyleTreePostProcessor =
             | NoRules -> refineListLoop name collected tail
             | Ok head -> refineListLoop name (head::collected) tail
 
-    let refineList name results =
+    let private refineList name results =
         refineListLoop name [] results
 
-    let rec refineTree set (tree:StyleTree<option<MsdnPage>>) =
+    let rec private refineTree set (tree:StyleTree<option<MsdnPage>>) =
         match tree with
         | Page (name, maybePage) ->
             match maybePage with

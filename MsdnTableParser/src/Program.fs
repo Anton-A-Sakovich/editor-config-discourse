@@ -4,6 +4,7 @@ open MsdnTableParser.LocalFileFetcher
 open MsdnTableParser.MarkdownParser
 open MsdnTableParser.TocYamlParser
 open MsdnTableParser.RulesYamlBuilder
+open EditorconfigDiscourse.Yaml
 open EditorconfigDiscourse.StyleTree
 open System
 open System.IO
@@ -67,7 +68,7 @@ let main args =
         let! treeOfTocPages =
             tocRoot
             |> tryParse
-            |> (function | Success value -> Completed value | Failure -> Failed("Failed to build TOC from YAML", 3))
+            |> (function | Parsed value -> Completed value | ParseResult.Failed -> Failed("Failed to build TOC from YAML", 3))
 
         let! treeOfTocPages =
             treeOfTocPages

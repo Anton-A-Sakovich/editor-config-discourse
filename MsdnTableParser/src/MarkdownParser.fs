@@ -4,18 +4,18 @@ module MarkdownParser =
     open System
     open System.Collections.Generic
 
-    type TableRow =
+    type private TableRow =
         { Property: string;
           Value: string;
           Description: string; }
 
-    type PropertyType =
+    type private PropertyType =
         | OptionName
         | OptionValue
         | DefaultOptionValue
         | Other
 
-    let parseLine (line:string) =
+    let private parseLine (line:string) =
         line.Split('|', StringSplitOptions.RemoveEmptyEntries)
         |> (function
             | [|property; value; description|] ->
@@ -25,7 +25,7 @@ module MarkdownParser =
                 |> Some
             | _ -> None)
 
-    let collectRows (rows:seq<TableRow>) : option<MsdnRule> =
+    let private collectRows (rows:seq<TableRow>) : option<MsdnRule> =
         let mutable propertyType = Other
         let mutable name = ""
         let mutable values = List<string>()
@@ -54,7 +54,7 @@ module MarkdownParser =
         else
             None
 
-    type LineType =
+    type private LineType =
         | Subsubsection
         | Table
         | Other
