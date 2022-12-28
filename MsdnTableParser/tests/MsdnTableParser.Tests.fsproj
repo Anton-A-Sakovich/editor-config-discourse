@@ -17,6 +17,6 @@
     <PackageReference Include="YamlDotNet" Version="12.2.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MsdnTableParser\MsdnTableParser.fsproj" />
+    <ProjectReference Include="..\src\MsdnTableParser.fsproj" />
   </ItemGroup>
 </Project>

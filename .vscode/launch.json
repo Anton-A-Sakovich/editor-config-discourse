@@ -8,9 +8,12 @@
             "name": "Launch MsdnTableParser",
             "type": "coreclr",
             "request": "launch",
-            "preLaunchTask": "BuildMsdnTableParser",
-            "program": "${workspaceFolder}/MsdnTableParser/bin/Debug/net7.0/MsdnTableParser.dll",
-            "args": ["${workspaceFolder}/rules.yaml", "${workspaceFolder}/docs/fundamentals/"],
+            "preLaunchTask": "Build MsdnTableParser",
+            "program": "${workspaceFolder}/MsdnTableParser/src/bin/Debug/net7.0/MsdnTableParser.dll",
+            "args": [
+                "${workspaceFolder}/rules.yaml",
+                "${workspaceFolder}/docs/fundamentals/"
+            ],
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,
             "console": "internalConsole"
@@ -19,9 +22,14 @@
             "name": "Launch MarkdownUpdater",
             "type": "coreclr",
             "request": "launch",
-            "preLaunchTask": "BuildMarkdownUpdater",
-            "program": "${workspaceFolder}/MarkdownUpdater/bin/Debug/net7.0/MarkdownUpdater.dll",
-            "args": ["rules.yaml", ".editorconfig", "rules.md", "https://github.com/Anton-A-Sakovich/editor-config-discourse/issues/"],
+            "preLaunchTask": "Build MarkdownUpdater",
+            "program": "${workspaceFolder}/MarkdownUpdater/src/bin/Debug/net7.0/MarkdownUpdater.dll",
+            "args": [
+                "rules.yaml",
+                ".editorconfig",
+                "rules.md",
+                "https://github.com/Anton-A-Sakovich/editor-config-discourse/issues/"
+            ],
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,
             "console": "internalConsole"

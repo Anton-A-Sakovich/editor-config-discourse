@@ -23,7 +23,7 @@
     <PackageReference Include="YamlDotNet" Version="12.2.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Utilities\Utilities.fsproj" />
-    <ProjectReference Include="..\EditorconfigDiscourse.StyleTree\EditorconfigDiscourse.StyleTree.fsproj" />
+    <ProjectReference Include="..\..\Utilities\src\Utilities.fsproj" />
+    <ProjectReference Include="..\..\StyleTree\src\StyleTree.fsproj" />
   </ItemGroup>
 </Project>

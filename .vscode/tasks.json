@@ -1,23 +1,161 @@
 {
     "version": "2.0.0",
+    "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": true
+    },
     "tasks": [
-        {
-            "label": "BuildMsdnTableParser",
+		{
+            "label": "Build Yaml",
             "command": "dotnet",
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/MsdnTableParser/MsdnTableParser.fsproj"
+                "${workspaceFolder}/Yaml/src/Yaml.fsproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+		{
+            "label": "Clean Yaml",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "clean",
+                "${workspaceFolder}/Yaml/src/Yaml.fsproj"
             ],
             "problemMatcher": "$msCompile"
         },
         {
-            "label": "BuildMarkdownUpdater",
+            "label": "Restore Yaml",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "restore",
+                "${workspaceFolder}/Yaml/src/Yaml.fsproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Build Utilities",
             "command": "dotnet",
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/MarkdownUpdater/MarkdownUpdater.fsproj"
+                "${workspaceFolder}/Utilities/src/Utilities.fsproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Clean Utilities",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "clean",
+                "${workspaceFolder}/Utilities/src/Utilities.fsproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Restore Utilities",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "restore",
+                "${workspaceFolder}/Utilities/src/Utilities.fsproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Build StyleTree",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/StyleTree/src/StyleTree.fsproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Clean StyleTree",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "clean",
+                "${workspaceFolder}/StyleTree/src/StyleTree.fsproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Restore StyleTree",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "restore",
+                "${workspaceFolder}/StyleTree/src/StyleTree.fsproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Build MsdnTableParser",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/MsdnTableParser/src/MsdnTableParser.fsproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Clean MsdnTableParser",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "clean",
+                "${workspaceFolder}/MsdnTableParser/src/MsdnTableParser.fsproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Restore MsdnTableParser",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "restore",
+                "${workspaceFolder}/MsdnTableParser/src/MsdnTableParser.fsproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Build MarkdownUpdater",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/MarkdownUpdater/src/MarkdownUpdater.fsproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Clean MarkdownUpdater",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "clean",
+                "${workspaceFolder}/MarkdownUpdater/src/MarkdownUpdater.fsproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Restore MarkdownUpdater",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "restore",
+                "${workspaceFolder}/MarkdownUpdater/src/MarkdownUpdater.fsproj"
             ],
             "problemMatcher": "$msCompile"
         }
