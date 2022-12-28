@@ -87,12 +87,12 @@ module MarkdownGenerator =
         | Resolution of reference:TableOfContentsReference * resolved:bool
         | Section of reference:TableOfContentsReference * resolved:int * total:int * children:list<TableOfContentsTree>
 
-    let sumTree (tree:TableOfContentsTree) =
+    let private sumTree (tree:TableOfContentsTree) =
         match tree with
         | Resolution (_, resolved) -> if resolved then (1, 1) else (0, 1)
         | Section(_, resolved, total, _) -> (resolved, total)
 
-    let rec appendTree issueIdToUrl (level:int) (builder:StringBuilder) (tree:StyleTree<list<StyleRuleResolution>>) =
+    let rec private appendTree issueIdToUrl (level:int) (builder:StringBuilder) (tree:StyleTree<list<StyleRuleResolution>>) =
         match tree with
         | Page (name, resolutions) ->
             let thisReference:TableOfContentsReference =

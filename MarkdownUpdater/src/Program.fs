@@ -3,6 +3,7 @@ open EditorconfigParser
 open MarkdownGenerator
 open EditorconfigDiscourse.StyleTree
 open EditorconfigDiscourse.Yaml
+open EditorconfigDiscourse.Yaml.Parsing
 open System.IO
 open System.Text
 open Utilities.Program
@@ -59,9 +60,9 @@ module Program =
 
             let! documentNode =
                 rootNode
-                |> Parsing.tryParseAs<YamlMappingNode>
-                |> Parsing.ParseResult.bind (YamlRepresentation.fromYaml tryParseRules)
-                |> (function | Parsing.Parsed value -> Completed value | Parsing.Failed -> Failed ("Failed to build sections tree from the YAML", 4))
+                |> tryParseAs<YamlMappingNode>
+                |> ParseResult.bind (YamlRepresentation.fromYaml tryParseRules)
+                |> (function | Parsed value -> Completed value | ParseResult.Failed -> Failed ("Failed to build sections tree from the YAML", 4))
 
             let editorconfigString = File.ReadAllText(editorconfigFilePath, encoding)
             let editorconfigRules = parseEditorconfig editorconfigString
