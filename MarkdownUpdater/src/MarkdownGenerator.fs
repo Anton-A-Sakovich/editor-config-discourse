@@ -1,4 +1,4 @@
-namespace MarkdownUpdater
+namespace EditorconfigDiscourse.MarkdownUpdater
 
 module MarkdownGenerator =
     open EditorconfigDiscourse.StyleTree

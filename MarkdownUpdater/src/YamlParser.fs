@@ -1,4 +1,4 @@
-namespace MarkdownUpdater
+namespace EditorconfigDiscourse.MarkdownUpdater
 
 module YamlParser =
     open EditorconfigDiscourse.StyleTree.YamlRepresentation

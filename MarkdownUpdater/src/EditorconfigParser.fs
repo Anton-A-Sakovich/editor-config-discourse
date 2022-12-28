@@ -1,9 +1,9 @@
-namespace MarkdownUpdater
+namespace EditorconfigDiscourse.MarkdownUpdater
 
 module EditorconfigParser =
     open System.Text.RegularExpressions
 
-    let parseEditorconfig (contents:string) = 
+    let parseEditorconfig (contents:string) =
         Regex.Matches(contents, @"^\s*(\w+)\s*=\s*([\w:]+)\s*(?:#(.+))?$", RegexOptions.Multiline)
         |> Seq.fold (fun map regexMatch ->
             let ruleName = regexMatch.Groups[1].Value
@@ -31,5 +31,5 @@ module EditorconfigParser =
                     Value = ruleValue;
                     IssueId = issueId;
                 }
-            
+
             Map.add ruleName rule map) Map.empty<string, EditorconfigRule>

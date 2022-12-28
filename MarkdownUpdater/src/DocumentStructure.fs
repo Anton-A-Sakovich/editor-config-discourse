@@ -1,4 +1,4 @@
-namespace MarkdownUpdater
+namespace EditorconfigDiscourse.MarkdownUpdater
 open EditorconfigDiscourse.StyleTree
 
 type StyleRuleResolution =

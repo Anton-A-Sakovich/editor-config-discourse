@@ -1,13 +1,10 @@
-﻿namespace MarkdownUpdater
-open EditorconfigParser
-open MarkdownGenerator
+﻿namespace EditorconfigDiscourse.MarkdownUpdater
 open EditorconfigDiscourse.StyleTree
+open EditorconfigDiscourse.Utilities.Program
 open EditorconfigDiscourse.Yaml
 open EditorconfigDiscourse.Yaml.Parsing
 open System.IO
 open System.Text
-open Utilities.Program
-open YamlParser
 open YamlDotNet.RepresentationModel
 
 module Program =
@@ -26,13 +23,13 @@ module Program =
                 if File.Exists(path) then
                     return ()
                 else
-                    return! Failed (message, 2)
+                    return! Program.Failed (message, 2)
             }
 
         program {
-            let! rulesYamlFilePath = requireArg (Failed ("No YAML file path provided.", 1)) 0
-            let! editorconfigFilePath = requireArg (Failed ("No .editorconfig file path provided", 1)) 1
-            let! rulesMarkdownFilePath = requireArg (Failed ("No Markdown file path provided.", 1)) 2
+            let! rulesYamlFilePath = requireArg (Program.Failed ("No YAML file path provided.", 1)) 0
+            let! editorconfigFilePath = requireArg (Program.Failed ("No .editorconfig file path provided", 1)) 1
+            let! rulesMarkdownFilePath = requireArg (Program.Failed ("No Markdown file path provided.", 1)) 2
 
             let issueIdToLink =
                 if args.Length > 3 then
@@ -53,7 +50,7 @@ module Program =
             let! rootNode =
                 program {
                     if yamlStream.Documents.Count = 0 then
-                        return! Failed("Cannot parse the YAML file.", 3)
+                        return! Program.Failed("Cannot parse the YAML file.", 3)
                     else
                         return yamlStream.Documents[0].RootNode
                 }
@@ -61,14 +58,14 @@ module Program =
             let! documentNode =
                 rootNode
                 |> tryParseAs<YamlMappingNode>
-                |> ParseResult.bind (YamlRepresentation.fromYaml tryParseRules)
-                |> (function | Parsed value -> Completed value | ParseResult.Failed -> Failed ("Failed to build sections tree from the YAML", 4))
+                |> ParseResult.bind (YamlRepresentation.fromYaml YamlParser.tryParseRules)
+                |> (function | ParseResult.Parsed value -> Program.Completed value | ParseResult.Failed -> Program.Failed ("Failed to build sections tree from the YAML", 4))
 
             let editorconfigString = File.ReadAllText(editorconfigFilePath, encoding)
-            let editorconfigRules = parseEditorconfig editorconfigString
+            let editorconfigRules = EditorconfigParser.parseEditorconfig editorconfigString
             let mergedDocumentNode = Merger.createResolutions editorconfigRules documentNode
 
-            let markdown = nodeToMarkdown issueIdToLink mergedDocumentNode
+            let markdown = MarkdownGenerator.nodeToMarkdown issueIdToLink mergedDocumentNode
             File.WriteAllText(rulesMarkdownFilePath, markdown, encoding)
 
             return ()
