@@ -50,7 +50,7 @@ module YamlRepresentation =
             return styleRule
         }
 
-    let rec addToYaml converter (tree:StyleTree<_>) (parent:YamlMappingNode) =
+    let rec private addToYaml converter (tree:StyleTree<_>) (parent:YamlMappingNode) =
         match tree with
         | Page (name, leaf) ->
             let leafNode:#YamlNode = converter leaf
@@ -68,7 +68,7 @@ module YamlRepresentation =
         addToYaml converter tree rootNode
         rootNode
 
-    let transposeParseResults (list:list<ParseResult<_>>) =
+    let private transposeParseResults (list:list<ParseResult<_>>) =
         let rec loop remaining collected =
             match remaining with
             | [] -> Parsed (List.rev collected)
@@ -79,7 +79,7 @@ module YamlRepresentation =
 
         loop list []
 
-    let rec fromYamlLoop leafParser (node:YamlNode) =
+    let rec private fromYamlLoop leafParser (node:YamlNode) =
         match leafParser node with
         | Parsed leaf -> fun name -> Parsed(Page(name, leaf))
         | Failed ->
