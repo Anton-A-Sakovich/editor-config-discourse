@@ -86,28 +86,9 @@ let main args =
 
         let treeOfMaybeStylePages = treeOfTocPages |> StyleTree.map fetchAndParseMarkdown
 
-        let rec transposeOption (collected:list<_>) (remaining:list<option<_>>) =
-            match remaining with
-            | [] -> Some (List.rev collected)
-            | head::tail ->
-                match head with
-                | Some value -> transposeOption (value::collected) tail
-                | None -> None
-
-        let onPage (name, value':option<_>) =
-            match value' with
-            | Some value -> Some(Page(name, value))
-            | None -> None
-
-        let onSection (name, children:list<option<_>>) =
-            let transposedChildren = transposeOption [] children
-            match transposedChildren with
-            | Some list -> Some (Section(name, list))
-            | None -> None
-
         let! treeOfStylePages =
             treeOfMaybeStylePages
-            |> StyleTree.cat onPage onSection
+            |> StyleTreePostProcessor.refine
             |> (function | Some tree -> Completed tree | None -> Failed ("Failed to build some Style Pages", 5))
 
         let yamlTree = YamlRepresentation.toYaml pageToYaml treeOfStylePages

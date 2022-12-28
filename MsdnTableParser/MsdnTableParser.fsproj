@@ -9,6 +9,8 @@
     <Compile Include="MsdnPage.fs" />
     <Compile Include="MarkdownParser.fsi" />
     <Compile Include="MarkdownParser.fs" />
+    <Compile Include="StyleTreePostProcessor.fsi" />
+    <Compile Include="StyleTreePostProcessor.fs" />
     <Compile Include="RulesYamlBuilder.fsi" />
     <Compile Include="RulesYamlBuilder.fs" />
     <Compile Include="HtmlFetcher.fsi" />
