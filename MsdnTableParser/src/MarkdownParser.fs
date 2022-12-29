@@ -62,8 +62,13 @@ module MarkdownParser =
     let parseMarkdown (url:string) (markdown:string) : option<MsdnPage> =
         let mutable title = ""
         let mutable lineType = Other
-        let mutable tableLines = List<string>()
-        let mutable rules = List<MsdnRule>()
+        let tableLines = List<string>()
+        let rules = List<MsdnRule>()
+
+        let inline collectTableLines (tableLines:List<string>) (rules:List<MsdnRule>) =
+            match tableLines |> Seq.map parseLine |> Seq.choose id |> collectRows with
+            | Some rule -> rules.Add(rule)
+            | None -> ()
 
         let lines = markdown.Replace("\r", "").Split("\n", StringSplitOptions.RemoveEmptyEntries)
 
@@ -79,19 +84,14 @@ module MarkdownParser =
             elif line.StartsWith("|") && lineType = Table then
                 tableLines.Add(line)
             elif lineType = Table then
-                let rule' =
-                    tableLines
-                    |> Seq.map parseLine
-                    |> Seq.choose id
-                    |> collectRows
-
-                if rule' |> Option.isSome then
-                    rules.Add(rule'.Value)
-
+                collectTableLines tableLines rules
                 tableLines.Clear()
                 lineType <- Other
             else
                 lineType <- Other
+
+        if lineType = Table then
+            collectTableLines tableLines rules
 
         if title = "" then
             None
