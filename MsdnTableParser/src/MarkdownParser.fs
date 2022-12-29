@@ -70,12 +70,16 @@ module MarkdownParser =
             | Some rule -> rules.Add(rule)
             | None -> ()
 
+            tableLines.Clear()
+
         let lines = markdown.Replace("\r", "").Split("\n", StringSplitOptions.RemoveEmptyEntries)
 
         for line in lines do
             if line.StartsWith("# ") then
                 title <- line.Substring(2)
             elif line.StartsWith("### ") then
+                if tableLines.Count > 0 then
+                    collectTableLines tableLines rules
                 lineType <- Subsubsection
             elif line.StartsWith("|") && lineType = Subsubsection then
                 lineType <- Table
@@ -85,7 +89,6 @@ module MarkdownParser =
                 tableLines.Add(line)
             elif lineType = Table then
                 collectTableLines tableLines rules
-                tableLines.Clear()
                 lineType <- Other
             else
                 lineType <- Other
