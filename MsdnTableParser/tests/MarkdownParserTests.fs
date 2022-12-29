@@ -5,7 +5,7 @@ open NUnit.Framework
 [<TestFixture>]
 type MarkdownParserTests() =
     [<Test>]
-    member _.ParsesValidPageWithOneRuleWithDefaultValue() =
+    member _.Parses_ValidPage_WithOneRule_WithDefaultValue_WithoutTextAfter_WithExtraProperties() =
         let pageUrl = "page_url"
 
         let pageText = """
@@ -42,7 +42,114 @@ Some introductory text.
         Assert.That(actual, Is.EqualTo expected)
 
     [<Test>]
-    member _.ParsesValidPageWithOneRuleWithoutDefaultValue() =
+    member _.Parses_ValidPage_WithOneRule_WithDefaultValue_WithTextAfter_WithExtraProperties() =
+        let pageUrl = "page_url"
+
+        let pageText = """
+# Page title
+
+Some introductory text.
+
+### dotnet_test_rule
+
+|     Property     |     Value     |     Description     |
+|     --------     |     -----     |     -----------     |
+|  **Random property 1**  |   random value 1   |         |
+|     **Option name**     |  dotnet_test_rule  |         |
+|  **Random property 2**  |   random value 2   |         |
+|    **Option values**    |        yes         |         |
+|                         |        no          |         |
+|                         |       maybe        |         |
+|  **Random property 3**  |   random value 3   |         |
+| **Default option value**|        yes         |         |
+|  **Random property 4**  |   random value 4   |         |
+
+Some text
+"""
+
+        let actual = MarkdownParser.parseMarkdown pageUrl pageText
+        let expected:option<MsdnPage> =
+            { Title = "Page title";
+              Url = "page_url";
+              Rules = [
+                { Name = "dotnet_test_rule";
+                  Values = ["yes"; "no"; "maybe"];
+                  DefaultValue = Some "yes"; }
+              ]; }
+            |> Some
+
+        Assert.That(actual, Is.EqualTo expected)
+
+    [<Test>]
+    member _.Parses_ValidPage_WithOneRule_WithDefaultValue_WithoutTextAfter_WithoutExtraProperties() =
+        let pageUrl = "page_url"
+
+        let pageText = """
+# Page title
+
+Some introductory text.
+
+### dotnet_test_rule
+
+|     Property     |     Value     |     Description     |
+|     --------     |     -----     |     -----------     |
+|     **Option name**     |  dotnet_test_rule  |         |
+|    **Option values**    |        yes         |         |
+|                         |        no          |         |
+|                         |       maybe        |         |
+| **Default option value**|        yes         |         |
+"""
+
+        let actual = MarkdownParser.parseMarkdown pageUrl pageText
+        let expected:option<MsdnPage> =
+            { Title = "Page title";
+              Url = "page_url";
+              Rules = [
+                { Name = "dotnet_test_rule";
+                  Values = ["yes"; "no"; "maybe"];
+                  DefaultValue = Some "yes"; }
+              ]; }
+            |> Some
+
+        Assert.That(actual, Is.EqualTo expected)
+
+    [<Test>]
+    member _.Parses_ValidPage_WithOneRule_WithDefaultValue_WithTextAfter_WithoutExtraProperties() =
+        let pageUrl = "page_url"
+
+        let pageText = """
+# Page title
+
+Some introductory text.
+
+### dotnet_test_rule
+
+|     Property     |     Value     |     Description     |
+|     --------     |     -----     |     -----------     |
+|     **Option name**     |  dotnet_test_rule  |         |
+|    **Option values**    |        yes         |         |
+|                         |        no          |         |
+|                         |       maybe        |         |
+| **Default option value**|        yes         |         |
+
+Some text
+"""
+
+        let actual = MarkdownParser.parseMarkdown pageUrl pageText
+        let expected:option<MsdnPage> =
+            { Title = "Page title";
+              Url = "page_url";
+              Rules = [
+                { Name = "dotnet_test_rule";
+                  Values = ["yes"; "no"; "maybe"];
+                  DefaultValue = Some "yes"; }
+              ]; }
+            |> Some
+
+        Assert.That(actual, Is.EqualTo expected)
+
+    [<Test>]
+    member _.Parses_ValidPage_WithOneRule_WithoutDefaultValue_WithoutTextAfter_WithExtraProperties() =
         let pageUrl = "page_url"
 
         let pageText = """
@@ -78,7 +185,39 @@ Some introductory text.
         Assert.That(actual, Is.EqualTo expected)
 
     [<Test>]
-    member _.ParsesValidPageWithTwoRules() =
+    member _.Parses_ValidPage_WithOneRule_WithoutDefaultValue_WithoutTextAfter_WithoutExtraProperties() =
+        let pageUrl = "page_url"
+
+        let pageText = """
+# Page title
+
+Some introductory text.
+
+### dotnet_test_rule
+
+|     Property     |     Value     |     Description     |
+|     --------     |     -----     |     -----------     |
+|     **Option name**     |  dotnet_test_rule  |         |
+|    **Option values**    |        yes         |         |
+|                         |        no          |         |
+|                         |       maybe        |         |
+"""
+
+        let actual = MarkdownParser.parseMarkdown pageUrl pageText
+        let expected:option<MsdnPage> =
+            { Title = "Page title";
+              Url = "page_url";
+              Rules = [
+                { Name = "dotnet_test_rule";
+                  Values = ["yes"; "no"; "maybe"];
+                  DefaultValue = None; }
+              ]; }
+            |> Some
+
+        Assert.That(actual, Is.EqualTo expected)
+
+    [<Test>]
+    member _.Parses_ValidPage_WithTwoRules_WithoutTextAfterFirstRule_WithoutTextAfterSecondRule_WithExtraProperties() =
         let pageUrl = "page_url"
 
         let pageText = """
@@ -112,6 +251,116 @@ Some introductory text.
 |                         |        baz         |         |
 |  **Random property 3**  |   random value 3   |         |
 |  **Random property 4**  |   random value 4   |         |
+"""
+
+        let actual = MarkdownParser.parseMarkdown pageUrl pageText
+        let expected:option<MsdnPage> =
+            { Title = "Page title";
+              Url = "page_url";
+              Rules = [
+                { Name = "dotnet_test_rule";
+                  Values = ["yes"; "no"; "maybe"];
+                  DefaultValue = Some "yes"; };
+                { Name = "csharp_test_rule";
+                  Values = ["foo"; "bar"; "baz"];
+                  DefaultValue = None; }
+              ]; }
+            |> Some
+
+        Assert.That(actual, Is.EqualTo expected)
+
+    [<Test>]
+    member _.Parses_ValidPage_WithTwoRules_WithTextAfterFirstRule_WithoutTextAfterSecondRule_WithExtraProperties() =
+        let pageUrl = "page_url"
+
+        let pageText = """
+# Page title
+
+Some introductory text.
+
+### dotnet_test_rule
+
+|     Property     |     Value     |     Description     |
+|     --------     |     -----     |     -----------     |
+|  **Random property 1**  |   random value 1   |         |
+|     **Option name**     |  dotnet_test_rule  |         |
+|  **Random property 2**  |   random value 2   |         |
+|    **Option values**    |        yes         |         |
+|                         |        no          |         |
+|                         |       maybe        |         |
+|  **Random property 3**  |   random value 3   |         |
+| **Default option value**|        yes         |         |
+|  **Random property 4**  |   random value 4   |         |
+
+Some text.
+
+### csharp_test_rule
+
+|     Property     |     Value     |     Description     |
+|     --------     |     -----     |     -----------     |
+|  **Random property 1**  |   random value 1   |         |
+|     **Option name**     |  csharp_test_rule  |         |
+|  **Random property 2**  |   random value 2   |         |
+|    **Option values**    |        foo         |         |
+|                         |        bar         |         |
+|                         |        baz         |         |
+|  **Random property 3**  |   random value 3   |         |
+|  **Random property 4**  |   random value 4   |         |
+"""
+
+        let actual = MarkdownParser.parseMarkdown pageUrl pageText
+        let expected:option<MsdnPage> =
+            { Title = "Page title";
+              Url = "page_url";
+              Rules = [
+                { Name = "dotnet_test_rule";
+                  Values = ["yes"; "no"; "maybe"];
+                  DefaultValue = Some "yes"; };
+                { Name = "csharp_test_rule";
+                  Values = ["foo"; "bar"; "baz"];
+                  DefaultValue = None; }
+              ]; }
+            |> Some
+
+        Assert.That(actual, Is.EqualTo expected)
+
+    [<Test>]
+    member _.Parses_ValidPage_WithTwoRules_WithoutTextAfterFirstRule_WithTextAfterSecondRule_WithExtraProperties() =
+        let pageUrl = "page_url"
+
+        let pageText = """
+# Page title
+
+Some introductory text.
+
+### dotnet_test_rule
+
+|     Property     |     Value     |     Description     |
+|     --------     |     -----     |     -----------     |
+|  **Random property 1**  |   random value 1   |         |
+|     **Option name**     |  dotnet_test_rule  |         |
+|  **Random property 2**  |   random value 2   |         |
+|    **Option values**    |        yes         |         |
+|                         |        no          |         |
+|                         |       maybe        |         |
+|  **Random property 3**  |   random value 3   |         |
+| **Default option value**|        yes         |         |
+|  **Random property 4**  |   random value 4   |         |
+
+### csharp_test_rule
+
+|     Property     |     Value     |     Description     |
+|     --------     |     -----     |     -----------     |
+|  **Random property 1**  |   random value 1   |         |
+|     **Option name**     |  csharp_test_rule  |         |
+|  **Random property 2**  |   random value 2   |         |
+|    **Option values**    |        foo         |         |
+|                         |        bar         |         |
+|                         |        baz         |         |
+|  **Random property 3**  |   random value 3   |         |
+|  **Random property 4**  |   random value 4   |         |
+
+Some text.
 """
 
         let actual = MarkdownParser.parseMarkdown pageUrl pageText
