@@ -33,6 +33,19 @@
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,
             "console": "internalConsole"
+        },
+        {
+            "name": "Attach",
+            "type": "coreclr",
+            "request": "attach",
+            "processId": "${input:processId}",
+        }
+    ],
+    "inputs": [
+        {
+            "id": "processId",
+            "type": "promptString",
+            "description": "The ID of the process to attach to."
         }
     ]
 }
