@@ -59,7 +59,7 @@ module MarkdownParser =
         | Table
         | Other
 
-    let parseMarkdown (url:string) (markdown:string) : option<MsdnPage> =
+    let parseMarkdown (markdown:string) : option<MsdnPageContent> =
         let mutable title = ""
         let mutable lineType = Other
         let tableLines = List<string>()
@@ -101,5 +101,4 @@ module MarkdownParser =
         else
             Some({
                 Title = title;
-                Url = url;
                 Rules = rules |> List.ofSeq;})

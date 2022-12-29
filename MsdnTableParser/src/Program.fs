@@ -78,7 +78,8 @@ let main args =
                 fetchFileAsync href
                 |> Async.AwaitTask
                 |> Async.RunSynchronously
-                |> Option.bind (MarkdownParser.parseMarkdown urlToLinkTo))
+                |> Option.bind MarkdownParser.parseMarkdown
+                |> Option.map (fun content -> { Title = content.Title; Url = urlToLinkTo; Rules = content.Rules; }))
 
         let treeOfMaybeStylePages = treeOfTocPages |> StyleTree.map fetchAndParseMarkdown
 
