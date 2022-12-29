@@ -6,6 +6,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="TocYamlParserTests.fs" />
+    <Compile Include="MarkdownParserTests.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
   <ItemGroup>
