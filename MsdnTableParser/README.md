@@ -31,7 +31,10 @@ where
 
 * `<output_file_path>` is the path where to save the rule options specs;
 * `<table_of_contents_path>` is the path where the file `toc.yml` resides (without `toc.yml` segment itself),
-optional, defaults to https://raw.githubusercontent.com/dotnet/docs/main/docs/fundamentals/.
+can be either a URL or a local file path, optional, defaults to https://raw.githubusercontent.com/dotnet/docs/main/docs/fundamentals/;
+
+Using a local file path for `<table_of_contents_path>` allows using pre downloaded documents in order to avoid
+excessive network requests.
 
 ## Output file structure
 
