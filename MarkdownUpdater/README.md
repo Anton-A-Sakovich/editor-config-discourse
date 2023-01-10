@@ -28,16 +28,16 @@ Root:
     Node 1:
         Node 1.1:
             Node 1.1.1:
-                - Rule option X
-                - Rule option Y
+                - Rule object X
+                - Rule object Y
             Node 1.1.2:
-                - Rule option Z
+                - Rule object Z
         Node 1.2:
             Node 1.2.1:
-                - Rule option W
+                - Rule object W
     Node 2:
         Node 2.1:
-            - Rule option Q
+            - Rule object Q
 ```
 
 There should be a single root node. If there are multiple root nodes, all but the first one are ignored.
