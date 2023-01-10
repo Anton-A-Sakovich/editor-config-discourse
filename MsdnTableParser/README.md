@@ -29,9 +29,9 @@ dotnet MsdnTableParser <output_file_path>[ <table_of_contents_path>]
 
 where
 
-* `<output_file_path>` is the path where to save the rule options specs;
-* `<table_of_contents_path>` is the path where the file `toc.yml` resides (without `toc.yml` segment itself),
-can be either a URL or a local file path, optional, defaults to https://raw.githubusercontent.com/dotnet/docs/main/docs/fundamentals/;
+* `<output_file_path>` is the path where to save the rule options specs (overrides the existing file);
+* `<table_of_contents_path>` (_optional_) is the path where the file `toc.yml` resides (without `toc.yml` segment itself),
+can be either a URL or a local file path; if not specified, then defaults to https://raw.githubusercontent.com/dotnet/docs/main/docs/fundamentals/;
 
 Using a local file path for `<table_of_contents_path>` allows using pre downloaded documents in order to avoid
 excessive network requests.
