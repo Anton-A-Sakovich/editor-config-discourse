@@ -24,7 +24,7 @@ At the time of writing the relevant table of contents file is located at https:/
 ## Synopsis
 
 ```
-dotnet MsdnTableParser <output_file_path>[, <table_of_contents_path>]
+dotnet MsdnTableParser <output_file_path>[ <table_of_contents_path>]
 ```
 
 where
