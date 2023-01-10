@@ -71,13 +71,13 @@ module LinesEnumeratorTests =
             let assertNoLines inputString =
                 let mutable runner = TestRunner(inputString)
                 runner.AssertMoveNext(false)
-            
+
             Assert.Multiple(fun () -> inputStrings |> Seq.iter assertNoLines)
 
         [<Test>]
         member _.ReturnsSingleLineWhenSurroundedWithLineBreaks() =
             let line = "Hello"
-            
+
             let inputStrings =
                 [| lineBreakString + line;
                    line + lineBreakString;
