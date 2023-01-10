@@ -7,7 +7,7 @@ which rules.
 ## Synopsis
 
 ```
-dotnet MarkdownUpdater <rules_options_file_path> <editorconfig_file_path> <markdown_file_path>[ <github_prefix>]
+dotnet MarkdownUpdater <rules_options_file_path> <editorconfig_file_path> <markdown_file_path>[ <issue_prefix>]
 ```
 
 where
@@ -15,7 +15,7 @@ where
 * `<rules_options_file_path>` is the path to the file with rule options specifications;
 * `<editorconfig_file_path>` is the path to the EditorConfig file;
 * `<markdown_file_path>` is the path where to save the Markdown (overrides the existing file);
-* `<github_prefix>` (_optional_) is the prefix which will be appended to issue IDs, e.g. https://github.com/Anton-A-Sakovich/editor-config-discourse/issues/.
+* `<issue_prefix>` (_optional_) is the prefix which will be appended to issue IDs, e.g. https://github.com/Anton-A-Sakovich/editor-config-discourse/issues/.
 
 ## Style rule options specifications file format
 
